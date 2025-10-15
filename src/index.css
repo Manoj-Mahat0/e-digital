@@ -1,0 +1,19 @@
+/* Minimal base styles; Tailwind is loaded via CDN in index.html */
+html, body, #root { height: 100%; }
+body { margin: 0; }
+
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 25s linear infinite;
+}

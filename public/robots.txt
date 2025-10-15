@@ -1,0 +1,14 @@
+# E-Digital Training robots.txt
+User-agent: *
+Allow: /
+
+# Allow all bots to access the entire site
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://edigital.globalinfosofts.com/sitemap.xml
+
+# Crawl delay to prevent server overload
+Crawl-delay: 10
