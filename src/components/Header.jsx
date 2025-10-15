@@ -270,7 +270,7 @@ export default function Header() {
         <div className="relative whitespace-nowrap">
           <p className="animate-scroll text-sm font-semibold py-2 inline-block">
             “For the first time in the history of Job Training Centers, we
-            provide 100% Job Guarantee on Stamp Paper.” &nbsp; • &nbsp;
+            provide 100% Job Guarantee on Stamp Paper.” 
             
           </p>
         </div>
@@ -278,3 +278,4 @@ export default function Header() {
     </header>
   );
 }
+// manoj
