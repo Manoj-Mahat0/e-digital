@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { HiPaperAirplane } from "react-icons/hi";
+import { HiPaperAirplane, HiX, HiLightningBolt, HiAcademicCap } from "react-icons/hi";
 import { FiClock, FiUsers, FiCheckCircle } from "react-icons/fi";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { motion } from "framer-motion";
@@ -22,8 +22,12 @@ export default function CourseDetail() {
   const navigate = useNavigate();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("new");
   const [form, setForm] = useState({ name: "", email: "", phone: "", mode: "Online", course: "" });
   const [formLoading, setFormLoading] = useState(false);
+  const [statusEmail, setStatusEmail] = useState("");
+  const [statusResult, setStatusResult] = useState(null);
+  const [statusLoading, setStatusLoading] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
 
   const courses = [
@@ -88,6 +92,41 @@ export default function CourseDetail() {
       toast.error(message);
     } finally {
       setFormLoading(false);
+    }
+  };
+
+  const handleStatusSubmit = async (e) => {
+    e.preventDefault();
+    if (!statusEmail) {
+      toast.error("Please enter your email.");
+      return;
+    }
+
+    try {
+      setStatusLoading(true);
+      const regRes = await api.get("https://be.edigital.globalinfosofts.com/registrations/?skip=0&limit=50");
+      const registrations = regRes.data.items;
+      const userReg = registrations.find(reg => reg.email === statusEmail);
+
+      if (!userReg) {
+        setStatusResult({ status: "Not Found", message: "No registration found with this email." });
+        return;
+      }
+
+      const payRes = await api.get("https://be.edigital.globalinfosofts.com/payments/");
+      const payments = payRes.data.items;
+      const userPayment = payments.find(pay => pay.registration_id === userReg.id);
+
+      if (userPayment && userPayment.status === "completed") {
+        setStatusResult({ status: "Paid", message: "Your payment has been completed.", details: userReg });
+      } else {
+        setStatusResult({ status: "Not Paid", message: "Payment not found or not completed.", details: userReg });
+      }
+    } catch (err) {
+      console.error("Status check error:", err);
+      toast.error("Failed to check status.");
+    } finally {
+      setStatusLoading(false);
     }
   };
 
@@ -256,9 +295,40 @@ export default function CourseDetail() {
               transition={{ delay: 0.05 }}
               className="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-2xl p-6 shadow-xl"
             >
-              
+              {/* Tabs */}
+              <div className="flex mb-4 bg-gray-100 rounded-lg p-1">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("new")}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${
+                    activeTab === "new"
+                      ? "bg-white text-sky-600 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  New Registration
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("status")}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${
+                    activeTab === "status"
+                      ? "bg-white text-sky-600 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  Get Registration Status
+                </button>
+              </div>
 
-              <form onSubmit={handleSubmit} className="mt-5 space-y-3" aria-label="Register for course form">
+              {activeTab === "new" ? (
+                <form onSubmit={handleSubmit} className="space-y-3" aria-label="Register for course form">
+                  <div className="flex items-center gap-3 mb-6">
+                    <HiLightningBolt className="h-7 w-7 text-sky-600" />
+                    <h4 className="text-xl text-gray-900 font-bold">
+                        Request Free Course Consultation
+                    </h4>
+                  </div>
                 <label className="block">
                   <input
                     name="name"
@@ -334,9 +404,49 @@ export default function CourseDetail() {
                 </button>
 
                 <div className="text-xs text-slate-500 text-center">Or call us at <strong> "993-4141-233"</strong></div>
-              </form>
-
-              
+                </form>
+              ) : (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 mb-6">
+                    <HiAcademicCap className="h-7 w-7 text-sky-600" />
+                    <h4 className="text-xl text-gray-900 font-bold">Check Registration Status</h4>
+                  </div>
+                  <form onSubmit={handleStatusSubmit} className="space-y-3">
+                    <label className="block">
+                      <input
+                        type="email"
+                        value={statusEmail}
+                        onChange={(e) => setStatusEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        className="w-full px-3 py-2 rounded-md bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                        required
+                      />
+                    </label>
+                    <button
+                      type="submit"
+                      disabled={statusLoading}
+                      className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-white font-medium transition ${
+                        statusLoading ? "bg-slate-600" : "bg-sky-600 hover:bg-sky-700"
+                      }`}
+                    >
+                      {statusLoading ? "Checking..." : "Check Status"}
+                    </button>
+                  </form>
+                  {statusResult && (
+                    <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                      <h5 className="font-semibold text-gray-900">Status: {statusResult.status}</h5>
+                      <p className="text-gray-700 mt-1">{statusResult.message}</p>
+                      {statusResult.details && (
+                        <div className="mt-2 text-sm text-gray-600">
+                          <p>Name: {statusResult.details.name}</p>
+                          <p>Course: {statusResult.details.course}</p>
+                          <p>Mode: {statusResult.details.course_mode}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </motion.div>
 
             <motion.div
