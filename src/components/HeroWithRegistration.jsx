@@ -214,7 +214,7 @@ export default function HeroWithRegistration() {
                   <div className="flex-shrink-0 h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
                     <HiCheck className="h-4 w-4 text-emerald-600 font-bold" />
                   </div>
-                  <span>Job opportunities starting from <strong>₹4.5 LPA</strong> (Guaranteed Placement)</span>
+                  <span>Exciting job opportunities starting at <strong>₹2.5 LPA </strong> you could earn even more based on your skills and how you perform in the interview!</span>
                 </li>
                 <li className="flex items-start gap-4">
                   <div className="flex-shrink-0 h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
