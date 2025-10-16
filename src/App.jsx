@@ -50,6 +50,9 @@ function Shell({ children }) {
       <FloatingButtons />
 
       <Footer />
+
+      {/* Map Section */}
+      
     </div>
   );
 }

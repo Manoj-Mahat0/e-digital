@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { HiCode, HiChartBar, HiCog, HiArrowRight, HiBadgeCheck, HiBookOpen } from "react-icons/hi";
+import { HiCode, HiChartBar, HiCog, HiArrowRight, HiBookOpen } from "react-icons/hi";
 
 // Card Animation Variants for staggered entry
 const cardVariants = {
@@ -22,7 +22,7 @@ const cardVariants = {
   },
 };
 
-export default function JobGuaranteeCourses() {
+export default function JobAssuranceCourses() {
   const courses = [
     {
       icon: HiCode,
@@ -55,11 +55,11 @@ export default function JobGuaranteeCourses() {
           </p>
           <h2 className="mt-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-600">
-              Guaranteed Career Programs
+              Assuranced Career Programs
             </span>
           </h2>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Career-first, intensive bootcamps with live projects, 1:1 expert mentorship, guaranteed placement support, and a pathway to high earnings.
+            Career-first, intensive bootcamps with live projects, 1:1 expert mentorship, Assuranced placement support, and a pathway to high earnings.
           </p>
         </header>
 
@@ -81,10 +81,10 @@ export default function JobGuaranteeCourses() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-white/15 ring-2 ring-white/50">
-                  <HiBadgeCheck className="w-8 h-8 text-white" />
+                  <img src="/NewJALogo.webp" alt="Job Assurance Logo" className="w-14 h-14" />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold">100% Job Guarantee</h3>
+                  <h3 className="text-3xl font-bold">100% Job Assurance</h3>
                   <p className="mt-1 text-base text-white/90 font-medium">
                     Secured placement or your fees back.
                   </p>

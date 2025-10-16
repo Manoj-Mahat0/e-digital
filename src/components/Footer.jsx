@@ -120,11 +120,25 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+
+          {/* right map with footer */}
+          <div className="w-full">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.9248436118573!2d86.200489675085!3d22.805248579326786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5e3d507584243%3A0x58705df840f5f9d4!2sE-DIGITALINDIA-%20Best%20Skill%20Development%20Institute%20in%20Jharkhand!5e0!3m2!1sen!2sin!4v1760605614624!5m2!1sen!2sin"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="E-DIGITALINDIA Location Map"
+        ></iframe>
+      </div>
         </div>
 
         {/* Partner logos row */}
         <div className="mt-12 flex flex-col items-center gap-6">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center justify-between w-full">
             <img src="/iso.webp" alt="ISO" className="h-12 object-contain" />
             <img src="/msme_compressed.webp" alt="MSME" className="h-12 object-contain" />
             <img src="/skillindia.webp" alt="Skill India" className="h-12 object-contain" />
@@ -136,7 +150,7 @@ export default function Footer() {
             </div>
 
             <div className="text-gray-400 text-sm">
-              Designed & Maintained by E-Digital Indian
+              Designed & Maintained by <a href="https://globalinfosofts.com/" className="hover:text-sky-400 transition-colors">Global Infosoft</a>
             </div>
           </div>
         </div>
