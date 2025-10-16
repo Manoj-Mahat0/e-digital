@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 // Changed to 'react-icons/hi' for maximum compatibility and stability.
 // HiMagnifyingGlass is changed to HiSearch.
 import { HiAcademicCap, HiSearch } from 'react-icons/hi';
-import { HiWrenchScrewdriver, HiCheckCircle } from 'react-icons/hi2'; // Using HiWrenchScrewdriver and HiCheckCircle from hi2
+import { HiWrenchScrewdriver } from 'react-icons/hi2'; // Using HiWrenchScrewdriver from hi2
 
 /**
  * CoursesWithChannels — FINAL UI/UX VERSION
@@ -276,8 +276,7 @@ export default function CoursesWithChannels({ initial = coursesList[0] }) {
                                                     <span className="truncate">{c}</span>
                                                     <span className="ml-3 inline-flex items-center text-xs">
                                                         {active ? (
-                                                            // HiCheckCircle from hi2 (cleaner checkmark)
-                                                            <HiCheckCircle className="h-5 w-5 text-white" aria-hidden="true" />
+                                                            <img src="/NewJALogo.webp" alt="Selected" className="h-5 w-5" aria-hidden="true" />
                                                         ) : null}
                                                     </span>
                                                 </button>

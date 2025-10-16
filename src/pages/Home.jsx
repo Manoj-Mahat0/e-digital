@@ -117,7 +117,7 @@ function Hero() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-black leading-tight mb-6">
   <Typewriter
     lines={typingLines}
-    typingSpeed={55}
+    typingSpeed={70}
     pauseBetween={1600}
     loop={true}
     className="text-black"
@@ -139,24 +139,24 @@ function Hero() {
               <div className="space-y-4">
                 <img
                   className="h-48 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
+                  src="h1.jpg"
                   alt="Team collaboration"
                 />
                 <img
                   className="h-32 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="https://images.unsplash.com/photo-1494173853739-c21f58b16055?q=80&w=800&auto=format&fit=crop"
+                  src="h3.jpg"
                   alt="Business meeting"
                 />
               </div>
               <div className="space-y-4 pt-8">
                 <img
                   className="h-32 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop"
+                  src="h2.jpg"
                   alt="Professional team"
                 />
                 <img
                   className="h-48 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=800&auto=format&fit=crop"
+                  src="h4.jpg"
                   alt="IT solutions"
                 />
               </div>
