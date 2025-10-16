@@ -28,13 +28,13 @@ export default function JobGuaranteeCourses() {
       icon: HiCode,
       title: "Full-Stack Web Development",
       description:
-        "Mastering the MERN stack, data structures, and advanced development practices. Earn ₹30,000–₹1,00,000+ / month.",
+        "Mastering the MERN stack, data structures, and advanced development practices. Earn ₹15,000–₹20,000+ / month.",
     },
     {
       icon: HiChartBar,
       title: "Advanced Digital Marketing",
       description:
-        "In-depth campaigns across SEO, SEM, Analytics, and AI-driven content. Real-world projects for earning ₹25,000–₹85,000+ / month.",
+        "In-depth campaigns across SEO, SEM, Analytics, and AI-driven content. Real-world projects for earning ₹10,000–₹15,000+ / month.",
     },
     {
       icon: HiCog,
