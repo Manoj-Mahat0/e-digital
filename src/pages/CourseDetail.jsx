@@ -30,17 +30,13 @@ export default function CourseDetail() {
   const [statusLoading, setStatusLoading] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
 
-  const courses = [
-    "Diploma in Digital Marketing",
-    "Diploma in PHP Web Development",
-    "Diploma in Data Science & AI",
-    "Diploma in Business & Soft Skills",
-    "Diploma in Android App Development",
-    "SAP Global Certification Course",
-  ];
+  const courses = coursesData.reduce((acc, c) => {
+    acc[c.slug] = c.title;
+    return acc;
+  }, {});
 
   useEffect(() => {
-    // For SSG, use static import instead of fetch
+    // For SSG, use static import instnpmead of fetch
     const courseData = coursesData.find((x) => x.slug === slug);
     setCourse(courseData || null);
     if (courseData) setForm((f) => ({ ...f, course: courseData.title }));
@@ -326,7 +322,7 @@ export default function CourseDetail() {
                   <div className="flex items-center gap-3 mb-6">
                     <HiLightningBolt className="h-7 w-7 text-sky-600" />
                     <h4 className="text-xl text-gray-900 font-bold">
-                        Request Free Course Consultation
+                        Request Free Course Consultation for {course.title}
                     </h4>
                   </div>
                 <label className="block">
@@ -384,9 +380,9 @@ export default function CourseDetail() {
                     aria-required
                   >
                     <option value="">Select course</option>
-                    {courses.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
+                    {Object.entries(courses).map(([slug, title]) => (
+                      <option key={slug} value={title}>
+                        {title}
                       </option>
                     ))}
                   </select>
