@@ -57,8 +57,6 @@ function getIconUrl(title) {
     'Kotlin': 'kotlin',
     'Java': 'java',
     'Android Jetpack': 'android', // fallback to android
-    'Git & GitHub': 'github',
-    'Docker': 'docker',
     'Unit Testing': null, // Added for padding
 
     // SAP (Increased to 7 tools)

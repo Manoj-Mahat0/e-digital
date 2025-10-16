@@ -24,6 +24,7 @@ import JobGuaranteeCourses from '../components/Courses/JobGuaranteeCourses'
 import Partners from '../components/Partners'
 import CoursesShowcase from '../components/Courses/CoursesShowcase'
 import TeamShowcase from '../components/Courses/TeamShowcase'
+import FestivalGreetingsCard from '../components/FestivalGreetingsCard'
 
 function Typewriter({ lines = [], typingSpeed = 60, pauseBetween = 1500, loop = true, className = '' }) {
   const [lineIndex, setLineIndex] = useState(0)
@@ -301,7 +302,8 @@ export default function Home() {
           })}
         </script>
       </Helmet>
-      
+
+      <FestivalGreetingsCard />
       <Hero />
       {/* <Services /> */}
       <DigitalMarketing />

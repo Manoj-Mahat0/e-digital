@@ -6,6 +6,13 @@ import {
   HiUsers,
   HiArrowRight
 } from 'react-icons/hi'
+import np1Image from '../../assets/np1.jpg'
+import np2Image from '../../assets/np2.jpeg'
+
+import np3Image from '../../assets/np3.jpeg'
+
+import np4Image from '../../assets/np4.jpeg'
+
 
 export default function DigitalMarketing() {
   const [hoveredIndex, setHoveredIndex] = useState(null)
@@ -19,31 +26,28 @@ export default function DigitalMarketing() {
       description:
         'Build brand presence on platforms like Instagram, Facebook and LinkedIn — content strategy, community growth and analytics-driven campaigns.',
       image:
-        'np1.jpeg'
+        np1Image
     },
     {
       icon: HiTrendingUp,
       title: 'Search Engine Optimization (SEO)',
       description:
         'On-page, technical and off-page SEO: keyword research, content optimization, link-building and site performance for lasting organic growth.',
-      image:
-        'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop'
+      image:np2Image
     },
     {
       icon: HiChartBar,
       title: 'Online Advertising',
       description:
         'Design, target and optimise paid campaigns across Google Ads, Meta and programmatic channels with measurable ROI techniques.',
-      image:
-        'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop'
+      image:np3Image
     },
     {
       icon: HiGlobeAlt,
       title: 'Website Creation & Management',
       description:
         'Rapidly build conversion-focused websites with no-code tools and good UX — deploy, measure and iterate for performance.',
-      image:
-        'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=1200&auto=format&fit=crop'
+      image:np4Image
     }
   ]
 
@@ -222,7 +226,7 @@ export default function DigitalMarketing() {
                     {/* image with lazy load + placeholder */}
                     <div className="w-full h-48 bg-gray-100 relative">
                       <img
-                        src={`${f.image}&q=80&w=1200&auto=format&fit=crop`}
+                        src={f.image}
                         alt={f.title}
                         loading="lazy"
                         className="w-full h-full object-cover rounded-2xl transition-transform duration-500 pointer-events-none transform-gpu"
@@ -260,7 +264,7 @@ export default function DigitalMarketing() {
               >
                 {hoveredIndex !== null && (
                   <img
-                    src={`${features[hoveredIndex].image}&q=80&w=1200&auto=format&fit=crop`}
+                    src={features[hoveredIndex].image}
                     alt={features[hoveredIndex].title}
                     className="w-full h-full object-cover"
                     loading="lazy"

@@ -1,396 +1,396 @@
-[
-  {
-    "id": "sap-global-certification",
-    "slug": "sap-global-certification-course",
-    "title": "Sap Global Certification Course",
-    "subtitle": "Sap Global Certification Course",
-    "shortDescription": "If you’ve ever wanted to build your career in SAP (Systems, Applications, and Products in Data Processing)—whether for corporate jobs, freelancing, or managing enterprise systems—this course will show you how. From basic modules to advanced implementation, you’ll learn how to work on real-world SAP solutions that businesses actually use.",
-    "longDescription": "With hands-on training, live projects, and expert mentorship, you will be able to design, configure, and manage SAP applications that work seamlessly for enterprises across industries.",
-    "image": "/sap.webp",
-        "syllabus":"/p1.pdf",
+                                                                                                                                                                  [
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "sap-global-certification",
+                                                                                                                                                                      "slug": "sap-global-certification-course",
+                                                                                                                                                                      "title": "Sap Global Certification Course",
+                                                                                                                                                                      "subtitle": "Sap Global Certification Course",
+                                                                                                                                                                      "shortDescription": "If you’ve ever wanted to build your career in SAP (Systems, Applications, and Products in Data Processing)—whether for corporate jobs, freelancing, or managing enterprise systems—this course will show you how. From basic modules to advanced implementation, you’ll learn how to work on real-world SAP solutions that businesses actually use.",
+                                                                                                                                                                      "longDescription": "With hands-on training, live projects, and expert mentorship, you will be able to design, configure, and manage SAP applications that work seamlessly for enterprises across industries.",
+                                                                                                                                                                      "image": "/sap.webp",
+                                                                                                                                                                          "syllabus":"/p1.pdf",
 
-    "coreBenefits": [
-      "Laptop on Enrollment– So you can start learning without any extra cost.",
-      "Dual Certification– Industry-recognized SAP Certificate + UGC-approved PGDCA Certificate to strengthen your profile.",
-      "Flexible Learning– Attend online, classroom, or hybrid mode—whatever fits your schedule.",
-      "Job guarantee with a paid internship– Gain practical experience and step into the SAP industry confidently.",
-      "Work on real projects– Implement SAP modules on live case studies to showcase in your portfolio.",
-      "Career Guidance– Resume building, interview prep, and placement support."
-    ],
-    "whatYouWillLearn": [
-      "Introduction to SAP ERP & SAP Modules (FI, CO, MM, SD, HCM, PP, etc.).",
-      "SAP System Navigation & Configuration.",
-      "SAP Financial Accounting (FI) & Controlling (CO).",
-      "SAP Materials Management (MM) & Sales Distribution (SD).",
-      "SAP HR/HCM (Human Capital Management) basics.",
-      "Real-time business scenarios with case studies."
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "A student planning a career in IT/ERP systems.",
-      "A professional looking to upgrade skills in SAP for better opportunities.",
-      "An entrepreneur wanting to manage your own SAP-based business operations.",
-      "A freelancer aiming to provide SAP consulting services"
-    ],
-    "careerOpportunities": [
-      "SAP End-User / Power User.",
-      "SAP ABAP Developer.",
-      "ERP Business Analyst.",
-      "Freelance SAP Implementation Specialist."
-    ],
-    "enrollUrl": "/apply?course=sap-global-certification-course",
-    "price": "Contact us",
-    "tags": [
-      "SAP",
-      "Certification",
-      "ERP",
-      "Enterprise"
-    ],
-    "featured": true
-  },
-  {
-    "id": "diploma-in-digital-marketing",
-    "slug": "diploma-in-digital-marketing",
-    "title": "Diploma in Digital Marketing",
-    "subtitle": "Digital Marketing Course Overview",
-    "shortDescription": "The Diploma in Digital Marketing at E Digital India is built to give you real, job-ready skills in today’s online world. Not only theory, you’ll work on live projects and learn directly from industry experts. From SEO and Google Ads to social media and content creation, every part of this course helps you to understand how digital marketing works in practice.",
-    "longDescription": "By the time you finish, you’ll know how to promote a brand, manage campaigns, generate leads, and grow a business online, skills that employers and clients look for every day.",
-    "image": "/digital-marketing-course.webp",
-        "syllabus":"/p1.pdf",
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        "Laptop on Enrollment– So you can start learning without any extra cost.",
+                                                                                                                                                                        "Dual Certification– Industry-recognized SAP Certificate + UGC-approved PGDCA Certificate to strengthen your profile.",
+                                                                                                                                                                        "Flexible Learning– Attend online, classroom, or hybrid mode—whatever fits your schedule.",
+                                                                                                                                                                        "Job guarantee with a paid internship– Gain practical experience and step into the SAP industry confidently.",
+                                                                                                                                                                        "Work on real projects– Implement SAP modules on live case studies to showcase in your portfolio.",
+                                                                                                                                                                        "Career Guidance– Resume building, interview prep, and placement support."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "Introduction to SAP ERP & SAP Modules (FI, CO, MM, SD, HCM, PP, etc.).",
+                                                                                                                                                                        "SAP System Navigation & Configuration.",
+                                                                                                                                                                        "SAP Financial Accounting (FI) & Controlling (CO).",
+                                                                                                                                                                        "SAP Materials Management (MM) & Sales Distribution (SD).",
+                                                                                                                                                                        "SAP HR/HCM (Human Capital Management) basics.",
+                                                                                                                                                                        "Real-time business scenarios with case studies."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "A student planning a career in IT/ERP systems.",
+                                                                                                                                                                        "A professional looking to upgrade skills in SAP for better opportunities.",
+                                                                                                                                                                        "An entrepreneur wanting to manage your own SAP-based business operations.",
+                                                                                                                                                                        "A freelancer aiming to provide SAP consulting services"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "SAP End-User / Power User.",
+                                                                                                                                                                        "SAP ABAP Developer.",
+                                                                                                                                                                        "ERP Business Analyst.",
+                                                                                                                                                                        "Freelance SAP Implementation Specialist."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=sap-global-certification-course",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "SAP",
+                                                                                                                                                                        "Certification",
+                                                                                                                                                                        "ERP",
+                                                                                                                                                                        "Enterprise"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": true
+                                                                                                                                                                    },
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "diploma-in-digital-marketing",
+                                                                                                                                                                      "slug": "diploma-in-digital-marketing",
+                                                                                                                                                                      "title": "Diploma in Digital Marketing",
+                                                                                                                                                                      "subtitle": "Digital Marketing Course Overview",
+                                                                                                                                                                      "shortDescription": "The Diploma in Digital Marketing at E Digital India is built to give you real, job-ready skills in today’s online world. Not only theory, you’ll work on live projects and learn directly from industry experts. From SEO and Google Ads to social media and content creation, every part of this course helps you to understand how digital marketing works in practice.",
+                                                                                                                                                                      "longDescription": "By the time you finish, you’ll know how to promote a brand, manage campaigns, generate leads, and grow a business online, skills that employers and clients look for every day.",
+                                                                                                                                                                      "image": "/digital-marketing-course.webp",
+                                                                                                                                                                          "syllabus":"/p1.pdf",
 
-    "coreBenefits": [
-      " Laptop: You’ll even get a personal laptop when you join, so you can hit the ground running, no extra gear needed.",
-"UGC-Approved PGDCA Certificate from Asian University: Add more credibility to your qualification with a recognized certification.",
-"Online & Classroom Classes: Learn flexibly, whether in-person or from home.",
-"ISO-Certified & Industry-Recognized Courses: Stand out with globally trusted certifications.",
-"100% Job Guarantee: Worried about what happens after the course? You’ll get a paid internship and 100% job placement support.",
-"Live Projects & Hands-on Learning: Gain practical skills by working on real client projects.",
-"Expert Trainers & Personalized Career Guidance: Learn directly from experienced professionals.",
-"Mock Interviews & Resume Building: Prepare for interviews with confidence.",
-"Placement Assistance: End-to-end support until you land your dream job."
-    ],
-    "whatYouWillLearn": [
-      "Introduction of Digital Marketing (what is, Tradition or Digital)",
-"How to get your site ranking on search engines (SEO)",
-"Running ads that actually convert (Google Ads / PPC)",
-"Social media marketing for platforms like Instagram, LinkedIn, and Facebook"
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "Students & fresh graduates who want a future-ready career.",
-"If you're job hunting and want real skills that companies are hiring for",
-"If you run a business and want to stop relying on agencies to get leads",
-"If you're freelancing or working already but want to earn more or switch it up"
-    ],
-    "careerOpportunities": [
-      "SEO Executive",
-"PPC/Google Ads Specialist",
-"Social Media Manager",
-"Content Marketer",
-"Or go solo as a freelancer or digital consultant"
-    ],
-    "enrollUrl": "/apply?course=machine-learning-disease-prediction",
-    "price": "Contact us",
-    "tags": [
-      "ML",
-      "Health",
-      "Python"
-    ],
-    "featured": false
-  },
-  {
-    "id": "diploma-in-web-development",
-    "slug": "diploma-in-web-development",
-    "title": "Diploma in Web Development",
-    "subtitle": "Web Development Course Overview",
-    "shortDescription": "If you’re looking to build real websites — not just copy-paste code — this PHP Web Development Diploma is for you. Whether you're a student, job seeker, or already working, it gives you practical skills you can actually use in the industry. You’ll start with the basics of PHP and gradually work your way up to more advanced stuff — building secure, functional, and user-friendly sites. ",
-    "longDescription": "And instead of just theory, you’ll be coding, problem-solving, and working on real projects, with guidance from people who’ve actually done this work in the field.",
-    "image": "/web-development-course.webp",
-    "syllabus":"/p1.pdf",
-    "coreBenefits": [
-      " Laptop– Each student is provided with a laptop to aid their learning.",
-"UGC-Approved PGDCA Certificate issued by Asian University– Add value to your resume with a credible certification.",
-"Online & Classroom Classes– Opt for flexible learning modes based on your convenience.",
-"ISO-Certified & Industry-Reputed Courses– Acquire globally accepted credentials.",
-"100% Job Guarantee with Paid Internships– boost your career with assured placement opportunities.",
-"Work on real projects, not just assignments– You’ll get hands-on with actual campaigns and tools, so you're not just learning—you’re doing.",
-"Learn from people who’ve actually done it– Our trainers aren’t just teachers; they’ve worked in the field and know what it’s really like. You’ll also get career advice that’s actually useful, not generic.",
-"Mock Interviews & Resume Creation– Prepare well for job placements.",
-"Placement Support– Personalized support until you get your first job."
-    ],
-    "whatYouWillLearn": [
-      "Introduction to Web Development Fundamentals",
-"PHP Syntax, Variables, Operators, and Control Structures",
-"Working with Forms and User Input",
-"Database Integration with MySQL (CRUD Operations)",
-"User Authentication and Login Systems",
-"Developing Dynamic and Data-Driven Web Applications",
-"Security and Error Handling in PHP",
-"PHP with HTML, CSS, JavaScript for Full-Stack Development Fundamentals",
-"Project Development and Deployment",
-"Career Counseling and Freelancing Skills"
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "Students & graduates looking to pursue a career in web development.",
-"High-demand technical skills job seekers.",
-"IT professionals looking to enhance their coding skills.",
-"IT professionals looking to enhance their coding skills.",
-"Entrepreneurs & freelancers looking to create custom web applications."
-    ],
-    "careerOpportunities": [
-      "Web Developer",
-"Web Application Developer",
-"Back-End Developer",
-"Full-Stack Developer (with front-end experience)",
-"Freelancer / Entrepreneur in Web Solutions"
-    ],
-    "enrollUrl": "/apply?course=ml-based-insurance-prediction",
-    "price": "Contact us",
-    "tags": [
-      "Insurance",
-      "ML"
-    ],
-    "featured": false
-  },
-  {
-    "id": "diploma-in-data-science-and-artificial-intelligence",
-    "slug": "diploma-in-data-science-and-artificial-intelligence",
-    "title": "Diploma in Data Science & Artificial Intelligence",
-    "subtitle": "Overview of Data Science & Artificial Intelligence",
-    "shortDescription": "Data is everywhere—from the videos you watch on YouTube to the recommendations on your shopping apps. Behind all of this is Data Science and Artificial Intelligence (AI). If you’ve ever wondered “How does this work?” or thought about building a career in one of the fastest-growing industries in the world, this course is your entry point.",
-    "longDescription": "At E Digital India, our Diploma in Data Science & AI is designed to take you step by step from the basics to advanced applications. You won’t just study theory—you’ll work on real projects, handle real datasets, and learn the exact skills companies are hiring for today.",
-    "image": "/ai-course.webp",
-        "syllabus":"/p1.pdf",
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        " Laptop: You’ll even get a personal laptop when you join, so you can hit the ground running, no extra gear needed.",
+                                                                                                                                                                  "UGC-Approved PGDCA Certificate from Asian University: Add more credibility to your qualification with a recognized certification.",
+                                                                                                                                                                  "Online & Classroom Classes: Learn flexibly, whether in-person or from home.",
+                                                                                                                                                                  "ISO-Certified & Industry-Recognized Courses: Stand out with globally trusted certifications.",
+                                                                                                                                                                  "100% Job Guarantee: Worried about what happens after the course? You’ll get a paid internship and 100% job placement support.",
+                                                                                                                                                                  "Live Projects & Hands-on Learning: Gain practical skills by working on real client projects.",
+                                                                                                                                                                  "Expert Trainers & Personalized Career Guidance: Learn directly from experienced professionals.",
+                                                                                                                                                                  "Mock Interviews & Resume Building: Prepare for interviews with confidence.",
+                                                                                                                                                                  "Placement Assistance: End-to-end support until you land your dream job."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "Introduction of Digital Marketing (what is, Tradition or Digital)",
+                                                                                                                                                                  "How to get your site ranking on search engines (SEO)",
+                                                                                                                                                                  "Running ads that actually convert (Google Ads / PPC)",
+                                                                                                                                                                  "Social media marketing for platforms like Instagram, LinkedIn, and Facebook"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "Students & fresh graduates who want a future-ready career.",
+                                                                                                                                                                  "If you're job hunting and want real skills that companies are hiring for",
+                                                                                                                                                                  "If you run a business and want to stop relying on agencies to get leads",
+                                                                                                                                                                  "If you're freelancing or working already but want to earn more or switch it up"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "SEO Executive",
+                                                                                                                                                                  "PPC/Google Ads Specialist",
+                                                                                                                                                                  "Social Media Manager",
+                                                                                                                                                                  "Content Marketer",
+                                                                                                                                                                  "Or go solo as a freelancer or digital consultant"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=machine-learning-disease-prediction",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "ML",
+                                                                                                                                                                        "Health",
+                                                                                                                                                                        "Python"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": false
+                                                                                                                                                                    },
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "diploma-in-web-development",
+                                                                                                                                                                      "slug": "diploma-in-web-development",
+                                                                                                                                                                      "title": "Diploma in Web Development",
+                                                                                                                                                                      "subtitle": "Web Development Course Overview",
+                                                                                                                                                                      "shortDescription": "If you’re looking to build real websites — not just copy-paste code — this PHP Web Development Diploma is for you. Whether you're a student, job seeker, or already working, it gives you practical skills you can actually use in the industry. You’ll start with the basics of PHP and gradually work your way up to more advanced stuff — building secure, functional, and user-friendly sites. ",
+                                                                                                                                                                      "longDescription": "And instead of just theory, you’ll be coding, problem-solving, and working on real projects, with guidance from people who’ve actually done this work in the field.",
+                                                                                                                                                                      "image": "/web-development-course.webp",
+                                                                                                                                                                      "syllabus":"/p1.pdf",
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        " Laptop– Each student is provided with a laptop to aid their learning.",
+                                                                                                                                                                  "UGC-Approved PGDCA Certificate issued by Asian University– Add value to your resume with a credible certification.",
+                                                                                                                                                                  "Online & Classroom Classes– Opt for flexible learning modes based on your convenience.",
+                                                                                                                                                                  "ISO-Certified & Industry-Reputed Courses– Acquire globally accepted credentials.",
+                                                                                                                                                                  "100% Job Guarantee with Paid Internships– boost your career with assured placement opportunities.",
+                                                                                                                                                                  "Work on real projects, not just assignments– You’ll get hands-on with actual campaigns and tools, so you're not just learning—you’re doing.",
+                                                                                                                                                                  "Learn from people who’ve actually done it– Our trainers aren’t just teachers; they’ve worked in the field and know what it’s really like. You’ll also get career advice that’s actually useful, not generic.",
+                                                                                                                                                                  "Mock Interviews & Resume Creation– Prepare well for job placements.",
+                                                                                                                                                                  "Placement Support– Personalized support until you get your first job."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "Introduction to Web Development Fundamentals",
+                                                                                                                                                                  "PHP Syntax, Variables, Operators, and Control Structures",
+                                                                                                                                                                  "Working with Forms and User Input",
+                                                                                                                                                                  "Database Integration with MySQL (CRUD Operations)",
+                                                                                                                                                                  "User Authentication and Login Systems",
+                                                                                                                                                                  "Developing Dynamic and Data-Driven Web Applications",
+                                                                                                                                                                  "Security and Error Handling in PHP",
+                                                                                                                                                                  "PHP with HTML, CSS, JavaScript for Full-Stack Development Fundamentals",
+                                                                                                                                                                  "Project Development and Deployment",
+                                                                                                                                                                  "Career Counseling and Freelancing Skills"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "Students & graduates looking to pursue a career in web development.",
+                                                                                                                                                                  "High-demand technical skills job seekers.",
+                                                                                                                                                                  "IT professionals looking to enhance their coding skills.",
+                                                                                                                                                                  "IT professionals looking to enhance their coding skills.",
+                                                                                                                                                                  "Entrepreneurs & freelancers looking to create custom web applications."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "Web Developer",
+                                                                                                                                                                  "Web Application Developer",
+                                                                                                                                                                  "Back-End Developer",
+                                                                                                                                                                  "Full-Stack Developer (with front-end experience)",
+                                                                                                                                                                  "Freelancer / Entrepreneur in Web Solutions"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=ml-based-insurance-prediction",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "Insurance",
+                                                                                                                                                                        "ML"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": false
+                                                                                                                                                                    },
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "diploma-in-data-science-and-artificial-intelligence",
+                                                                                                                                                                      "slug": "diploma-in-data-science-and-artificial-intelligence",
+                                                                                                                                                                      "title": "Diploma in Data Science & Artificial Intelligence",
+                                                                                                                                                                      "subtitle": "Overview of Data Science & Artificial Intelligence",
+                                                                                                                                                                      "shortDescription": "Data is everywhere—from the videos you watch on YouTube to the recommendations on your shopping apps. Behind all of this is Data Science and Artificial Intelligence (AI). If you’ve ever wondered “How does this work?” or thought about building a career in one of the fastest-growing industries in the world, this course is your entry point.",
+                                                                                                                                                                      "longDescription": "At E Digital India, our Diploma in Data Science & AI is designed to take you step by step from the basics to advanced applications. You won’t just study theory—you’ll work on real projects, handle real datasets, and learn the exact skills companies are hiring for today.",
+                                                                                                                                                                      "image": "/ai-course.webp",
+                                                                                                                                                                          "syllabus":"/p1.pdf",
 
-    "coreBenefits": [
-      " Laptop for every student, so you learn without limits.",
-"UGC-approved PGDCA Certificate from Asian University.",
-"ISO-certified & industry-recognized courses that strengthen your profile.",
-"100% Job Guarantee with paid internships.",
-"Classroom, online, or both.",
-"Hands-on practice with live projects and real-world datasets.",
-"Guidance beyond classes: career counseling, resume building, and mock interviews.",
-"Placement assistance until you’re placed."
-    ],
-    "whatYouWillLearn": [
-      "Getting started with Data Science & AI basics",
-"Python programming for data science",
-"How to collect, clean, and prepare data",
-"Making sense of information with data analysis & visualization",
-"Building smart systems using machine learning algorithms",
-"Going deeper with Deep Learning & Neural Networks",
-"Understanding Natural Language Processing (NLP) (think chatbots & voice assistants)",
-"Exploring real-world AI applications",
-"An introduction to Big Data tools & concepts",
-"A capstone project that ties everything together + career guidance"
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "Students & fresh graduates who want a career in AI and data.",
-"Job seekers who want to enter high-demand IT and analytics roles.",
-"IT professionals ready to upskill and future-proof their careers.",
-"Business owners & managers who want to use data for smarter decisions.",
-"Freelancers eager to explore AI-driven opportunities."
-    ],
-    "careerOpportunities": [
-      "Data Analyst",
-"Data Scientist",
-"Machine Learning Engineer",
-"AI Specialist",
-"Business Intelligence Analyst",
-"Python Developer",
-"Research Analyst"
-    ],
-    "enrollUrl": "/apply?course=interactive-movie-recommendation",
-    "price": "Contact us",
-    "tags": [
-      "Recommender",
-      "Fullstack"
-    ],
-    "featured": false
-  },
-  {
-    "id": "diploma-in-android-app-development",
-    "slug": "diploma-in-android-app-development",
-    "title": "Diploma in Android App Development",
-    "subtitle": "Android App Development Course Overview",
-    "shortDescription": "If you’ve ever wanted to build your own Android apps, whether for work, freelancing, or launching your idea, this course will show you how. From basic coding to advanced features, you’ll learn how to build real apps that run smoothly across devices.",
-    "longDescription": "With hands-on training, live projects, and expert mentorship, you will be able to design, develop, and deploy Android applications that work seamlessly across devices.",
-    "image": "/android-app-development.webp",
-        "syllabus":"/p1.pdf",
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        " Laptop for every student, so you learn without limits.",
+                                                                                                                                                                  "UGC-approved PGDCA Certificate from Asian University.",
+                                                                                                                                                                  "ISO-certified & industry-recognized courses that strengthen your profile.",
+                                                                                                                                                                  "100% Job Guarantee with paid internships.",
+                                                                                                                                                                  "Classroom, online, or both.",
+                                                                                                                                                                  "Hands-on practice with live projects and real-world datasets.",
+                                                                                                                                                                  "Guidance beyond classes: career counseling, resume building, and mock interviews.",
+                                                                                                                                                                  "Placement assistance until you’re placed."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "Getting started with Data Science & AI basics",
+                                                                                                                                                                  "Python programming for data science",
+                                                                                                                                                                  "How to collect, clean, and prepare data",
+                                                                                                                                                                  "Making sense of information with data analysis & visualization",
+                                                                                                                                                                  "Building smart systems using machine learning algorithms",
+                                                                                                                                                                  "Going deeper with Deep Learning & Neural Networks",
+                                                                                                                                                                  "Understanding Natural Language Processing (NLP) (think chatbots & voice assistants)",
+                                                                                                                                                                  "Exploring real-world AI applications",
+                                                                                                                                                                  "An introduction to Big Data tools & concepts",
+                                                                                                                                                                  "A capstone project that ties everything together + career guidance"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "Students & fresh graduates who want a career in AI and data.",
+                                                                                                                                                                  "Job seekers who want to enter high-demand IT and analytics roles.",
+                                                                                                                                                                  "IT professionals ready to upskill and future-proof their careers.",
+                                                                                                                                                                  "Business owners & managers who want to use data for smarter decisions.",
+                                                                                                                                                                  "Freelancers eager to explore AI-driven opportunities."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "Data Analyst",
+                                                                                                                                                                  "Data Scientist",
+                                                                                                                                                                  "Machine Learning Engineer",
+                                                                                                                                                                  "AI Specialist",
+                                                                                                                                                                  "Business Intelligence Analyst",
+                                                                                                                                                                  "Python Developer",
+                                                                                                                                                                  "Research Analyst"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=interactive-movie-recommendation",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "Recommender",
+                                                                                                                                                                        "Fullstack"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": false
+                                                                                                                                                                    },
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "diploma-in-android-app-development",
+                                                                                                                                                                      "slug": "diploma-in-android-app-development",
+                                                                                                                                                                      "title": "Diploma in Android App Development",
+                                                                                                                                                                      "subtitle": "Android App Development Course Overview",
+                                                                                                                                                                      "shortDescription": "If you’ve ever wanted to build your own Android apps, whether for work, freelancing, or launching your idea, this course will show you how. From basic coding to advanced features, you’ll learn how to build real apps that run smoothly across devices.",
+                                                                                                                                                                      "longDescription": "With hands-on training, live projects, and expert mentorship, you will be able to design, develop, and deploy Android applications that work seamlessly across devices.",
+                                                                                                                                                                      "image": "/android-app-development.webp",
+                                                                                                                                                                          "syllabus":"/p1.pdf",
 
-    "coreBenefits": [
-      " laptop when you join– So you don’t have to worry about gear.",
-"Get two certificates– One for Android Development and a UGC-approved PGDCA certificate to boost your resume.",
-"Learn online, in class, or both– Choose what works for your schedule.",
-"Job guarantee with a paid internship– You’ll finish the course with experience and a foot in the door.",
-"Work on real projects– Build apps you can actually show to future employers.",
-"Guidance that goes beyond the classroom– From resume help to mock interviews, we’ll help you get hired."
-    ],
-    "whatYouWillLearn": [
-      "The basics of Java and Kotlin (the core Android languages)",
-"Configuring Android Studio and launching your initial application",
-"Designing smooth, user-friendly interfaces",
-"Working with data, APIs, Firebase, and cloud tools",
-"Publishing your app to Google Play",
-"And wrapping it all up with a final project, you can add to your portfolio"
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "A student is figuring out their next step",
-"Looking for tech skills that lead to jobs",
-"An entrepreneur with an app idea but no idea how to build it",
-"A freelancer or developer ready to move into mobile"
-    ],
-    "careerOpportunities": [
-      "Android App Developer",
-"Mobile UI/UX Designer",
-"Freelance app creator",
-"Or even launch your own app-based business"
-    ],
-    "enrollUrl": "/apply?course=ai-driven-scam-detection",
-    "price": "Contact us",
-    "tags": [
-      "NLP",
-      "Security",
-      "Fraud"
-    ],
-    "featured": false
-  },
-  {
-    "id": "diploma-in-business-communication-and-soft-skills",
-    "slug": "diploma-in-business-communication-and-soft-skills",
-    "title": "Diploma in Business Communication & Soft Skills",
-    "subtitle": "Business Communication & Soft Skills Course Overview",
-    "shortDescription": "In Jamshedpur, I often meet students who say, “I know my subject, but when it comes to interviews, I just go blank.” Or working professionals who tell me, “I can do the job well, but I can’t explain it in meetings.”",
-    "longDescription": "That’s exactly why we started this diploma. Communication is not just about speaking English—it’s about expressing yourself with confidence, whether you’re facing an interviewer, a client, or even your team.",
-    "image": "/skill-development-course.webp",
-        "syllabus":"/p1.pdf",
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        " laptop when you join– So you don’t have to worry about gear.",
+                                                                                                                                                                  "Get two certificates– One for Android Development and a UGC-approved PGDCA certificate to boost your resume.",
+                                                                                                                                                                  "Learn online, in class, or both– Choose what works for your schedule.",
+                                                                                                                                                                  "Job guarantee with a paid internship– You’ll finish the course with experience and a foot in the door.",
+                                                                                                                                                                  "Work on real projects– Build apps you can actually show to future employers.",
+                                                                                                                                                                  "Guidance that goes beyond the classroom– From resume help to mock interviews, we’ll help you get hired."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "The basics of Java and Kotlin (the core Android languages)",
+                                                                                                                                                                  "Configuring Android Studio and launching your initial application",
+                                                                                                                                                                  "Designing smooth, user-friendly interfaces",
+                                                                                                                                                                  "Working with data, APIs, Firebase, and cloud tools",
+                                                                                                                                                                  "Publishing your app to Google Play",
+                                                                                                                                                                  "And wrapping it all up with a final project, you can add to your portfolio"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "A student is figuring out their next step",
+                                                                                                                                                                  "Looking for tech skills that lead to jobs",
+                                                                                                                                                                  "An entrepreneur with an app idea but no idea how to build it",
+                                                                                                                                                                  "A freelancer or developer ready to move into mobile"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "Android App Developer",
+                                                                                                                                                                  "Mobile UI/UX Designer",
+                                                                                                                                                                  "Freelance app creator",
+                                                                                                                                                                  "Or even launch your own app-based business"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=ai-driven-scam-detection",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "NLP",
+                                                                                                                                                                        "Security",
+                                                                                                                                                                        "Fraud"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": false
+                                                                                                                                                                    },
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "diploma-in-business-communication-and-soft-skills",
+                                                                                                                                                                      "slug": "diploma-in-business-communication-and-soft-skills",
+                                                                                                                                                                      "title": "Diploma in Business Communication & Soft Skills",
+                                                                                                                                                                      "subtitle": "Business Communication & Soft Skills Course Overview",
+                                                                                                                                                                      "shortDescription": "In Jamshedpur, I often meet students who say, “I know my subject, but when it comes to interviews, I just go blank.” Or working professionals who tell me, “I can do the job well, but I can’t explain it in meetings.”",
+                                                                                                                                                                      "longDescription": "That’s exactly why we started this diploma. Communication is not just about speaking English—it’s about expressing yourself with confidence, whether you’re facing an interviewer, a client, or even your team.",
+                                                                                                                                                                      "image": "/skill-development-course.webp",
+                                                                                                                                                                          "syllabus":"/p1.pdf",
 
-    "coreBenefits": [
-      "You’ll get comfortable with English, both speaking and writing.",
-"You’ll learn how to write emails that sound professional (not stiff).",
-"You’ll present ideas without rushing or fumbling.",
-"You’ll practice teamwork and leadership, because both matter.",
-"You’ll get used to deadlines with smart time management.",
-"You’ll walk into interviews knowing exactly how to handle them."
-    ],
-    "whatYouWillLearn": [
-      "You’ll get comfortable with English, both speaking and writing.",
-"You’ll learn how to write emails that sound professional (not stiff).",
-"You’ll present ideas without rushing or fumbling.",
-"You’ll practice teamwork and leadership, because both matter.",
-"You’ll get used to deadlines with smart time management.",
-"You’ll walk into interviews knowing exactly how to handle them."
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "HR executives and trainers",
-"Business development professionals",
-"Client relationship managers",
-"Communication executives",
-"Customer support leads"
-    ],
-    "careerOpportunities": [
-      "HR executives and trainers",
-"Business development professionals",
-"Client relationship managers",
-"Communication executives",
-"Customer support leads"
-     ],
-    "enrollUrl": "/apply?course=ai-driven-scam-detection",
-    "price": "Contact us",
-    "tags": [
-      "NLP",
-      "Security",
-      "Fraud"
-    ],
-    "featured": false
-  },
-  {
-    "id": "advanced-digital-marketing-app-development",
-    "slug": "advanced-digital-marketing-app-development",
-    "title": "Advanced Digital Marketing and App Development Diploma",
-    "subtitle": "6 Month Advanced Digital Marketing Class Syllabus",
-    "shortDescription": "A Government of India certification program. Go Digital with E-Digital. This 6-month advanced course covers digital marketing techniques, interview skills, online business strategies, and app development using Flutter.",
-    "longDescription": "Secure your future with a 100% Job Guarantee Course. After completing, get ASIAN University Approved Certificate. Includes live sessions, practical classes, live projects, 100% internship, PDF notes, 1 year support, and more.",
-    "image": "/digital-marketing-course.webp",
-        "syllabus":"/p1.pdf",
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        "You’ll get comfortable with English, both speaking and writing.",
+                                                                                                                                                                  "You’ll learn how to write emails that sound professional (not stiff).",
+                                                                                                                                                                  "You’ll present ideas without rushing or fumbling.",
+                                                                                                                                                                  "You’ll practice teamwork and leadership, because both matter.",
+                                                                                                                                                                  "You’ll get used to deadlines with smart time management.",
+                                                                                                                                                                  "You’ll walk into interviews knowing exactly how to handle them."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "You’ll get comfortable with English, both speaking and writing.",
+                                                                                                                                                                  "You’ll learn how to write emails that sound professional (not stiff).",
+                                                                                                                                                                  "You’ll present ideas without rushing or fumbling.",
+                                                                                                                                                                  "You’ll practice teamwork and leadership, because both matter.",
+                                                                                                                                                                  "You’ll get used to deadlines with smart time management.",
+                                                                                                                                                                  "You’ll walk into interviews knowing exactly how to handle them."
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "HR executives and trainers",
+                                                                                                                                                                  "Business development professionals",
+                                                                                                                                                                  "Client relationship managers",
+                                                                                                                                                                  "Communication executives",
+                                                                                                                                                                  "Customer support leads"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "HR executives and trainers",
+                                                                                                                                                                  "Business development professionals",
+                                                                                                                                                                  "Client relationship managers",
+                                                                                                                                                                  "Communication executives",
+                                                                                                                                                                  "Customer support leads"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=ai-driven-scam-detection",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "NLP",
+                                                                                                                                                                        "Security",
+                                                                                                                                                                        "Fraud"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": false
+                                                                                                                                                                    },
+                                                                                                                                                                    {
+                                                                                                                                                                      "id": "advanced-digital-marketing-app-development",
+                                                                                                                                                                      "slug": "advanced-digital-marketing-app-development",
+                                                                                                                                                                      "title": "Advanced Digital Marketing and App Development Diploma",
+                                                                                                                                                                      "subtitle": "6 Month Advanced Digital Marketing Class Syllabus",
+                                                                                                                                                                      "shortDescription": "A Government of India certification program. Go Digital with E-Digital. This 6-month advanced course covers digital marketing techniques, interview skills, online business strategies, and app development using Flutter.",
+                                                                                                                                                                      "longDescription": "Secure your future with a 100% Job Guarantee Course. After completing, get ASIAN University Approved Certificate. Includes live sessions, practical classes, live projects, 100% internship, PDF notes, 1 year support, and more.",
+                                                                                                                                                                      "image": "/digital-marketing-course.webp",
+                                                                                                                                                                          "syllabus":"/p1.pdf",
 
-    "coreBenefits": [
-      "Live Session",
-      "Practical Class",
-      "Live Projects",
-      "100% Internship",
-      "PDF Notes",
-      "1 Year Support",
-      "100% Job Guarantee",
-      "ASIAN University Approved Certification"
-    ],
-    "whatYouWillLearn": [
-      "Techniques of a cracking interview",
-      "How To Start Your Online Business",
-      "Learn the Top 30 important tools for Digital Marketing",
-      "Impressive Talk Techniques",
-      "Speak effectively",
-      "Psychology of interviewer",
-      "Key points of making a resume",
-      "Types of communication",
-      "How to start with Minimum Investment",
-      "Strategy of online Business",
-      "How to close sales",
-      "How to create your network",
-      "How to Increase sales",
-      "How to crack a job",
-      "App Development Fundamentals",
-      "Development IDE (Android Studio, VS Code, IntelliJ IDEA)",
-      "Basics of Flutter",
-      "Basics of OOP",
-      "Data Structures and Algorithms",
-      "Gradle",
-      "Create a Hello World App",
-      "Version Control (GitHub, GitLab)",
-      "Dart Basics (DartPad, Variables, Built-in Types, Functions, Operators, Control Flow Statements)",
-      "Widgets (Responsive, Inherited, Stateless, Stateful, Styled, Material, Cupertino)",
-      "Working with Assets (Font, Image)",
-      "Design Principles and Patterns (SOLID Principles)",
-      "Package Manager (Flutter pub, dart pub, pub.dev)",
-      "Working with APIs (JSON, REST, Web Sockets)",
-      "Storage (SQLite, Shared Preferences)",
-      "State Management (GetX, BloC, Riverpod)",
-      "Testing (Integration, Unit, Widget Testing)",
-      "Deployment (Playstore, Indus Appstore)"
-    ],
-    "duration": "6 Months",
-    "mode": "Classroom & Online",
-    "idealFor": [
-      "Students looking to build careers in digital marketing and app development",
-      "Job seekers wanting practical skills in online business and Flutter apps",
-      "Entrepreneurs aiming to start businesses with minimal investment",
-      "Professionals seeking to enhance communication and technical skills"
-    ],
-    "careerOpportunities": [
-      "Digital Marketing Specialist",
-      "App Developer (Flutter)",
-      "Online Business Consultant",
-      "Sales and Networking Expert",
-      "Freelancer in Digital Marketing and App Development"
-    ],
-    "enrollUrl": "/apply?course=advanced-digital-marketing-app-development",
-    "price": "Contact us",
-    "tags": [
-      "Digital Marketing",
-      "App Development",
-      "Flutter",
-      "Job Guarantee"
-    ],
-    "featured": false
-  }
-]
+                                                                                                                                                                      "coreBenefits": [
+                                                                                                                                                                        "Live Session",
+                                                                                                                                                                        "Practical Class",
+                                                                                                                                                                        "Live Projects",
+                                                                                                                                                                        "100% Internship",
+                                                                                                                                                                        "PDF Notes",
+                                                                                                                                                                        "1 Year Support",
+                                                                                                                                                                        "100% Job Guarantee",
+                                                                                                                                                                        "ASIAN University Approved Certification"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "whatYouWillLearn": [
+                                                                                                                                                                        "Techniques of a cracking interview",
+                                                                                                                                                                        "How To Start Your Online Business",
+                                                                                                                                                                        "Learn the Top 30 important tools for Digital Marketing",
+                                                                                                                                                                        "Impressive Talk Techniques",
+                                                                                                                                                                        "Speak effectively",
+                                                                                                                                                                        "Psychology of interviewer",
+                                                                                                                                                                        "Key points of making a resume",
+                                                                                                                                                                        "Types of communication",
+                                                                                                                                                                        "How to start with Minimum Investment",
+                                                                                                                                                                        "Strategy of online Business",
+                                                                                                                                                                        "How to close sales",
+                                                                                                                                                                        "How to create your network",
+                                                                                                                                                                        "How to Increase sales",
+                                                                                                                                                                        "How to crack a job",
+                                                                                                                                                                        "App Development Fundamentals",
+                                                                                                                                                                        "Development IDE (Android Studio, VS Code, IntelliJ IDEA)",
+                                                                                                                                                                        "Basics of Flutter",
+                                                                                                                                                                        "Basics of OOP",
+                                                                                                                                                                        "Data Structures and Algorithms",
+                                                                                                                                                                        "Gradle",
+                                                                                                                                                                        "Create a Hello World App",
+                                                                                                                                                                        "Version Control (GitHub, GitLab)",
+                                                                                                                                                                        "Dart Basics (DartPad, Variables, Built-in Types, Functions, Operators, Control Flow Statements)",
+                                                                                                                                                                        "Widgets (Responsive, Inherited, Stateless, Stateful, Styled, Material, Cupertino)",
+                                                                                                                                                                        "Working with Assets (Font, Image)",
+                                                                                                                                                                        "Design Principles and Patterns (SOLID Principles)",
+                                                                                                                                                                        "Package Manager (Flutter pub, dart pub, pub.dev)",
+                                                                                                                                                                        "Working with APIs (JSON, REST, Web Sockets)",
+                                                                                                                                                                        "Storage (SQLite, Shared Preferences)",
+                                                                                                                                                                        "State Management (GetX, BloC, Riverpod)",
+                                                                                                                                                                        "Testing (Integration, Unit, Widget Testing)",
+                                                                                                                                                                        "Deployment (Playstore, Indus Appstore)"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "duration": "6 Months",
+                                                                                                                                                                      "mode": "Classroom & Online",
+                                                                                                                                                                      "idealFor": [
+                                                                                                                                                                        "Students looking to build careers in digital marketing and app development",
+                                                                                                                                                                        "Job seekers wanting practical skills in online business and Flutter apps",
+                                                                                                                                                                        "Entrepreneurs aiming to start businesses with minimal investment",
+                                                                                                                                                                        "Professionals seeking to enhance communication and technical skills"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "careerOpportunities": [
+                                                                                                                                                                        "Digital Marketing Specialist",
+                                                                                                                                                                        "App Developer (Flutter)",
+                                                                                                                                                                        "Online Business Consultant",
+                                                                                                                                                                        "Sales and Networking Expert",
+                                                                                                                                                                        "Freelancer in Digital Marketing and App Development"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "enrollUrl": "/apply?course=advanced-digital-marketing-app-development",
+                                                                                                                                                                      "price": "Contact us",
+                                                                                                                                                                      "tags": [
+                                                                                                                                                                        "Digital Marketing",
+                                                                                                                                                                        "App Development",
+                                                                                                                                                                        "Flutter",
+                                                                                                                                                                        "Job Guarantee"
+                                                                                                                                                                      ],
+                                                                                                                                                                      "featured": false
+                                                                                                                                                                    }
+                                                                                                                                                                  ]
