@@ -84,7 +84,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-9">
             <span>info@edigitalindian.com</span>
             <div className="flex items-center gap-4 text-xs">
-              <span>+91-9661577233,</span>
+              {/* <span>+91-9661577233,</span> */}
               <span>+91-9934141233</span>
             </div>
           </div>
@@ -271,7 +271,8 @@ export default function Header() {
           <p className="animate-scroll text-sm font-semibold py-2 inline-block">
             “For the first time in the history of Job Training Centers, we
             provide 100% Job Guarantee on Stamp Paper.” 
-            
+            &nbsp; • &nbsp; 
+            "All our previous offers have ended. Check out our latest updates by visiting our office or calling us at 9934141233"
           </p>
         </div>
       </div>
