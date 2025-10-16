@@ -19,7 +19,7 @@ export default function DigitalMarketing() {
       description:
         'Build brand presence on platforms like Instagram, Facebook and LinkedIn — content strategy, community growth and analytics-driven campaigns.',
       image:
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop'
+        'np1.jpeg'
     },
     {
       icon: HiTrendingUp,
