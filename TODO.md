@@ -1,7 +1,5 @@
-# TODO: Fix State Management Issues in CourseDetail.jsx
+# TODO: Add New Course from Syllabus
 
-## Tasks
-- [x] Move course data fetching and form pre-filling to useEffect to prevent infinite re-renders
-- [x] Properly manage loading state based on course availability
-- [x] Ensure form pre-fills correctly when course is found
-- [x] Test the component to verify fixes work correctly
+- [x] Edit src/data/courses.json to append the new "Advanced Digital Marketing and App Development Diploma" course object with details extracted from public/p1.pdf.
+- [x] Verify the JSON syntax is valid after editing.
+- [x] Test the application to ensure the new course appears in the courses list and detail page.
