@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-// Enhanced Bubble component to accept and display different colors
+// Animated background bubble
 const AnimatedBubble = ({ size, top, left, delay, duration, colorClass }) => (
   <div
     className={`absolute rounded-full shadow-2xl backdrop-blur-sm animate-bubble ${colorClass}`}
@@ -16,11 +16,6 @@ const AnimatedBubble = ({ size, top, left, delay, duration, colorClass }) => (
   />
 );
 
-/**
- * CreativeProfileCard (Maximal Color Glassmorphism)
- * Props:
- * - name, handle, role, avatar, onBookmark, initiallyBookmarked
- */
 const CreativeProfileCard = memo(function CreativeProfileCard({
   name = "John Doe",
   handle = "@johndoe_dev",
@@ -31,16 +26,15 @@ const CreativeProfileCard = memo(function CreativeProfileCard({
 }) {
   const [bookmarked, setBookmarked] = React.useState(Boolean(initiallyBookmarked));
 
-  function toggleBookmark(e) {
+  const toggleBookmark = (e) => {
     e?.stopPropagation();
     setBookmarked((v) => {
       const next = !v;
       if (typeof onBookmark === "function") onBookmark(next);
       return next;
     });
-  }
+  };
 
-  // The CSS animation remains the same, but the colors come from the bubble's colorClass.
   const animationStyles = `
     @keyframes move-bubble {
       0%, 100% {
@@ -48,20 +42,20 @@ const CreativeProfileCard = memo(function CreativeProfileCard({
         opacity: 0.6;
       }
       25% {
-        transform: translateY(-20px) rotate(45deg) scale(1.1);
+        transform: translateY(-25px) rotate(45deg) scale(1.1);
         opacity: 0.8;
       }
       50% {
-        transform: translateY(-50px) rotate(90deg) scale(0.9);
-        opacity: 0.4;
+        transform: translateY(-45px) rotate(90deg) scale(0.9);
+        opacity: 0.5;
       }
       75% {
-        transform: translateY(-30px) rotate(135deg) scale(1.2);
+        transform: translateY(-30px) rotate(135deg) scale(1.15);
         opacity: 0.7;
       }
     }
     .animate-bubble {
-      animation: move-bubble infinite alternate ease-in-out;
+      animation: move-bubble infinite alternate cubic-bezier(0.65, 0, 0.35, 1);
     }
   `;
 
@@ -69,11 +63,13 @@ const CreativeProfileCard = memo(function CreativeProfileCard({
     <>
       <style>{animationStyles}</style>
 
-      {/* --- Main Card Container: VIBRANT GRADIENT --- */}
-      {/* We use a strong background gradient to set the overall mood */}
-      <div className="relative w-full max-w-sm mx-auto overflow-hidden rounded-3xl bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-indigo-500/30 shadow-2xl backdrop-blur-xl">
-        
-        {/* --- Animated Background Bubbles: MULTICOLOR --- */}
+      {/* --- Main Card --- */}
+      <div
+        className="relative w-full max-w-sm mx-auto overflow-hidden rounded-3xl 
+        bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-indigo-500/30 
+        shadow-2xl backdrop-blur-xl transition-transform duration-500 hover:scale-[1.03]"
+      >
+        {/* --- Animated Bubbles --- */}
         <div className="absolute inset-0 z-0 opacity-70">
           <AnimatedBubble size={80} top={20} left={5} delay={0} duration={15} colorClass="bg-red-400/50" />
           <AnimatedBubble size={120} top={80} left={80} delay={5} duration={10} colorClass="bg-teal-400/50" />
@@ -82,25 +78,27 @@ const CreativeProfileCard = memo(function CreativeProfileCard({
           <AnimatedBubble size={90} top={90} left={10} delay={4} duration={16} colorClass="bg-blue-400/50" />
         </div>
 
-        {/* --- Profile Content: ENHANCED GLASSMOPHISM --- */}
+        {/* --- Profile Content --- */}
         <div className="relative z-10 p-8 text-center text-white bg-white/10 rounded-3xl border border-white/40 shadow-inner">
           
           {/* Bookmark Button */}
           <button
             onClick={onBookmark ? toggleBookmark : null}
-            className={`absolute top-4 right-4 p-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400/70 backdrop-blur-sm 
-              ${bookmarked ? "text-red-500 bg-white/50" : "text-white/70 hover:text-red-500 hover:bg-white/30"}`}
+            aria-pressed={bookmarked}
             aria-label={bookmarked ? "Remove from bookmarks" : "Add to bookmarks"}
             disabled={!onBookmark}
+            className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400/70 backdrop-blur-sm 
+              ${bookmarked ? "text-red-500 bg-white/50" : "text-white/70 hover:text-red-500 hover:bg-white/30"}`}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-current" viewBox="0 0 24 24">
               <path d="M16 2h-8C6.9 2 6 2.9 6 4v16l6-3 6 3V4c0-1.1-.9-2-2-2z" />
             </svg>
           </button>
-          
+
+          {/* --- Profile Info --- */}
           <div className="flex flex-col items-center pt-2">
+            {/* Avatar */}
             <div className="relative">
-              {/* Avatar: Rainbow Gradient Border */}
               <div className="rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-pink-500 to-sky-500 inline-block ring-4 ring-white/90 shadow-lg">
                 <img
                   src={avatar}
@@ -109,17 +107,13 @@ const CreativeProfileCard = memo(function CreativeProfileCard({
                   className="h-28 w-28 rounded-full object-cover border-4 border-white shadow-xl"
                 />
               </div>
-
-              {/* Status Dot */}
               <span className="absolute -bottom-0.5 right-0.5 block h-4 w-4 rounded-full ring-2 ring-white/90 bg-lime-400 shadow-lg" />
             </div>
 
-            {/* Name and Handle */}
+            {/* Name & Handle */}
             <h3 className="mt-4 text-3xl font-black text-white drop-shadow-lg">{name}</h3>
             <p className="text-lg text-white/90 font-semibold mt-1 drop-shadow">{handle}</p>
-
-            
-            
+            <p className="mt-2 text-sm text-white/80 italic">{role}</p>
           </div>
         </div>
       </div>

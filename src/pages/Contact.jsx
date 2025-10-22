@@ -20,7 +20,7 @@ export default function Contact() {
   const siteUrl = import.meta.env.VITE_SITE_URL || 'https://edigital.globalinfosofts.com';
   
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-8">
       <Helmet>
         <title>Contact Us | E-Digital Training</title>
         <meta name="description" content="Get in touch with E-Digital Training. Have questions about our courses or want to work together? Contact us through our form or find our location on the map." />
