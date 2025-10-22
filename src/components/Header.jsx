@@ -269,12 +269,18 @@ export default function Header() {
       {/* Scrolling promo strip */}
       <div className="w-full bg-gradient-to-r from-indigo-700 to-blue-600 text-white overflow-hidden">
         <div className="relative whitespace-nowrap">
-          <p className="animate-scroll text-sm font-semibold py-2 inline-block">
-            “For the first time in the history of Job Training Centers, we
-            provide 100% Job Guarantee on Stamp Paper.” 
-            &nbsp; • &nbsp; 
-            "All our previous offers have ended. Check out our latest updates by visiting our office or calling us at 9934141233"
-          </p>
+          <p className="animate-scroll text-lg font-semibold py-0 inline-block">
+  
+  {/* &nbsp; • &nbsp; */}
+  <img
+    src="/new.webp"
+    alt="New"
+    className="inline-block w-12 h-12 mr-5 align-middle"
+  />
+  "The special offer from our institute is no longer valid as of today."&nbsp; • &nbsp;
+  " For updates on upcoming offers and courses, please visit our office or contact our team directly."
+</p>
+
         </div>
       </div>
     </header>

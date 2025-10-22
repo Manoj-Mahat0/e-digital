@@ -11,7 +11,7 @@ import np2Image from '../../assets/np2.jpeg'
 
 import np3Image from '../../assets/np3.jpeg'
 
-import np4Image from '../../assets/np4.jpeg'
+import np4Image from '../../assets/np4.jpg'
 
 
 export default function DigitalMarketing() {

@@ -15,12 +15,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const courses = [
-    { name: "SAP Course", to: "/courses/sap-global-certification-course" },
-    { name: "Digital Marketing", to: "/courses/diploma-in-digital-marketing" },
     { name: "Web Development", to: "/courses/diploma-in-web-development" },
+        { name: "Digital Marketing", to: "/courses/diploma-in-digital-marketing" },
+
     { name: "Data Science & AI", to: "/courses/diploma-in-data-science-and-artificial-intelligence" },
     { name: "Android App Development", to: "/courses/diploma-in-android-app-development" },
     { name: "Business & Soft Skills", to: "/courses/diploma-in-business-communication-and-soft-skills" },
+        { name: "SAP Course", to: "/courses/sap-global-certification-course" },
+
   ];
 
   const companyLinks = [

@@ -83,18 +83,14 @@ export default function Contact() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="text-center mb-12"
+          className="text-center mb-5"
         >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white px-4 py-2 rounded-full shadow-lg mb-4">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white px-4 py-1 rounded-full shadow-lg mb-4">
             <HiPaperAirplane className="h-5 w-5 animate-bounce" />
-            <span className="font-semibold tracking-wide">Contact Us</span>
+            <h1 className="font-semibold tracking-wide">Contact Us</h1>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-800 bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-400 bg-clip-text text-transparent">
-            Get in touch
-          </h1>
-          <p className="mt-3 text-lg text-slate-500 max-w-2xl mx-auto">
-            Have a question or want to work together? Fill out the form or find us on the map — we usually reply within 24 hours.
-          </p>
+          
+          
         </motion.header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
@@ -302,7 +298,6 @@ function MapCard() {
         <HiMapPin className="h-5 w-5 text-indigo-500" />
         <div>
           <div className="font-semibold text-slate-800">Our location</div>
-          <div className="text-sm text-slate-500">Gola Rd, Patna — click to open in Google Maps</div>
         </div>
       </div>
 

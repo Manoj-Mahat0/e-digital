@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { HiPaperAirplane, HiLightningBolt, HiAcademicCap, HiDocumentText, HiChevronDown } from "react-icons/hi"; // Added new icons
+import { HiPaperAirplane, HiLightningBolt, HiAcademicCap, HiDocumentText, HiChevronDown } from "react-icons/hi";
 import { FiCheckCircle } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 
-// --- New Component for the Accordion Item for better structure and animation ---
+// --- Accordion item (unchanged except small aria ids) ---
 const SyllabusAccordionItem = ({ section, index, isOpen, toggle }) => (
   <div className="bg-white border-b last:border-b-0">
     <button
+      id={`syllabus-header-${index}`}
       onClick={() => toggle(index)}
       className="w-full text-left flex items-start justify-between gap-3 p-4 hover:bg-gray-50 transition duration-150 ease-in-out"
       aria-expanded={isOpen}
@@ -28,18 +29,20 @@ const SyllabusAccordionItem = ({ section, index, isOpen, toggle }) => (
         <HiChevronDown className="h-5 w-5" />
       </motion.div>
     </button>
-    
+
     <AnimatePresence>
       {isOpen && (
         <motion.div
           id={`syllabus-content-${index}`}
+          role="region"
+          aria-labelledby={`syllabus-header-${index}`}
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3 }}
           className="overflow-hidden"
         >
-          <div className="pb-4 pt-1 px-4 text-sm text-slate-700 bg-gray-50 border-t border-gray-100">
+          <div className="pb-4 pt-1 px-4 text-sm text-slate-700 bg-gray-50 border-t border-gray-100" id={`syllabus-panel-${index}`}>
             {Array.isArray(section.topics) ? section.topics.join(", ") : section.topics}
           </div>
         </motion.div>
@@ -47,8 +50,6 @@ const SyllabusAccordionItem = ({ section, index, isOpen, toggle }) => (
     </AnimatePresence>
   </div>
 );
-// ---------------------------------------------------------------------------------
-
 
 export default function CourseDetail() {
   const { slug } = useParams();
@@ -65,39 +66,47 @@ export default function CourseDetail() {
   const [statusLoading, setStatusLoading] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
 
+  // NEW: enquiry overlay states
+  const [enquiryForm, setEnquiryForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [enquiryLoading, setEnquiryLoading] = useState(false);
+  const [enquirySubmitted, setEnquirySubmitted] = useState(false); // when true -> remove blur
 
   // load courses.json from public directory at runtime
   useEffect(() => {
-    let mounted = true;
+    const controller = new AbortController();
+    let isMounted = true;
+
     (async () => {
       try {
-        const controller = new AbortController();
         const res = await fetch("/data/courses.json", { cache: "no-cache", signal: controller.signal });
-        if (!res.ok) throw new Error("Failed to fetch courses.json");
+        if (!res.ok) throw new Error(`Failed to fetch courses.json (status ${res.status})`);
         const data = await res.json();
-        if (!mounted) return;
+        if (!isMounted) return;
         setAllCourses(data);
-        const found = data.find((c) => c.slug === slug);
-        setCourse(found || null);
+        const found = data.find((c) => c.slug === slug) || null;
+        setCourse(found);
         if (found) setForm((f) => ({ ...f, course: found.title }));
       } catch (err) {
-        if (err.name !== 'AbortError') {
-          console.error("Failed to load courses.json:", err);
-          toast.error("Unable to load course data.");
-        }
+        if (err.name === "AbortError") return;
+        console.error("Failed to load courses.json:", err);
+        toast.error("Unable to load course data.");
       } finally {
-        if (mounted) setLoading(false);
+        if (isMounted) setLoading(false);
       }
     })();
+
     return () => {
-      mounted = false;
+      isMounted = false;
+      controller.abort();
     };
   }, [slug]);
 
-  const coursesMap = allCourses.reduce((acc, c) => {
-    acc[c.slug] = c.title;
-    return acc;
-  }, {});
+  const coursesMap = useMemo(() => {
+    return allCourses.reduce((acc, c) => {
+      acc[c.slug] = c.title;
+      return acc;
+    }, {});
+  }, [allCourses]);
 
   const update = useCallback((e) => {
     const { name, value } = e.target;
@@ -107,7 +116,9 @@ export default function CourseDetail() {
   const validate = () => {
     if (!form.name.trim()) return "Please enter your name.";
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) return "Please enter a valid email.";
-    if (!/^\+?[0-9]{7,15}$/.test(form.phone)) return "Please enter a valid phone number (digits only).";
+    const digitsOnly = form.phone.replace(/[^\d+]/g, "");
+    const normalized = digitsOnly.startsWith("+") ? digitsOnly.slice(1) : digitsOnly;
+    if (!/^[0-9]{7,15}$/.test(normalized)) return "Please enter a valid phone number (7–15 digits).";
     if (!form.course) return "Please choose a course.";
     return null;
   };
@@ -122,7 +133,7 @@ export default function CourseDetail() {
     const payload = {
       name: form.name.trim(),
       email: form.email.trim(),
-      phone_number: form.phone.trim(),
+      phone_number: form.phone.trim().replace(/[^\d+]/g, ""),
       course_mode: form.mode,
       course: form.course,
     };
@@ -179,9 +190,9 @@ export default function CourseDetail() {
     }
   };
 
-  const toggleAccordion = useCallback((i) => setOpenIdx(openIdx === i ? null : i), [openIdx]);
-
-
+  const toggleAccordion = useCallback((i) => {
+    setOpenIdx((prev) => (prev === i ? null : i));
+  }, []);
 
   // helper to make an absolute URL for files in public directory
   const resolvePublicPath = (path) => {
@@ -189,6 +200,58 @@ export default function CourseDetail() {
     if (/^https?:\/\//i.test(path)) return path;
     if (path.startsWith("/")) return `${window.location.origin}${path}`;
     return `${window.location.origin}/${path}`;
+  };
+
+  // --- NEW: Enquiry form handlers (overlay) ---
+  const updateEnquiry = (e) => {
+    const { name, value } = e.target;
+    setEnquiryForm((s) => ({ ...s, [name]: value }));
+  };
+
+  const validateEnquiry = () => {
+    if (!enquiryForm.name.trim()) return "Name is required.";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(enquiryForm.email)) return "Valid email is required.";
+    if (!/^[0-9]{7,15}$/.test(enquiryForm.phone.replace(/[^\d]/g, ""))) return "Valid phone is required (7-15 digits).";
+    return null;
+  };
+
+  const handleEnquirySubmit = async (e) => {
+    e.preventDefault();
+    const err = validateEnquiry();
+    if (err) {
+      toast.error(err);
+      return;
+    }
+
+    const payload = {
+      name: enquiryForm.name.trim(),
+      email: enquiryForm.email.trim(),
+      phone: enquiryForm.phone.trim().replace(/[^\d]/g, ""),
+      message: enquiryForm.message || `Enquiry about ${course?.title || "course"}`,
+    };
+
+    try {
+      setEnquiryLoading(true);
+      // Using absolute endpoint same as your curl
+      const res = await api.post("https://be.edigital.globalinfosofts.com/contact/", payload);
+      // Some axios setups return res.status; others return res.data — check your api wrapper.
+      const status = res?.status || (res && res.data ? 201 : 0);
+      if (status === 201 || status === 200) {
+        toast.success("Thank You - Enjoy Your Syllabus");
+        setEnquirySubmitted(true); // remove blur
+        // Optionally store response or clear form
+        setEnquiryForm({ name: "", email: "", phone: "", message: "" });
+      } else {
+        toast.info("Received unexpected response from server.");
+      }
+    } catch (err) {
+      console.error("Enquiry submit error:", err);
+      const message =
+        err?.response?.data?.detail || err?.response?.data || err?.message || "Failed to submit enquiry.";
+      toast.error(message);
+    } finally {
+      setEnquiryLoading(false);
+    }
   };
 
   // Renders syllabus section: handles string (pdf path) or array of sections
@@ -212,24 +275,66 @@ export default function CourseDetail() {
       );
     }
 
-    // case: string (pdf path) - Display PDF using iframe
+    // case: string (pdf path) - Display PDF using object fallback
     if (typeof course.syllabus === "string") {
       const pdfUrl = resolvePublicPath(course.syllabus);
+      const safeUrl = encodeURI(pdfUrl);
 
       return (
-        <div className="space-y-4 p-4 bg-sky-50 rounded-xl border border-sky-200">
+        <div className="space-y-4 p-4 bg-sky-50 rounded-xl border border-sky-200 relative">
           <div className="flex items-center gap-3 text-sky-700">
             <HiDocumentText className="h-6 w-6" />
             <p className="font-semibold">Course Syllabus</p>
           </div>
           <p className="text-sm text-sky-800">View the full syllabus below.</p>
-          <iframe
-            src={pdfUrl}
-            width="100%"
-            height="600px"
-            title="Syllabus PDF"
-            className="border border-gray-200 rounded-lg"
-          ></iframe>
+
+          <div className={`rounded-lg border border-gray-200 overflow-hidden ${!enquirySubmitted ? "relative" : ""}`}>
+            {/* If not submitted, apply blur to viewer */}
+            <div style={{ filter: enquirySubmitted ? "none" : "blur(6px)" }}>
+              <object data={safeUrl} type="application/pdf" width="100%" height="600">
+                <iframe
+                  src={safeUrl}
+                  width="100%"
+                  height="600px"
+                  title="Syllabus PDF"
+                  className="border-0"
+                />
+              </object>
+            </div>
+
+            {/* Overlay enquiry form shown while not submitted */}
+            {!enquirySubmitted && (
+              <div
+                role="dialog"
+                aria-modal="true"
+                aria-label="Enquiry form to unlock syllabus"
+                className="absolute inset-0 flex items-center justify-center p-6"
+              >
+                <div className="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-100 p-5">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Request Syllabus Access</h3>
+                  <p className="text-sm text-gray-600 mb-4">Fill this short enquiry to view the full syllabus.</p>
+
+                  <form onSubmit={handleEnquirySubmit} className="space-y-3">
+                    <input name="name" value={enquiryForm.name} onChange={updateEnquiry} placeholder="Full name" className="w-full px-3 py-2 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none" required />
+                    <input name="email" type="email" value={enquiryForm.email} onChange={updateEnquiry} placeholder="Email address" className="w-full px-3 py-2 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none" required />
+                    <input name="phone" value={enquiryForm.phone} onChange={updateEnquiry} placeholder="Phone (digits only)" className="w-full px-3 py-2 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none" required />
+                    <textarea name="message" value={enquiryForm.message} onChange={updateEnquiry} placeholder={`I'm interested in ${course?.title || "this course"}`} className="w-full px-3 py-2 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none" rows={3} />
+
+                    <div className="flex gap-2">
+                      <button type="submit" disabled={enquiryLoading} className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-white font-semibold ${enquiryLoading ? "bg-slate-500 cursor-not-allowed" : "bg-sky-600 hover:bg-sky-700"}`}>
+                        <HiPaperAirplane className={`h-4 w-4 ${enquiryLoading ? "animate-pulse" : ""}`} />
+                        {enquiryLoading ? "Sending..." : "Send Enquiry"}
+                      </button>
+                      <button type="button" onClick={() => { setEnquiryForm({ name: "", email: "", phone: "", message: "" }); toast.info("Form cleared."); }} className="px-4 py-2 rounded-xl border border-gray-200 bg-white">
+                        Clear
+                      </button>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       );
     }
@@ -286,14 +391,14 @@ export default function CourseDetail() {
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">{course.title}</h1>
             <p className="mt-2 text-xl text-sky-600 font-medium">{course.subtitle}</p>
           </header>
-          
+
           <hr className="border-gray-100" />
 
           <section className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
             <h3 className="text-2xl font-bold mb-4 text-gray-800">Course Overview</h3>
             <p className="text-slate-700 leading-relaxed text-lg">{course.longDescription}</p>
           </section>
-          
+
           <hr className="border-gray-100" />
 
           <div className="grid sm:grid-cols-2 gap-6">
@@ -309,7 +414,7 @@ export default function CourseDetail() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.2 }} className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
-              <h4 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+              <h4 className="text-xl font-bold mb-3 text-gray-800">
                  Core Benefits
               </h4>
               <ul className="list-inside list-disc text-slate-700 space-y-2">
@@ -317,7 +422,7 @@ export default function CourseDetail() {
               </ul>
             </motion.div>
           </div>
-          
+
           <hr className="border-gray-100" />
 
           <section className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
@@ -331,7 +436,6 @@ export default function CourseDetail() {
         <aside className="lg:col-span-5">
           <div className="sticky top-20 space-y-6">
             <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }} className="bg-white border border-sky-100 rounded-3xl p-6 shadow-2xl">
-              
               {/* registration/status tabs */}
               <div className="flex mb-6 bg-gray-100 rounded-xl p-1 shadow-inner">
                 <button type="button" onClick={() => setActiveTab("new")} className={`flex-1 py-2 px-4 rounded-xl text-sm font-semibold transition duration-200 ${activeTab === "new" ? "bg-sky-600 text-white shadow-md" : "text-gray-600 hover:text-gray-900"}`}>New Registration</button>

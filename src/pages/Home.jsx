@@ -23,7 +23,7 @@ import DigitalMarketing from '../components/Services/DigitalMarketing'
 import JobGuaranteeCourses from '../components/Courses/JobGuaranteeCourses'
 import Partners from '../components/Partners'
 import CoursesShowcase from '../components/Courses/CoursesShowcase'
-import TeamShowcase from '../components/Courses/TeamShowcase'
+import TeamList from '../components/Courses/TeamList'
 import FestivalGreetingsCard from '../components/FestivalGreetingsCard'
 
 function Typewriter({ lines = [], typingSpeed = 60, pauseBetween = 1500, loop = true, className = '' }) {
@@ -310,7 +310,7 @@ export default function Home() {
       <JobGuaranteeCourses />
       <Partners />
       <CoursesShowcase initialIndex={0} />
-      <TeamShowcase team={teamData} />
+      <TeamList />
       {/* <Industries />
       <CTA /> */}
     </main>

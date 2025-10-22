@@ -1,315 +1,139 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { FaLinkedin, FaTwitter, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import { HiX } from "react-icons/hi";
-import api from "../../services/api";
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 
-// Skeleton Loader
-const TeamCardSkeleton = () => (
-  <div className="bg-gray-100 rounded-2xl p-6 shadow-sm animate-pulse h-56">
-    <div className="flex items-center gap-4">
-      <div className="h-20 w-20 rounded-xl bg-gray-300"></div>
-      <div className="flex-1">
-        <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
-        <div className="h-3 bg-gray-300 rounded w-1/2"></div>
-      </div>
-    </div>
-  </div>
+// Enhanced Bubble component to accept and display different colors
+const AnimatedBubble = ({ size, top, left, delay, duration, colorClass }) => (
+  <div
+    className={`absolute rounded-full shadow-2xl backdrop-blur-sm animate-bubble ${colorClass}`}
+    style={{
+      width: `${size}px`,
+      height: `${size}px`,
+      top: `${top}%`,
+      left: `${left}%`,
+      animationDelay: `${delay}s`,
+      animationDuration: `${duration}s`,
+    }}
+  />
 );
 
-export default function TeamShowcase() {
-  const [team, setTeam] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState(null);
-  const [activeMember, setActiveMember] = useState(null);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+/**
+ * CreativeProfileCard (Maximal Color Glassmorphism)
+ * Props:
+ * - name, handle, role, avatar, onBookmark, initiallyBookmarked
+ */
+const CreativeProfileCard = memo(function CreativeProfileCard({
+  name = "John Doe",
+  handle = "@johndoe_dev",
+  role = "Frontend Developer | Tech Enthusiast | Coffee Lover",
+  avatar = "/placeholder-avatar.png",
+  onBookmark = null,
+  initiallyBookmarked = false,
+}) {
+  const [bookmarked, setBookmarked] = React.useState(Boolean(initiallyBookmarked));
 
-  const observerRef = useRef();
+  function toggleBookmark(e) {
+    e?.stopPropagation();
+    setBookmarked((v) => {
+      const next = !v;
+      if (typeof onBookmark === "function") onBookmark(next);
+      return next;
+    });
+  }
 
-  // Fetch team members with pagination
-  const fetchTeam = useCallback(async (pageNum = 1) => {
-    try {
-      const limit = 6; // per-page count
-      const res = await api.get(`/team/?only_active=false&skip=${(pageNum - 1) * limit}&limit=${limit}`);
-      const items = res.data?.items || [];
-
-      const mapped = items.map((m) => ({
-        id: m.id,
-        name: m.name,
-        role: m.role,
-        bio: m.bio || "A valued member of our E-Digital India team.",
-        email: m.email,
-        phone: m.phone,
-        linkedin: m.linkedin,
-        twitter: m.twitter,
-        avatar: m.photo
-          ? `https://be.edigital.globalinfosofts.com${m.photo}`
-          : "https://via.placeholder.com/150?text=Profile",
-      }));
-
-      if (pageNum === 1) {
-        setTeam(mapped);
-      } else {
-        setTeam((prev) => [...prev, ...mapped]);
+  // The CSS animation remains the same, but the colors come from the bubble's colorClass.
+  const animationStyles = `
+    @keyframes move-bubble {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
       }
-
-      setHasMore(items.length >= limit);
-      setError(null);
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setError("Couldn't load more team members. Please try again later.");
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
+      25% {
+        transform: translateY(-20px) rotate(45deg) scale(1.1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-50px) rotate(90deg) scale(0.9);
+        opacity: 0.4;
+      }
+      75% {
+        transform: translateY(-30px) rotate(135deg) scale(1.2);
+        opacity: 0.7;
+      }
     }
-  }, []);
-
-  // Initial fetch
-  useEffect(() => {
-    fetchTeam(1);
-  }, [fetchTeam]);
-
-  // Infinite scroll observer
-  const lastTeamCardRef = useCallback(
-    (node) => {
-      if (loadingMore) return;
-      if (observerRef.current) observerRef.current.disconnect();
-
-      observerRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setLoadingMore(true);
-          setPage((prev) => prev + 1);
-        }
-      });
-
-      if (node) observerRef.current.observe(node);
-    },
-    [loadingMore, hasMore]
-  );
-
-  // Fetch more when page increments
-  useEffect(() => {
-    if (page > 1) {
-      fetchTeam(page);
+    .animate-bubble {
+      animation: move-bubble infinite alternate ease-in-out;
     }
-  }, [page, fetchTeam]);
-
-  // ESC to close modal
-  useEffect(() => {
-    const handleKeydown = (e) => e.key === "Escape" && setActiveMember(null);
-    document.addEventListener("keydown", handleKeydown);
-    return () => document.removeEventListener("keydown", handleKeydown);
-  }, []);
+  `;
 
   return (
     <>
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900">
-              Meet Our Passionate Team
-            </h2>
-            <p className="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
-              Behind every successful project are the people who make it happen.
-              Meet the dedicated professionals driving E-Digital India forward.
-            </p>
-          </div>
+      <style>{animationStyles}</style>
 
-          {/* Error */}
-          {error && (
-            <div className="text-center py-10 text-red-600 font-medium">
-              {error}
-            </div>
-          )}
-
-          {/* Team Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {(loading ? Array.from({ length: 6 }) : team).map((member, idx) =>
-              loading ? (
-                <TeamCardSkeleton key={idx} />
-              ) : (
-                <article
-                  ref={idx === team.length - 1 ? lastTeamCardRef : null}
-                  key={member.id || idx}
-                  onClick={() => setActiveMember(member)}
-                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 cursor-pointer 
-                             hover:shadow-2xl hover:border-sky-500 transition transform hover:-translate-y-1"
-                >
-                  <div className="flex items-start gap-5">
-                    <img
-                      src={member.avatar}
-                      alt={member.name}
-                      className="h-24 w-24 rounded-full object-cover border-4 border-white shadow-md"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900">
-                        {member.name}
-                      </h3>
-                      <p className="text-sky-600 font-medium">{member.role}</p>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-700 text-sm mt-5 line-clamp-3">
-                    {member.bio}
-                  </p>
-
-                  <div className="flex items-center justify-between mt-6 border-t pt-4">
-                    <div className="flex items-center gap-2">
-                      {member.linkedin && (
-                        <a
-                          href={member.linkedin}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-full text-sky-700 hover:text-sky-800 hover:bg-sky-50 transition"
-                        >
-                          <FaLinkedin className="h-5 w-5" />
-                        </a>
-                      )}
-                      {member.twitter && (
-                        <a
-                          href={member.twitter}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-full text-sky-400 hover:text-sky-500 hover:bg-sky-50 transition"
-                        >
-                          <FaTwitter className="h-5 w-5" />
-                        </a>
-                      )}
-                      {member.email && (
-                        <a
-                          href={`mailto:${member.email}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition"
-                        >
-                          <FaEnvelope className="h-5 w-5" />
-                        </a>
-                      )}
-                    </div>
-                    <span className="text-sky-600 text-sm font-semibold">
-                      View Profile →
-                    </span>
-                  </div>
-                </article>
-              )
-            )}
-          </div>
-
-          {/* Loading More Spinner */}
-          {loadingMore && (
-            <div className="text-center mt-10 text-gray-500 animate-pulse">
-              Loading more team members...
-            </div>
-          )}
+      {/* --- Main Card Container: VIBRANT GRADIENT --- */}
+      {/* We use a strong background gradient to set the overall mood */}
+      <div className="relative w-full max-w-sm mx-auto overflow-hidden rounded-3xl bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-indigo-500/30 shadow-2xl backdrop-blur-xl">
+        
+        {/* --- Animated Background Bubbles: MULTICOLOR --- */}
+        <div className="absolute inset-0 z-0 opacity-70">
+          <AnimatedBubble size={80} top={20} left={5} delay={0} duration={15} colorClass="bg-red-400/50" />
+          <AnimatedBubble size={120} top={80} left={80} delay={5} duration={10} colorClass="bg-teal-400/50" />
+          <AnimatedBubble size={60} top={50} left={50} delay={2} duration={18} colorClass="bg-yellow-400/50" />
+          <AnimatedBubble size={150} top={10} left={90} delay={7} duration={12} colorClass="bg-purple-400/50" />
+          <AnimatedBubble size={90} top={90} left={10} delay={4} duration={16} colorClass="bg-blue-400/50" />
         </div>
-      </section>
 
-      {/* Scrollable Modal */}
-      {activeMember && (
-        <div
-          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 overflow-y-auto"
-          onClick={() => setActiveMember(null)}
-        >
-          <div
-            className="bg-white max-w-4xl w-full rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh] relative"
-            onClick={(e) => e.stopPropagation()}
+        {/* --- Profile Content: ENHANCED GLASSMOPHISM --- */}
+        <div className="relative z-10 p-8 text-center text-white bg-white/10 rounded-3xl border border-white/40 shadow-inner">
+          
+          {/* Bookmark Button */}
+          <button
+            onClick={onBookmark ? toggleBookmark : null}
+            className={`absolute top-4 right-4 p-2 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400/70 backdrop-blur-sm 
+              ${bookmarked ? "text-red-500 bg-white/50" : "text-white/70 hover:text-red-500 hover:bg-white/30"}`}
+            aria-label={bookmarked ? "Remove from bookmarks" : "Add to bookmarks"}
+            disabled={!onBookmark}
           >
-            <button
-              onClick={() => setActiveMember(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200"
-              aria-label="Close Profile"
-            >
-              <HiX className="h-6 w-6" />
-            </button>
-
-            <div className="p-8">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b pb-6 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path d="M16 2h-8C6.9 2 6 2.9 6 4v16l6-3 6 3V4c0-1.1-.9-2-2-2z" />
+            </svg>
+          </button>
+          
+          <div className="flex flex-col items-center pt-2">
+            <div className="relative">
+              {/* Avatar: Rainbow Gradient Border */}
+              <div className="rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-pink-500 to-sky-500 inline-block ring-4 ring-white/90 shadow-lg">
                 <img
-                  src={activeMember.avatar}
-                  alt={activeMember.name}
-                  className="h-32 w-32 rounded-full object-cover border-4 border-sky-100 shadow-lg"
+                  src={avatar}
+                  alt={`${name} avatar`}
+                  loading="lazy"
+                  className="h-28 w-28 rounded-full object-cover border-4 border-white shadow-xl"
                 />
-                <div className="text-center sm:text-left">
-                  <h3 className="text-3xl font-extrabold text-gray-900">
-                    {activeMember.name}
-                  </h3>
-                  <p className="text-xl text-sky-700 font-medium mt-1">
-                    {activeMember.role}
-                  </p>
-                </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-4">
-                    About {activeMember.name}
-                  </h4>
-                  <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
-                    {activeMember.bio}
-                  </p>
-                </div>
-
-                <div className="lg:col-span-1 bg-gray-50 p-5 rounded-xl border border-gray-100">
-                  <h4 className="text-xl font-bold text-gray-800 mb-4">
-                    Contact Details
-                  </h4>
-                  {activeMember.email && (
-                    <div className="flex items-center gap-3 text-gray-700 mb-3">
-                      <FaEnvelope className="text-sky-600" />
-                      <a
-                        href={`mailto:${activeMember.email}`}
-                        className="text-sky-600 hover:underline break-all"
-                      >
-                        {activeMember.email}
-                      </a>
-                    </div>
-                  )}
-                  {activeMember.phone && (
-                    <div className="flex items-center gap-3 text-gray-700 mb-3">
-                      <FaPhoneAlt className="text-sky-600" />
-                      <p>{activeMember.phone}</p>
-                    </div>
-                  )}
-                  <div className="flex items-center gap-3 mt-4">
-                    {activeMember.linkedin && (
-                      <a
-                        href={activeMember.linkedin}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition"
-                      >
-                        <FaLinkedin className="h-5 w-5" />
-                      </a>
-                    )}
-                    {activeMember.twitter && (
-                      <a
-                        href={activeMember.twitter}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center justify-center h-10 w-10 bg-sky-400 text-white rounded-full hover:bg-sky-500 transition"
-                      >
-                        <FaTwitter className="h-5 w-5" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-end pt-6">
-                <button
-                  onClick={() => setActiveMember(null)}
-                  className="px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
-                >
-                  Close Profile
-                </button>
-              </div>
+              {/* Status Dot */}
+              <span className="absolute -bottom-0.5 right-0.5 block h-4 w-4 rounded-full ring-2 ring-white/90 bg-lime-400 shadow-lg" />
             </div>
+
+            {/* Name and Handle */}
+            <h3 className="mt-4 text-3xl font-black text-white drop-shadow-lg">{name}</h3>
+            <p className="text-lg text-white/90 font-semibold mt-1 drop-shadow">{handle}</p>
+
+            
+            
           </div>
         </div>
-      )}
+      </div>
     </>
   );
-}
+});
+
+CreativeProfileCard.propTypes = {
+  name: PropTypes.string,
+  handle: PropTypes.string,
+  role: PropTypes.string,
+  avatar: PropTypes.string,
+  onBookmark: PropTypes.func,
+  initiallyBookmarked: PropTypes.bool,
+};
+
+export default CreativeProfileCard;
