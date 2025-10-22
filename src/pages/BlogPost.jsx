@@ -3,8 +3,16 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import api from "../services/api";
 
+// Helper function to generate URL-friendly slugs from titles
+function generateSlug(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export default function BlogPost() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,18 +29,26 @@ export default function BlogPost() {
       setError(null);
 
       try {
-        // Fetch the post and the list of posts in parallel
-        const [postRes, listRes] = await Promise.all([
-          api.get(`/blog/${id}`, { signal: controller.signal }),
-          api.get(`/blog/`, { signal: controller.signal }),
-        ]);
+        // Fetch all blog posts to find the one matching the slug
+        const listRes = await api.get(`/blog/`, { signal: controller.signal });
 
         if (!mounted) return;
 
-        setPost(postRes.data);
+        const allPosts = Array.isArray(listRes.data) ? listRes.data : [];
+        
+        // Find the post that matches the slug
+        const matchedPost = allPosts.find(p => generateSlug(p.h1 || `post-${p.id}`) === slug);
 
-        const data = Array.isArray(listRes.data) ? listRes.data : [];
-        const sorted = data
+        if (!matchedPost) {
+          setError("Blog post not found.");
+          setLoading(false);
+          return;
+        }
+
+        setPost(matchedPost);
+
+        // Sort posts by date for recent posts sidebar
+        const sorted = allPosts
           .map((p) => ({ ...p }))
           .sort((a, b) => {
             const da = new Date(a.created_at || a.published_at || 0).getTime();
@@ -40,14 +56,8 @@ export default function BlogPost() {
             return db - da;
           });
 
-        // Exclude current post from recent list if present
-        const filtered = sorted.filter((p) => {
-          // compare by id or slug
-          if (!postRes.data) return true;
-          const curId = `${postRes.data.id ?? postRes.data.slug}`;
-          const pId = `${p.id ?? p.slug}`;
-          return pId !== curId;
-        });
+        // Exclude current post from recent list
+        const filtered = sorted.filter((p) => p.id !== matchedPost.id);
 
         setRecentPosts(filtered.slice(0, 3));
       } catch (err) {
@@ -71,7 +81,7 @@ export default function BlogPost() {
       mounted = false;
       controller.abort();
     };
-  }, [id]);
+  }, [slug]);
 
   // Updated renderBlock to use better Tailwind classes for readability
   function renderBlock(block, idx) {
@@ -147,7 +157,7 @@ export default function BlogPost() {
       "description": getDescription(),
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `${siteUrl}/blog/${id}`
+        "@id": `${siteUrl}/blog/${slug}`
       }
     };
   };
@@ -180,7 +190,7 @@ export default function BlogPost() {
   );
   if (!post) return null;
 
-  const canonicalUrl = `${siteUrl}/blog/${id}`;
+  const canonicalUrl = `${siteUrl}/blog/${slug}`;
   const description = getDescription();
 
   return (
@@ -268,10 +278,12 @@ export default function BlogPost() {
                 <p className="text-slate-500">No recent posts available.</p>
               ) : (
                 <ul className="space-y-6">
-                  {recentPosts.map((p) => (
+                  {recentPosts.map((p) => {
+                    const postSlug = generateSlug(p.h1 || `post-${p.id}`);
+                    return (
                     <li key={`recent-${p.id ?? p.slug}`} className="border-b last:border-b-0 pb-4 last:pb-0">
                       <Link 
-                        to={p.slug ? `/blog/${p.slug}` : `/blog/${p.id}`} 
+                        to={`/blog/${postSlug}`}
                         className="flex items-start space-x-3 hover:text-sky-600 transition duration-150 group"
                       >
                         <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-slate-100">
@@ -288,7 +300,8 @@ export default function BlogPost() {
                         </div>
                       </Link>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               )}
             </div>

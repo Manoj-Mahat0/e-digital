@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verify": "node verify-build.js",
+    "deploy:check": "npm run build && npm run verify",
+    "sitemap": "node scripts/sitemap-plugin.js",
+    "sitemap:build": "npm run build && npm run sitemap"
   },
   "dependencies": {
     "axios": "^1.12.2",

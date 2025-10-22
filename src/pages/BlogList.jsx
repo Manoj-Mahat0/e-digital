@@ -3,6 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 
+// Helper function to generate URL-friendly slugs from titles
+function generateSlug(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export default function BlogList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,12 +70,14 @@ export default function BlogList() {
         {/* Blog List Content (2/3 width on large screens) - This section remains unchanged */}
         <section className="lg:col-span-2">
           <div className="grid gap-10 sm:grid-cols-2">
-            {posts.map((p) => (
-              <article
-                key={p.id}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-slate-200"
-              >
-                <Link to={`/blog/${p.id}`} className="block h-full flex flex-col">
+            {posts.map((p) => {
+              const slug = generateSlug(p.h1 || `post-${p.id}`);
+              return (
+                <article
+                  key={p.id}
+                  className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-slate-200"
+                >
+                  <Link to={`/blog/${slug}`} className="block h-full flex flex-col">
                   {/* Feature Image */}
                   {p.feature_image ? (
                     <img
@@ -102,7 +112,8 @@ export default function BlogList() {
                   </div>
                 </Link>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -115,10 +126,12 @@ export default function BlogList() {
                 <p className="text-slate-500">No recent posts available.</p>
             ) : (
                 <ul className="space-y-6">
-                    {recentPosts.map((p) => (
+                    {recentPosts.map((p) => {
+                        const slug = generateSlug(p.h1 || `post-${p.id}`);
+                        return (
                         <li key={`recent-${p.id}`} className="border-b last:border-b-0 pb-4 last:pb-0">
                             <Link 
-                                to={`/blog/${p.id}`}
+                                to={`/blog/${slug}`}
                                 className="flex items-start space-x-3 hover:text-sky-600 transition duration-150 group"
                             >
                                 {/* Recent Post Image (NEW) */}
@@ -148,7 +161,8 @@ export default function BlogList() {
                                 </div>
                             </Link>
                         </li>
-                    ))}
+                        );
+                    })}
                 </ul>
             )}
           </div>
