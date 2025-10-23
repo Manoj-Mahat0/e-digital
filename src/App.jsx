@@ -76,15 +76,15 @@ export default function App() {
       <Shell>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about-us" element={<About />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           {/* <Route path="/courses" element={<Courses />} /> */}
           <Route path="/courses/:slug" element={<CourseDetail />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/careers" element={<Career />} />
+          <Route path="/term-and-condition" element={<Terms />} />
+          <Route path="/career" element={<Career />} />
           {/* example catch-all/simple page route if you use SimplePage */}
           {/* add additional routes here */}
         </Routes>

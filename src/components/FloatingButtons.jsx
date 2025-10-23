@@ -3,8 +3,8 @@ import { HiPhone } from 'react-icons/hi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const FloatingButtons = () => {
-  const phoneNumber = '+919876543210'; // Replace with actual number
-  const whatsappNumber = '9876543210'; // WhatsApp number without +
+  const phoneNumber = '+919934141233'; // Replace with actual number
+  const whatsappNumber = '9934141233'; // WhatsApp number without +
 
   return (
     <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-50">

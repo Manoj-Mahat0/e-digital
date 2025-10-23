@@ -197,7 +197,7 @@ export default function HeroWithRegistration() {
           <div className="lg:col-span-7 order-1 lg:order-1">
             <h1 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold tracking-tight text-gray-900 leading-tight mb-4">
               Launch Your Career in <span className="text-sky-600">6 Months</span>{" "}
-              with Our Professional Diplomas 
+              with Our Professional Diploma 
             </h1>
 
             <p className="text-base text-gray-600 max-w-3xl mb-6">
@@ -327,7 +327,7 @@ export default function HeroWithRegistration() {
                           onChange={update}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
                       >
-                          <option value="Online">Online Mode</option>
+                          {/* <option value="Online">Online Mode</option> */}
                           <option value="Offline">Offline/In-Person</option>
                           <option value="Hybrid">Hybrid Mode</option>
                       </select>
@@ -425,7 +425,7 @@ export default function HeroWithRegistration() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full mx-4">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-gray-900">Complete Your Payment</h3>
+                <h3 className="text-xl font-bold text-gray-900">Complete Your Payment for Registration</h3>
                 <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-700">
                   <HiX className="h-6 w-6" />
                 </button>
@@ -436,22 +436,37 @@ export default function HeroWithRegistration() {
               </div>
               <form onSubmit={handlePaymentSubmit}>
                 <div className="space-y-4">
-                  <input
-                    name="transactionId"
-                    value={paymentForm.transactionId}
-                    onChange={updatePaymentForm}
-                    required
-                    placeholder="Transaction ID"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                  />
-                  <input
-                    name="screenshot"
-                    type="file"
-                    onChange={updatePaymentForm}
-                    required
-                    accept="image/*"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                  />
+                  <label
+      htmlFor="transactionId"
+      className="block text-gray-700 font-medium mb-2"
+    >
+      Transaction ID
+    </label>
+    <input
+      id="transactionId"
+      name="transactionId"
+      value={paymentForm.transactionId}
+      onChange={updatePaymentForm}
+      required
+      placeholder="Enter Transaction ID"
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+    />
+                  
+                     <label
+      htmlFor="screenshot"
+      className="block text-gray-700 font-medium mb-2"
+    >
+      Upload Payment Screenshot
+    </label>
+    <input
+      id="screenshot"
+      name="screenshot"
+      type="file"
+      onChange={updatePaymentForm}
+      required
+      accept="image/*"
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+    />
                 </div>
                 <div className="flex gap-4 mt-6">
                   <button

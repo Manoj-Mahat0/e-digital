@@ -44,8 +44,8 @@ export default function Header() {
     { name: "Web Development", to: "/courses/diploma-in-web-development" },
     { name: "Data Science & AI", to: "/courses/diploma-in-data-science-and-artificial-intelligence" },
     { name: "Android App Development", to: "/courses/diploma-in-android-app-development" },
-    { name: "Business & Soft Skills", to: "/courses/diploma-in-business-communication-and-soft-skills" },
-    { name: "SAP Course", to: "/courses/sap-global-certification-course" },
+    { name: "Business Comm. & Soft Skills", to: "/courses/diploma-in-business-communication-and-soft-skills" },
+    { name: "Sap Global Certification", to: "/courses/sap-global-certification-course" },
   ];
 
   const courseActive = courses.some((c) => location.pathname === c.to);
@@ -80,17 +80,18 @@ export default function Header() {
   return (
     <header className="relative z-50">
       {/* Top contact bar */}
-      <div className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 text-white text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-9">
-            <span>info@edigitalindian.com</span>
-            <div className="flex items-center gap-4 text-xs">
-              {/* <span>+91-9661577233,</span> */}
-              <span>+91-9934141233</span>
-            </div>
-          </div>
-        </div>
+      <div className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 text-white text-base sm:text-lg">
+  <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+    <div className="flex items-center justify-between h-14">
+      <span className="font-medium">info@edigitalindian.com</span>
+      <div className="flex items-center gap-6">
+        {/* <span>+91-9661577233</span> */}
+        <span className="font-medium">+91-9934141233</span>
       </div>
+    </div>
+  </div>
+</div>
+
 
       {/* Main header */}
       <div className="w-full bg-white shadow">

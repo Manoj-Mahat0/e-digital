@@ -20,8 +20,8 @@ export default function Footer() {
 
     { name: "Data Science & AI", to: "/courses/diploma-in-data-science-and-artificial-intelligence" },
     { name: "Android App Development", to: "/courses/diploma-in-android-app-development" },
-    { name: "Business & Soft Skills", to: "/courses/diploma-in-business-communication-and-soft-skills" },
-        { name: "SAP Course", to: "/courses/sap-global-certification-course" },
+    { name: "Business Comm. & Soft Skills", to: "/courses/diploma-in-business-communication-and-soft-skills" },
+        { name: "Sap Global Certification", to: "/courses/sap-global-certification-course" },
 
   ];
 
@@ -124,11 +124,11 @@ export default function Footer() {
 
     {/* Partner logos */}
     <div className="mt-12 flex flex-col items-center gap-6">
-      <div className="flex items-center justify-between w-full">
+      {/* <div className="flex items-center justify-between w-full">
         <img src="/iso.webp" alt="ISO" className="h-12 object-contain" />
         <img src="/msme_compressed.webp" alt="MSME" className="h-12 object-contain" />
         <img src="/skillindia.webp" alt="Skill India" className="h-12 object-contain" />
-      </div>
+      </div> */}
 
       <div className="w-full border-t border-gray-800 mt-6 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-gray-400 text-sm">

@@ -133,7 +133,7 @@ export default function BlogPost() {
           <div key={key} className="my-8 rounded-xl overflow-hidden shadow-lg border border-slate-100">
             <img
               src={typeof block.data === 'string' ? block.data.replace('http://', 'https://') : ''}
-              alt=""
+              alt="educational content"
               className="w-full max-h-[500px] object-cover"
               loading="lazy"
               onError={(e) => {
