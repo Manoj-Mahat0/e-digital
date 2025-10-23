@@ -113,7 +113,6 @@ const CreativeProfileCard = memo(function CreativeProfileCard({
             {/* Name & Handle */}
             <h3 className="mt-4 text-3xl font-black text-white drop-shadow-lg">{name}</h3>
             <p className="text-lg text-white/90 font-semibold mt-1 drop-shadow">{handle}</p>
-            <p className="mt-2 text-sm text-white/80 italic">{role}</p>
           </div>
         </div>
       </div>

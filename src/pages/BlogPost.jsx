@@ -93,6 +93,32 @@ export default function BlogPost() {
         return <h3 key={key} className="text-2xl font-semibold mt-6 mb-3 text-gray-800">{block.data}</h3>;
       case "text":
         // Increased font size and leading for better readability
+        // Handle both string data and array of text objects with links
+        if (Array.isArray(block.data)) {
+          return (
+            <p key={key} className="text-lg leading-loose text-slate-700 mb-5">
+              {block.data.map((item, i) => {
+                if (item.link) {
+                  // Render as hyperlink if link property exists
+                  return (
+                    <a
+                      key={i}
+                      href={item.link.startsWith('http') ? item.link : `https://${item.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sky-600 hover:text-sky-700 underline font-medium transition duration-150"
+                    >
+                      {item.text}
+                    </a>
+                  );
+                } else {
+                  // Render as plain text if no link
+                  return <span key={i}>{item.text}</span>;
+                }
+              })}
+            </p>
+          );
+        }
         return <p key={key} className="text-lg leading-loose text-slate-700 mb-5">{block.data}</p>;
       case "list":
         return (

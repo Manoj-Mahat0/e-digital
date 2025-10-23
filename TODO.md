@@ -1,10 +1,7 @@
-# TODO: Implement Festival Greetings Card on Homepage
+# TODO: Update FestivalGreetingsCard.jsx for Chhath Puja
 
 ## Tasks
-- [x] Create `src/components/FestivalGreetingsCard.jsx` component with date-based visibility, dismissal logic, and localStorage persistence
-- [x] Update `src/pages/Home.jsx` to import and render the FestivalGreetingsCard component
-
-## Followup Steps
-- [x] Test the implementation by running `npm run dev` and verifying the card appears on homepage within date range
-- [x] Verify "Don't show again" functionality persists via localStorage
-- [ ] Adjust dates, message, or styling if needed based on feedback
+- [x] Update all comments referencing Diwali to Chhath Puja in the code.
+- [x] Change the festival period condition from November 23-28 to October 23-28.
+- [x] Verify and ensure the title and message text are appropriate for Chhath Puja (already seem correct).
+- [x] Test the component by running the app and checking if the card appears during October 23-28.
