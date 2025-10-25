@@ -288,7 +288,7 @@ export default function HeroWithRegistration() {
                 <div className="flex items-center gap-3 mb-6">
                     <HiLightningBolt className="h-7 w-7 text-sky-600" />
                     <h4 className="text-xl text-gray-900 font-bold">
-                        Request Free Course Consultation
+                        Request Course Consultation
                     </h4>
                 </div>
 

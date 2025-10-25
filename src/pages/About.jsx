@@ -13,8 +13,8 @@ import {
   HiHeart,
   HiFlag,
   HiLightBulb,
-  HiOfficeBuilding, // Added an icon for story/location
-  HiAcademicCap,    // Added an icon for mission/vision
+  HiOfficeBuilding,
+  HiAcademicCap,
 } from "react-icons/hi";
 
 // NOTE: Tailwind CSS is assumed to be available in your project.
@@ -48,11 +48,11 @@ function Hero() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center py-8">
           <h1 className="text-5xl sm:text-6xl font-black tracking-tight">
-            Our Journey: Skills, Success, and <span className="text-green-300">Guaranteed Futures</span>
+            Our Journey: Skills, Success, and <span className="text-green-300">Guaranteed Futures in Jamshedpur</span>
           </h1>
           <p className="mt-5 max-w-3xl mx-auto text-xl font-light text-indigo-200">
-            Empowering students and professionals with **practical, in-demand skills** that lead
-            directly to high-value employment, backed by our job commitment on stamp paper.
+            Empowering students and professionals in Jamshedpur with **practical, in-demand skills** that lead
+            directly to high-value employment, backed by our job commitment on stamp paper. ISO Certified Digital Marketing Institute Jamshedpur with 100% Placement Guarantee.
           </p>
           <a
             href="#mission-vision"
@@ -88,38 +88,38 @@ function TwoColumnAbout() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle
           eyebrow="Core Values & History"
-          title="Bridging the Gap Between Education and Industry"
-          subtitle="Our foundation is built on a commitment to quality, practical training, and guaranteed career success for every student."
+          title="Bridging the Gap Between Education and Industry in Jamshedpur"
+          subtitle="Our foundation is built on a commitment to quality, practical training, and guaranteed career success for every student in Jamshedpur. Best IT Training Center in Jamshedpur with Career Oriented Courses."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-16">
           {/* Left: Feature-Icon-Driven Content (span 7) */}
           <div className="lg:col-span-7 space-y-8">
-            <FeatureCard title="About E-Digital India" Icon={HiUsers}>
-              Welcome to **E-Digital India** — a trusted platform for job-oriented digital and skill-based education. Our mission is to empower learners with practical, in-demand skills that lead directly to employment. We offer a **job commitment on stamp paper** to ensure every learner gains both skills and job assurance.
+            <FeatureCard title="About E-Digital India - Jamshedpur's Premier IT Institute" Icon={HiUsers}>
+              Welcome to **E-Digital India** — Jamshedpur's trusted platform for job-oriented digital and skill-based education. Our mission is to empower learners with practical, in-demand skills that lead directly to employment. We offer a **100% job guarantee** to ensure every learner gains both skills and job assurance. ISO Certified Digital Marketing Institute Jamshedpur with placement support for all courses.
             </FeatureCard>
 
-            <FeatureCard title="Our Mission" Icon={HiFlag}>
-              Our mission is to empower students with in-demand skills and provide them with a **100% job guarantee**. We focus on practical learning, industry-relevant training, and mentorship from experts to ensure that every student is job-ready, meeting industry standards and driving innovation.
+            <FeatureCard title="Our Mission - Empowering Jamshedpur's Youth" Icon={HiFlag}>
+              Our mission is to empower students in Jamshedpur with in-demand skills and provide them with a **100% job guarantee**. We focus on practical learning, industry-relevant training, and mentorship from experts to ensure that every student is job-ready, meeting industry standards and driving innovation. Best IT Courses with Job Guarantee Jamshedpur.
             </FeatureCard>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <FeatureCard title="Our Vision" Icon={HiLightBulb}>
-                We envision a future where skill-based education replaces traditional learning barriers. By offering high-quality training, real-world experience, and career guidance, we aim to transform students into highly skilled professionals ready for the global market.
+              <FeatureCard title="Our Vision - Transforming Education in Jharkhand" Icon={HiLightBulb}>
+                We envision a future where skill-based education in Jharkhand replaces traditional learning barriers. By offering high-quality training, real-world experience, and career guidance, we aim to transform students into highly skilled professionals ready for the global market. Top Institute for AI in Jamshedpur and Career Oriented Courses.
               </FeatureCard>
 
-              <FeatureCard title="Why Choose Us?" Icon={HiShieldCheck}>
+              <FeatureCard title="Why Choose Us? - Jamshedpur's Best Training Institute" Icon={HiShieldCheck}>
                 <ul className="list-disc pl-5 space-y-2 text-gray-700 font-medium">
-                  <li>**ISO-Certified** & Industry-Recognized Courses</li>
-                  <li>100% Job Guarantee with Paid Internships</li>
+                  <li>**ISO-Certified** & Industry-Recognized Courses in Jamshedpur</li>
+                  <li>100% Job Guarantee with Paid Internships in Jamshedpur</li>
                   <li>Live Projects & Hands-on Learning</li>
                   <li>Expert Trainers & Personalized Guidance</li>
                 </ul>
               </FeatureCard>
             </div>
             
-             <FeatureCard title="Our Story: From Vision to Reality" Icon={HiOfficeBuilding}>
-              E Digital India was founded to bridge the gap between academic education and real-world job requirements. We launched our first institute focusing on hands-on training and guaranteed job placements, and have since expanded to major cities like Chennai, Delhi, and Jamshedpur, continuing our mission to make career-oriented education accessible to all.
+             <FeatureCard title="Our Story: From Vision to Reality in Jamshedpur" Icon={HiOfficeBuilding}>
+              E Digital India was founded to bridge the gap between academic education and real-world job requirements in Jamshedpur. We launched our first institute focusing on hands-on training and guaranteed job placements, and have since expanded to major cities like Chennai, Delhi, and Jamshedpur, continuing our mission to make career-oriented education accessible to all. Software Training Institute Jamshedpur with proven track record.
             </FeatureCard>
           </div>
 
@@ -139,13 +139,13 @@ function TwoColumnAbout() {
               <div className="p-6 rounded-xl bg-white shadow-xl border border-gray-100">
                  <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <HiPhone className="h-6 w-6 text-indigo-600" />
-                    Connect With Us
+                    Connect With Us - Jamshedpur's Best IT Institute
                 </h4>
                 <div className="space-y-3">
                     <div className="flex items-center space-x-3">
                         <HiPhone className="h-5 w-5 text-green-500 flex-shrink-0" />
-                        <a href="tel:+919665177233" className="font-medium text-lg text-indigo-600 hover:text-indigo-800 transition">
-                            +91-9661577233
+                        <a href="tel:+919934141233" className="font-medium text-lg text-indigo-600 hover:text-indigo-800 transition">
+                            +91-9934141233
                         </a>
                     </div>
                     <div className="flex items-center space-x-3">
@@ -157,7 +157,7 @@ function TwoColumnAbout() {
                     <div className="flex items-start space-x-3 pt-2 border-t mt-4">
                         <HiOfficeBuilding className="h-5 w-5 text-green-500 flex-shrink-0 mt-1" />
                         <p className="text-md text-gray-700 font-medium">
-                            Jamshedpur, Jharkhand, India
+                            Jamshedpur, Jharkhand, India - Best IT Training Center in Jamshedpur
                         </p>
                     </div>
                 </div>
@@ -172,11 +172,11 @@ function TwoColumnAbout() {
 
 function Stats() {
   const items = [
-    { value: "500+", label: "Happy Students", icon: HiHeart, color: "text-red-500", bg: "bg-red-50" },
-    { value: "1000+", label: "Projects Completed", icon: HiCheckCircle, color: "text-green-600", bg: "bg-green-50" },
-    { value: "25+", label: "Cities Served", icon: HiGlobeAlt, color: "text-blue-500", bg: "bg-blue-50" },
-    { value: "98%", label: "Placement Rate", icon: HiTrendingUp, color: "text-purple-600", bg: "bg-purple-50" }, // Changed text for impact
-    { value: "24/7", label: "Dedicated Support", icon: HiClock, color: "text-yellow-600", bg: "bg-yellow-50" },
+    { value: "500+", label: "Happy Students in Jamshedpur", icon: HiHeart, color: "text-red-500", bg: "bg-red-50" },
+    { value: "1000+", label: "Projects Completed in Jharkhand", icon: HiCheckCircle, color: "text-green-600", bg: "bg-green-50" },
+    { value: "25+", label: "Cities Served Including Jamshedpur", icon: HiGlobeAlt, color: "text-blue-500", bg: "bg-blue-50" },
+    { value: "98%", label: "Placement Rate in Jamshedpur", icon: HiTrendingUp, color: "text-purple-600", bg: "bg-purple-50" }, // Changed text for impact
+    { value: "24/7", label: "Dedicated Support for Jamshedpur Students", icon: HiClock, color: "text-yellow-600", bg: "bg-yellow-50" },
   ];
 
   return (
@@ -184,7 +184,7 @@ function Stats() {
         <div className="max-w-7xl mx-auto px-6">
             <SectionTitle
                 eyebrow="Proven Track Record"
-                title="Our Impact by the Numbers"
+                title="Our Impact by the Numbers in Jamshedpur"
             />
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-12">
                 {items.map((item, idx) => (
@@ -205,44 +205,74 @@ function Stats() {
   );
 }
 
-export default function AboutPage() {
-  const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://edigital.globalinfosofts.com";
-
+export default function About() {
   return (
-    <main>
+    <div className="min-h-screen">
       <Helmet>
-        <title>About Us | E-Digital India - Job Guaranteed Skill Education</title>
-        <meta name="description" content="Learn about E-Digital India's journey, mission, and commitment to job-oriented skill education. ISO certified training with 100% job guarantee." />
-        <link rel="canonical" href={`${siteUrl}/about`} />
+        <title>About E-Digital India - Best IT Training Institute in Jamshedpur</title>
+        <meta name="description" content="E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support. Learn about our mission, vision, and values." />
+        <meta name="keywords" content="Digital Marketing Course in Jamshedpur, Web Development Training Jamshedpur, Data Science and AI Course Jamshedpur, Android App Development Course in Jamshedpur, Business and Soft Skills Training Jamshedpur, SAP Course in Jamshedpur, ISO Certified Digital Marketing Institute Jamshedpur, Best Web Development Institute Jamshedpur, AI and Machine Learning Course Jamshedpur, Full Stack Developer Course in Jamshedpur, MERN Stack Course Jamshedpur, Digital Marketing Diploma Jamshedpur, Job Oriented Courses in Jamshedpur, 100% Placement Course Jamshedpur, Software Training Institute Jamshedpur, IT Courses with Job Guarantee Jamshedpur, Learn Coding in Jamshedpur, Advanced SEO and SEM Course Jamshedpur, Freelancing Skills Training Jamshedpur, Career Oriented Courses Jamshedpur, Top Institute for AI in Jamshedpur, UI UX Design Course Jamshedpur, Professional Diploma Courses Jamshedpur, Python Programming Course Jamshedpur, Machine Learning Training in Jamshedpur, Best IT Training Center Jamshedpur" />
+        <link rel="canonical" href="https://edigitalindian.com/about-us" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="About E-Digital India - Best IT Training Institute in Jamshedpur" />
+        <meta property="og:description" content="E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support." />
+        <meta property="og:url" content="https://edigitalindian.com/about-us" />
+        <meta property="og:image" content="https://edigitalindian.com/logo.webp" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About E-Digital India - Best IT Training Institute in Jamshedpur" />
+        <meta name="twitter:description" content="E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support." />
+        <meta name="twitter:image" content="https://edigitalindian.com/logo.webp" />
+        
+        {/* JSON-LD structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "name": "About E-Digital India - Best IT Training Institute in Jamshedpur",
+            "description": "E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support.",
+            "url": "https://edigitalindian.com/about-us",
+            "mainEntity": {
+              "@type": "EducationalOrganization",
+              "name": "E-Digital India",
+              "description": "Jamshedpur's premier IT training institute offering ISO certified courses with 100% job guarantee",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Jamshedpur",
+                "addressRegion": "Jharkhand",
+                "addressCountry": "India"
+              },
+              "offers": {
+                "@type": "AggregateOffer",
+                "itemOffered": [
+                  {
+                    "@type": "Course",
+                    "name": "Digital Marketing Course in Jamshedpur",
+                    "description": "Comprehensive digital marketing training in Jamshedpur with 100% job guarantee"
+                  },
+                  {
+                    "@type": "Course",
+                    "name": "Web Development Training Jamshedpur",
+                    "description": "Full Stack Web Development Course in Jamshedpur with placement guarantee"
+                  },
+                  {
+                    "@type": "Course",
+                    "name": "Data Science and AI Course Jamshedpur",
+                    "description": "AI and Machine Learning Course in Jamshedpur with practical training"
+                  }
+                ]
+              }
+            }
+          })}
+        </script>
       </Helmet>
-
+      
       <Hero />
-      <Stats /> {/* Moved stats up, as it's a strong credibility builder */}
       <TwoColumnAbout />
-
-      {/* Call to Action - Stronger contrast and color */}
-      <section className="py-20 bg-indigo-600">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h3 className="text-4xl font-extrabold text-white mb-4">Ready to Launch Your Career?</h3>
-          <p className="text-indigo-200 text-xl max-w-2xl mx-auto mb-8">
-            Join our next batch of successful professionals. Get in touch for course details, placements, or partnerships.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <a
-              href="tel:+919665177233"
-              className="w-full sm:w-auto px-10 py-4 bg-green-400 text-indigo-900 text-lg font-semibold rounded-full shadow-lg hover:bg-green-300 transition transform hover:-translate-y-0.5"
-            >
-              <HiPhone className="h-5 w-5 inline mr-2 -mt-0.5" /> Call Now
-            </a>
-            <a
-              href="mailto:info@edigitalindian.com"
-              className="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white text-white text-lg font-semibold rounded-full hover:bg-white hover:text-indigo-600 transition transform hover:-translate-y-0.5"
-            >
-              <HiMail className="h-5 w-5 inline mr-2 -mt-0.5" /> Email Us
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
+      <Stats />
+    </div>
   );
 }

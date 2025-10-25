@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Utility function for random numbers (can be used for various effects)
@@ -113,7 +113,7 @@ const ChhathPujaAnimation = () => {
   );
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br from-indigo-900 to-purple-900 overflow-hidden flex items-center justify-center font-sans">
+    <div className="relative w-full h-full bg-gradient-to-br from-indigo-900 to-purple-900 overflow-hidden flex items-center justify-center font-sans">
       {/* Audio Element */}
       <audio ref={audioRef} src="/path/to/mild-conch-birds.mp3" loop />
 
@@ -338,4 +338,91 @@ const ChhathPujaAnimation = () => {
   );
 };
 
-export default ChhathPujaAnimation;
+const FestivalGreetingsCard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Automatically open the modal when component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsModalOpen(true);
+    }, 1000); // Open after 1 second
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      {/* Button is hidden since we're auto-opening */}
+      <div className="hidden">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Open Chhath Puja Animation
+        </button>
+      </div>
+      
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              className="bg-gradient-to-br from-purple-900 to-indigo-800 rounded-2xl p-4 max-w-4xl w-full h-[80vh] relative overflow-hidden shadow-2xl border border-amber-500/30"
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.button
+                className="absolute top-4 right-4 text-amber-200 hover:text-white z-10 bg-black/30 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold transition-all duration-300 hover:scale-110 hover:bg-amber-500/20"
+                onClick={() => setIsModalOpen(false)}
+                whileHover={{ rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                &times;
+              </motion.button>
+              
+              <div className="h-full rounded-xl overflow-hidden border border-amber-300/20">
+                <ChhathPujaAnimation />
+              </div>
+              
+              {/* Decorative corner elements */}
+              <motion.div 
+                className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-amber-400/50"
+                initial={{ scaleX: 0, scaleY: 0 }}
+                animate={{ scaleX: 1, scaleY: 1 }}
+                transition={{ delay: 0.5 }}
+              />
+              <motion.div 
+                className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-amber-400/50"
+                initial={{ scaleX: 0, scaleY: 0 }}
+                animate={{ scaleX: 1, scaleY: 1 }}
+                transition={{ delay: 0.7 }}
+              />
+              <motion.div 
+                className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-amber-400/50"
+                initial={{ scaleX: 0, scaleY: 0 }}
+                animate={{ scaleX: 1, scaleY: 1 }}
+                transition={{ delay: 0.9 }}
+              />
+              <motion.div 
+                className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-amber-400/50"
+                initial={{ scaleX: 0, scaleY: 0 }}
+                animate={{ scaleX: 1, scaleY: 1 }}
+                transition={{ delay: 1.1 }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default FestivalGreetingsCard;

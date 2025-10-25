@@ -77,7 +77,7 @@ export default function BlogList() {
                   key={p.id}
                   className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-slate-200"
                 >
-                  <Link to={`/blog/${slug}`} className="block h-full flex flex-col">
+                  <Link to={`/${slug}`} className="block h-full flex flex-col">
                   {/* Feature Image */}
                   {p.feature_image ? (
                     <img
@@ -131,7 +131,7 @@ export default function BlogList() {
                         return (
                         <li key={`recent-${p.id}`} className="border-b last:border-b-0 pb-4 last:pb-0">
                             <Link 
-                                to={`/blog/${slug}`}
+                                to={`/${slug}`}
                                 className="flex items-start space-x-3 hover:text-sky-600 transition duration-150 group"
                             >
                                 {/* Recent Post Image (NEW) */}

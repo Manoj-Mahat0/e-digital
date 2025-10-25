@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -8,15 +8,38 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FloatingButtons from "./components/FloatingButtons";
 import BlogList from "./pages/BlogList";
-import BlogPost from "./pages/BlogPost";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Apply from "./pages/Apply";
 import SimplePage from "./pages/SimplePage"; // keep if used elsewhere
-import CourseDetail from "./pages/CourseDetail";
+import Courses from "./pages/Courses";
 import Terms from "./pages/Terms";
 import Career from "./pages/Career";
+import ContentPage from "./pages/ContentPage";
+import NotFound from "./pages/NotFound";
+import { getRedirectPath } from "./utils/redirects";
+
+// Redirect component to handle 301 redirects
+function RedirectHandler() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const redirectPath = getRedirectPath(location.pathname);
+    if (redirectPath) {
+      // Handle 301 redirect
+      if (typeof window !== 'undefined') {
+        document.documentElement.setAttribute('data-redirect-status', '301');
+        document.documentElement.setAttribute('data-redirect-source', location.pathname);
+        document.documentElement.setAttribute('data-redirect-destination', redirectPath);
+      }
+      navigate(redirectPath, { replace: true });
+    }
+  }, [location, navigate]);
+  
+  return null;
+}
 
 // ScrollToTop component — ensures each route starts at top of page
 function ScrollToTop() {
@@ -72,6 +95,7 @@ export default function App() {
       />
 
       <ScrollToTop />
+      <RedirectHandler />
 
       <Shell>
         <Routes>
@@ -80,13 +104,12 @@ export default function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/blog" element={<BlogList />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          {/* <Route path="/courses" element={<Courses />} /> */}
-          <Route path="/courses/:slug" element={<CourseDetail />} />
+          <Route path="/courses" element={<Courses />} />
           <Route path="/term-and-condition" element={<Terms />} />
           <Route path="/career" element={<Career />} />
-          {/* example catch-all/simple page route if you use SimplePage */}
-          {/* add additional routes here */}
+          <Route path="/:slug" element={<ContentPage />} />
+          <Route path="/404-errors-google-analytics" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Shell>
     </>

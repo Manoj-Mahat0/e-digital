@@ -183,7 +183,7 @@ export default function BlogPost() {
       "description": getDescription(),
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `${siteUrl}/blog/${slug}`
+        "@id": `${siteUrl}/${slug}`
       }
     };
   };
@@ -216,7 +216,7 @@ export default function BlogPost() {
   );
   if (!post) return null;
 
-  const canonicalUrl = `${siteUrl}/blog/${slug}`;
+  const canonicalUrl = `${siteUrl}/${slug}`;
   const description = getDescription();
 
   return (
@@ -309,7 +309,7 @@ export default function BlogPost() {
                     return (
                     <li key={`recent-${p.id ?? p.slug}`} className="border-b last:border-b-0 pb-4 last:pb-0">
                       <Link 
-                        to={`/blog/${postSlug}`}
+                        to={`/${postSlug}`}
                         className="flex items-start space-x-3 hover:text-sky-600 transition duration-150 group"
                       >
                         <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-slate-100">

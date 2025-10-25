@@ -229,7 +229,7 @@ export default function DigitalMarketing() {
                         src={f.image}
                         alt={f.title}
                         loading="lazy"
-                        className="w-full h-full object-cover rounded-2xl transition-transform duration-500 pointer-events-none transform-gpu"
+                        className="w-full h-full object-contain rounded-2xl transition-transform duration-500 pointer-events-none transform-gpu"
                         style={{
                           transform: isActive ? 'scale(1.06)' : 'scale(1)'
                         }}

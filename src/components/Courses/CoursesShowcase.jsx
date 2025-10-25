@@ -74,7 +74,7 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
             badge: course.tags && course.tags.length > 0 ? course.tags[0] : "",
             tag: course.featured ? "Featured" : "",
             full: course, // keep original for modal / state if needed
-            path: `/courses/${course.slug}`, // curriculum path based on slug
+            path: `/${course.slug}`, // curriculum path based on slug
           };
         });
         setCourses(transformedCourses);
@@ -160,13 +160,13 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
           <p className="text-gray-600 mt-2">Our Courses</p>
         </div>
 
-        {/* Pills */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
+        {/* Pills - Improved mobile responsiveness */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
           {courses.map((c, i) => (
             <button
               key={c.id + "-" + i}
               onClick={() => setActiveIndex(i)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition
+              className={`px-3 py-2 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition whitespace-nowrap
                 ${
                   i === activeIndex
                     ? "bg-sky-500 text-white shadow-md"
@@ -179,125 +179,120 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
           ))}
         </div>
 
-        {/* Big Card (two-column) */}
-        <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10 grid md:grid-cols-12 gap-6 items-stretch">
-  {/* Left image */}
-  <div
-    className="md:col-span-6 lg:col-span-7 flex justify-center md:justify-start cursor-pointer"
-    onClick={() => openModal(activeIndex)}
-    role="button"
-    tabIndex={0}
-    onKeyDown={(e) => {
-      if (e.key === 'Enter') openModal(activeIndex);
-    }}
-    aria-label={`Open details for ${active.title}`}
-  >
-<img
-  src={active.image || fallbackImage}
-  alt={active.title}
-  className="w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] object-cover rounded-2xl border-8 border-white shadow-lg transform transition-transform duration-300 hover:scale-105"
-/>
-
-
-
-  </div>
-
-  {/* Right info card */}
-  <div className="md:col-span-6 lg:col-span-5 flex">
-    <div className="relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 flex flex-col justify-between w-full h-64 sm:h-80 md:h-96 lg:h-[28rem]
-     overflow-hidden">
-      {/* Title + Overview */}
-      <div>
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h4 className="text-2xl font-bold text-sky-700">{active.title}</h4>
-            <p className="text-sm text-gray-600 mt-2">
-              <strong className="text-gray-800">Course Overview:</strong>{" "}
-              {active.overview.length > 200
-                ? `${active.overview.slice(0, 200)}...`
-                : active.overview}
-            </p>
+        {/* Big Card (two-column) - Enhanced mobile responsiveness */}
+        <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden p-4 sm:p-6 md:p-8 lg:p-10 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-stretch">
+          {/* Left image - Mobile optimized */}
+          <div
+            className="md:col-span-6 lg:col-span-7 flex justify-center md:justify-start cursor-pointer"
+            onClick={() => openModal(activeIndex)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') openModal(activeIndex);
+            }}
+            aria-label={`Open details for ${active.title}`}
+          >
+            <img
+              src={active.image || fallbackImage}
+              alt={active.title}
+              className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-2xl border-4 sm:border-8 border-white shadow-lg transform transition-transform duration-300 hover:scale-105"
+            />
           </div>
-          {active.badge && (
-            <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-sky-100 text-sky-700">
-              {active.badge}
-            </span>
-          )}
-        </div>
 
-        {/* Tag */}
-        {active.tag && (
-          <div className="mt-4">
-            <span className="inline-block text-xs bg-sky-50 text-sky-700 px-3 py-1 rounded-full">
-              {active.tag}
-            </span>
-          </div>
-        )}
+          {/* Right info card - Mobile optimized */}
+          <div className="md:col-span-6 lg:col-span-5 flex">
+            <div className="relative bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 flex flex-col justify-between w-full h-auto sm:h-64 md:h-80 lg:h-96 overflow-hidden">
+              {/* Title + Overview */}
+              <div>
+                <div className="flex items-start justify-between gap-2 sm:gap-4">
+                  <div>
+                    <h4 className="text-xl sm:text-2xl font-bold text-sky-700">{active.title}</h4>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-2">
+                      <strong className="text-gray-800">Course Overview:</strong>{" "}
+                      {active.overview.length > 150
+                        ? `${active.overview.slice(0, 150)}...`
+                        : active.overview}
+                    </p>
+                  </div>
+                  {active.badge && (
+                    <span className="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-sky-100 text-sky-700">
+                      {active.badge}
+                    </span>
+                  )}
+                </div>
 
-        {/* Rating */}
-        <div className="flex items-center gap-3 mt-4">
-          <div className="flex items-center gap-1 text-yellow-500">
-            {Array.from({ length: 5 }).map((_, idx) => (
-              <HiStar key={idx} className="h-4 w-4" />
-            ))}
-          </div>
-          <div className="text-sm text-gray-600">
-            <strong className="text-gray-900">{active.rating ?? "4.8"}</strong>{" "}
-            ({active.reviews ?? 950})
-          </div>
-        </div>
+                {/* Tag */}
+                {active.tag && (
+                  <div className="mt-3 sm:mt-4">
+                    <span className="inline-block text-xs bg-sky-50 text-sky-700 px-2 py-1 rounded-full">
+                      {active.tag}
+                    </span>
+                  </div>
+                )}
 
-        {/* Meta info */}
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-3 text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-3">
-            <HiCalendar className="h-5 w-5 text-sky-500" />
-            <div>
-              <div className="text-xs text-gray-500">Duration</div>
-              <div className="text-sm font-semibold">{active.duration}</div>
+                {/* Rating */}
+                <div className="flex items-center gap-2 sm:gap-3 mt-3 sm:mt-4">
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                      <HiStar key={idx} className="h-3 w-3 sm:h-4 sm:w-4" />
+                    ))}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    <strong className="text-gray-900">{active.rating ?? "4.8"}</strong>{" "}
+                    ({active.reviews ?? 950})
+                  </div>
+                </div>
+
+                {/* Meta info - Mobile responsive grid */}
+                <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-2 sm:p-3">
+                    <HiCalendar className="h-4 w-4 sm:h-5 sm:w-5 text-sky-500 flex-shrink-0" />
+                    <div>
+                      <div className="text-xs text-gray-500">Duration</div>
+                      <div className="text-xs sm:text-sm font-semibold">{active.duration}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-2 sm:p-3">
+                    <HiPlay className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500 flex-shrink-0" />
+                    <div>
+                      <div className="text-xs text-gray-500">Live Projects</div>
+                      <div className="text-xs sm:text-sm font-semibold">{active.projects}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA buttons - Mobile responsive */}
+              <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+                <button
+                  onClick={() => openModal(activeIndex)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-sky-500 text-white text-sm sm:text-base font-semibold shadow hover:opacity-95 transition"
+                >
+                  Read More
+                  <HiChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
+                </button>
+
+                <Link
+                  to="/apply"
+                  state={{ course: active.full }}
+                  className="w-full sm:w-auto text-center px-3 py-2 sm:px-4 sm:py-2 rounded-lg border border-gray-200 text-gray-800 bg-white hover:shadow transition text-sm sm:text-base"
+                >
+                  Enroll Now
+                </Link>
+              </div>
             </div>
           </div>
-
-          <div className="flex items-center gap-3 text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-3">
-            <HiPlay className="h-5 w-5 text-amber-500" />
-            <div>
-              <div className="text-xs text-gray-500">Live Projects</div>
-              <div className="text-sm font-semibold">{active.projects}</div>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* CTA buttons */}
-      <div className="mt-4 flex items-center gap-3">
-        <button
-          onClick={() => openModal(activeIndex)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-500 text-white font-semibold shadow hover:opacity-95 transition"
-        >
-          Read More
-          <HiChevronRight className="h-4 w-4" />
-        </button>
-
-        <Link
-          to="/apply"
-          state={{ course: active.full }}
-          className="px-4 py-2 rounded-lg border border-gray-200 text-gray-800 bg-white hover:shadow transition"
-        >
-          Enroll Now
-        </Link>
-      </div>
-    </div>
-  </div>
-</div>
-
-      </div>
-
-      {/* Modal */}
+      {/* Modal - Enhanced mobile responsiveness */}
       {modalOpen && modalIndex !== null && courses[modalIndex] && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="course-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center px-4 py-4 sm:p-0"
         >
           {/* backdrop */}
           <div
@@ -306,29 +301,29 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
             aria-hidden="true"
           />
 
-          <div className="relative w-full max-w-5xl mx-auto">
+          <div className="relative w-full max-w-5xl mx-auto max-h-[90vh] overflow-y-auto">
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-              <div className="md:flex">
-                {/* left: big image */}
+              <div className="flex flex-col md:flex-row">
+                {/* left: big image - Mobile optimized */}
                 <div className="md:w-1/2 w-full">
                   <img
                     src={courses[modalIndex].image || fallbackImage}
                     alt={courses[modalIndex].title}
-                    className="w-full h-72 md:h-full object-cover"
+                    className="w-full h-48 sm:h-64 md:h-full object-contain"
                   />
                 </div>
 
-                {/* right: details */}
-                <div className="md:w-1/2 w-full p-6 md:p-8">
+                {/* right: details - Mobile optimized */}
+                <div className="md:w-1/2 w-full p-4 sm:p-6 md:p-8">
                   <div className="flex items-start justify-between">
                     <div>
                       <h2
                         id="course-modal-title"
-                        className="text-2xl font-bold text-sky-700"
+                        className="text-xl sm:text-2xl font-bold text-sky-700"
                       >
                         {courses[modalIndex].title}
                       </h2>
-                      <p className="text-sm text-gray-600 mt-2">
+                      <p className="text-xs sm:text-sm text-gray-600 mt-2">
                         {courses[modalIndex].overview}
                       </p>
                     </div>
@@ -337,28 +332,28 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
                       ref={closeBtnRef}
                       onClick={closeModal}
                       aria-label="Close course details"
-                      className="ml-4 inline-flex items-center justify-center h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 transition"
+                      className="ml-2 sm:ml-4 inline-flex items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-gray-100 hover:bg-gray-200 transition flex-shrink-0"
                     >
-                      <HiX className="h-5 w-5" />
+                      <HiX className="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
                   </div>
 
-                  {/* badges & meta */}
-                  <div className="mt-4 flex items-center gap-3">
+                  {/* badges & meta - Mobile responsive */}
+                  <div className="mt-3 sm:mt-4 flex flex-wrap items-center gap-2 sm:gap-3">
                     {courses[modalIndex].badge && (
-                      <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs">
+                      <span className="px-2 py-1 sm:px-3 sm:py-1 rounded-full bg-sky-100 text-sky-700 text-xs">
                         {courses[modalIndex].badge}
                       </span>
                     )}
                     {courses[modalIndex].tag && (
-                      <span className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs">
+                      <span className="px-2 py-1 sm:px-3 sm:py-1 rounded-full bg-gray-100 text-gray-700 text-xs">
                         {courses[modalIndex].tag}
                       </span>
                     )}
-                    <div className="ml-auto flex items-center gap-2 text-sm text-gray-600">
+                    <div className="ml-auto flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
                       <div className="flex items-center gap-1 text-yellow-500">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <HiStar key={i} className="h-4 w-4" />
+                          <HiStar key={i} className="h-3 w-3 sm:h-4 sm:w-4" />
                         ))}
                       </div>
                       <span>
@@ -368,60 +363,60 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
                     </div>
                   </div>
 
-                  {/* duration / projects */}
-                  <div className="mt-6 grid grid-cols-2 gap-3">
-                    <div className="flex items-center gap-3 text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-3">
-                      <HiCalendar className="h-5 w-5 text-sky-500" />
+                  {/* duration / projects - Mobile responsive */}
+                  <div className="mt-4 sm:mt-6 grid grid-cols-2 gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-2 sm:p-3">
+                      <HiCalendar className="h-4 w-4 sm:h-5 sm:w-5 text-sky-500 flex-shrink-0" />
                       <div>
                         <div className="text-xs text-gray-500">Duration</div>
-                        <div className="text-sm font-semibold">
+                        <div className="text-xs sm:text-sm font-semibold">
                           {courses[modalIndex].duration}
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-3">
-                      <HiPlay className="h-5 w-5 text-amber-500" />
+                    <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700 bg-gray-50 border border-gray-100 rounded-lg p-2 sm:p-3">
+                      <HiPlay className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500 flex-shrink-0" />
                       <div>
                         <div className="text-xs text-gray-500">Live Projects</div>
-                        <div className="text-sm font-semibold">
+                        <div className="text-xs sm:text-sm font-semibold">
                           {courses[modalIndex].projects}
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* features list */}
+                  {/* features list - Mobile optimized */}
                   {courses[modalIndex].features &&
                     courses[modalIndex].features.length > 0 && (
-                      <ul className="mt-6 grid grid-cols-1 gap-2 max-h-48 overflow-auto pr-2">
+                      <ul className="mt-4 sm:mt-6 grid grid-cols-1 gap-2 max-h-40 sm:max-h-48 overflow-auto pr-2">
                         {courses[modalIndex].features.map((f, idx) => (
                           <li
                             key={f + idx}
-                            className="flex items-start gap-2 text-gray-700 text-sm"
+                            className="flex items-start gap-2 text-gray-700 text-xs sm:text-sm"
                           >
-                            <HiCheck className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <HiCheck className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0 mt-0.5" />
                             <span>{f}</span>
                           </li>
                         ))}
                       </ul>
                     )}
 
-                  {/* actions */}
-                  <div className="mt-6 flex items-center gap-3">
+                  {/* actions - Mobile responsive */}
+                  <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
                     <Link
                       to="/apply"
                       state={{ course: courses[modalIndex].full }}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-500 text-white font-semibold shadow hover:opacity-95"
+                      className="w-full sm:w-auto text-center inline-flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-sky-500 text-white text-sm sm:text-base font-semibold shadow hover:opacity-95"
                     >
                       Enroll Now
-                      <HiChevronRight className="h-4 w-4" />
+                      <HiChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Link>
 
                     {/* view curriculum -> navigates to course page and closes modal */}
                     <button
                       onClick={() => handleViewCurriculum(courses[modalIndex].path)}
-                      className="px-4 py-2 rounded-lg border border-gray-200 text-gray-800 bg-white hover:shadow inline-flex items-center justify-center"
+                      className="w-full sm:w-auto text-center px-3 py-2 sm:px-4 sm:py-2 rounded-lg border border-gray-200 text-gray-800 bg-white hover:shadow inline-flex items-center justify-center text-sm sm:text-base"
                     >
                       View Curriculum
                     </button>

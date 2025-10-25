@@ -6,9 +6,10 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
+Disallow: /404
 
 # Sitemap location
-Sitemap: https://edigital.globalinfosofts.com/sitemap.xml
+Sitemap: https://edigitalindian.com/sitemap.xml
 
 # Crawl delay to prevent server overload
 Crawl-delay: 10

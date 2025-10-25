@@ -371,7 +371,7 @@ export default function CourseDetail() {
     );
 
   const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
-  const canonicalUrl = `${siteUrl}/courses/${slug}`;
+  const canonicalUrl = `${siteUrl}/${slug}`;
 
   return (
     <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">

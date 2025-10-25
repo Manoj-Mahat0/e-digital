@@ -99,6 +99,42 @@ function Hero() {
     'Get Certified with Practical Training'
   ]
 
+  // Carousel images data
+  const carouselImages = [
+    {
+      src: "h1.webp",
+      alt: "E-Digital India Team Collaboration - Digital Marketing & IT Training in Jamshedpur",
+      title: "Our Professional Team at E-Digital India"
+    },
+    {
+      src: "h3.webp",
+      alt: "Business Meeting - Career Development in Jamshedpur",
+      title: "Business Strategy Meeting at E-Digital India"
+    },
+    {
+      src: "h2.webp",
+      alt: "Professional IT Training Team in Jamshedpur",
+      title: "Expert Instructors at E-Digital India"
+    },
+    {
+      src: "h4.webp",
+      alt: "IT Solutions and Digital Skills Training in Jamshedpur",
+      title: "Advanced IT Solutions Training at E-Digital India"
+    }
+  ];
+
+  // Carousel state
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto slide effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+
   return (
     <section id="home" className="relative bg-gradient-to-br from-brand-light via-white to-primary-50 overflow-hidden">
       {/* Background Elements */}
@@ -107,6 +143,11 @@ function Hero() {
         <div className="absolute -bottom-40 -left-40 h-80 w-80 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-96 w-96 bg-brand/3 rounded-full blur-3xl" />
       </div>
+
+      {/* Add floating animation elements */}
+      <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-white rounded-full opacity-20 animate-pulse"></div>
+      <div className="absolute top-3/4 right-1/4 w-6 h-6 bg-brand rounded-full opacity-30 animate-bounce"></div>
+      <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-primary rounded-full opacity-40 animate-ping"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -134,43 +175,98 @@ function Hero() {
 
           </div>
 
-          {/* Right Content - Image Grid */}
+          {/* Right Content - Carousel */}
           <div className="relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <img
-                  className="h-48 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="h1.jpg"
-                  alt="Team collaboration"
-                />
-                <img
-                  className="h-32 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="h3.jpg"
-                  alt="Business meeting"
-                />
-              </div>
-              <div className="space-y-4 pt-8">
-                <img
-                  className="h-32 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="h2.jpg"
-                  alt="Professional team"
-                />
-                <img
-                  className="h-48 w-full object-cover rounded-2xl shadow-lg border-4 border-white"
-                  src="h4.jpg"
-                  alt="IT solutions"
-                />
+            <div className="relative h-80 overflow-hidden rounded-2xl shadow-2xl backdrop-blur-sm bg-white/30 border border-white/20">
+              {/* Carousel images */}
+              {carouselImages.map((image, index) => (
+                <div 
+                  key={index}
+                  className={`absolute inset-0 transition-all duration-700 ease-in-out transform ${
+                    index === currentIndex 
+                      ? 'opacity-100 scale-100' 
+                      : 'opacity-0 scale-105'
+                  }`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    title={image.title}
+                    className="w-full h-full object-contain rounded-2xl"
+                    loading="lazy"
+                  />
+                  {/* Glassmorphism overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                </div>
+              ))}
+              
+              {/* Carousel indicators with glassmorphism */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 backdrop-blur-sm bg-white/20 rounded-full px-3 py-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${
+                      index === currentIndex 
+                        ? 'bg-white w-6' 
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
 
-           
+            {/* Navigation arrows with glassmorphism */}
+            <button
+              onClick={() => setCurrentIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+              aria-label="Previous image"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={() => setCurrentIndex((prev) => (prev + 1) % carouselImages.length)}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+              aria-label="Next image"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
+      
+      {/* Add custom animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.1); }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse 4s ease-in-out infinite;
+        }
+        .animate-bounce-slow {
+          animation: bounce 5s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   )
 }
-
 
 
 

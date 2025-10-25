@@ -40,12 +40,12 @@ export default function Header() {
 
   const courses = [
     
-    { name: "Digital Marketing", to: "/courses/diploma-in-digital-marketing" },
-    { name: "Web Development", to: "/courses/diploma-in-web-development" },
-    { name: "Data Science & AI", to: "/courses/diploma-in-data-science-and-artificial-intelligence" },
-    { name: "Android App Development", to: "/courses/diploma-in-android-app-development" },
-    { name: "Business Comm. & Soft Skills", to: "/courses/diploma-in-business-communication-and-soft-skills" },
-    { name: "Sap Global Certification", to: "/courses/sap-global-certification-course" },
+    { name: "Digital Marketing", to: "/diploma-in-digital-marketing" },
+    { name: "Web Development", to: "/diploma-in-web-development" },
+    { name: "Data Science & AI", to: "/diploma-in-data-science-and-artificial-intelligence" },
+    { name: "Android App Development", to: "/diploma-in-android-app-development" },
+    { name: "Business Comm. & Soft Skills", to: "/diploma-in-business-communication-and-soft-skills" },
+    { name: "Sap Global Certification", to: "/sap-global-certification-course" },
   ];
 
   const courseActive = courses.some((c) => location.pathname === c.to);
