@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
+import { Helmet } from "react-helmet-async";
 
 // Helper function to generate URL-friendly slugs from titles
 function generateSlug(title) {
@@ -53,6 +54,9 @@ export default function BlogList() {
   // Determine the 3 most recent posts for the sidebar
   const recentPosts = posts.slice(0, 3);
   
+  const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const canonicalUrl = `${siteUrl}/blog`;
+
   // --- Loading/Error/Empty State Renders ---
   if (loading) return <div className="p-8 text-center">Loading posts…</div>;
   if (error) return <div className="p-8 text-center text-red-600">{error}</div>;
@@ -62,6 +66,14 @@ export default function BlogList() {
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
+      <Helmet>
+        <title>E-Digital India Blog: Guide to learn in-demand courses</title>
+        <meta name="description" content="Stay Update with the latest blog on digital marketing, web development, & other tech courses. Learn new skills and advance your career with E-Digital India!" />
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </Helmet>
+
       <h1 className="text-4xl font-extrabold mb-10 text-gray-900 border-b pb-4">Blogs</h1>
 
       {/* Main Grid Layout: Content on the left, Sidebar on the right */}

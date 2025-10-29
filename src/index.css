@@ -1,7 +1,30 @@
 /* Minimal base styles; Tailwind is loaded via CDN in index.html */
-html, body, #root { height: 100%; }
-body { margin: 0; }
+html, body, #root { 
+  height: 100%; 
+  /* Improve rendering performance */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+body { 
+  margin: 0; 
+  /* Set default font to reduce FOIT */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Contain layout shifts */
+* {
+  box-sizing: border-box;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 @keyframes scrollText {
   0% {
@@ -16,4 +39,18 @@ body { margin: 0; }
   display: inline-block;
   white-space: nowrap;
   animation: scrollText 25s linear infinite;
+  /* Optimize animation */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Critical above-the-fold styles */
+.lazy-loading {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-loaded {
+  opacity: 1;
 }

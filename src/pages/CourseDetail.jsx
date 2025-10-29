@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 // --- Accordion item (unchanged except small aria ids) ---
 const SyllabusAccordionItem = ({ section, index, isOpen, toggle }) => (
@@ -343,19 +344,7 @@ export default function CourseDetail() {
   };
 
   if (loading)
-    return (
-      <div className="p-8 max-w-6xl mx-auto">
-        <div className="animate-pulse space-y-6">
-          <div className="h-64 bg-gray-200 rounded-2xl" />
-          <div className="h-8 bg-gray-200 rounded w-3/4" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="h-48 bg-gray-100 rounded-xl" />
-            <div className="h-48 bg-gray-100 rounded-xl" />
-          </div>
-          <div className="h-24 bg-gray-100 rounded-xl" />
-        </div>
-      </div>
-    );
+    return <SkeletonLoader type="courseDetail" />;
 
   if (!course)
     return (
@@ -376,15 +365,24 @@ export default function CourseDetail() {
   return (
     <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>{course.title} | E-Digital Training</title>
-        <meta name="description" content={course.subtitle || course.longDescription?.substring(0, 160)} />
+        <title>{course.metaTitle || `${course.title} | E-Digital Training`}</title>
+        <meta name="description" content={course.metaDescription || course.subtitle || course.longDescription?.substring(0, 160)} />
         <link rel="canonical" href={canonicalUrl} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Helmet>
 
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         <article className="lg:col-span-7 space-y-8">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="rounded-3xl overflow-hidden shadow-2xl">
-            <img src={course.image} alt={course.title} className="w-full h-72 object-cover object-center" loading="lazy" />
+            <img 
+              src={course.image} 
+              alt={course.title} 
+              className="w-full h-72 object-cover object-center" 
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
           </motion.div>
 
           <header>
@@ -403,7 +401,7 @@ export default function CourseDetail() {
 
           <div className="grid sm:grid-cols-2 gap-6">
             <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.1 }} className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
-              <h4 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+              <h4 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2" id="dm-heading">
                 <FiCheckCircle className="text-green-500" /> What You Will Learn
               </h4>
               <ul className="list-none text-slate-700 space-y-2">

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export default function Career() {
   const whyWorkWithUs = [
@@ -59,8 +60,19 @@ export default function Career() {
     }
   ];
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+  const canonicalUrl = `${siteUrl}/career`;
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <Helmet>
+        <title>Career Opportunities at E-Digital India | Join Us Today!</title>
+        <meta name="description" content="Explore exciting Career Opportunities at E-Digital India. Start your journey in digital marketing, web development, & more. Apply now and build the future!" />
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </Helmet>
+      
       <div className="max-w-6xl mx-auto">
         {/* Page Title */}
         <div className="text-center mb-16">

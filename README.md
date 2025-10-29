@@ -166,7 +166,7 @@ VITE_SITE_URL=http://localhost:5173
 
 # .env.production
 VITE_API_URL=https://be.edigital.globalinfosofts.com
-VITE_SITE_URL=https://edigital.globalinfosofts.com
+VITE_SITE_URL=https://edigitalindian.com
 ```
 
 ## 🎨 Blog System

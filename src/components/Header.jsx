@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   HiHome,
@@ -10,6 +10,7 @@ import {
   HiChevronDown,
   HiChevronUp,
 } from "react-icons/hi";
+import { getOptimizedImageAttributes } from "../utils/imageOptimizer";
 
 function NavLink({ to, children, onClick, icon: Icon }) {
   const location = useLocation();
@@ -77,6 +78,11 @@ export default function Header() {
     }
   }
 
+  // Optimize image loading
+  useEffect(() => {
+    // This will be handled by the main app
+  }, []);
+
   return (
     <header className="relative z-50">
       {/* Top contact bar */}
@@ -100,8 +106,14 @@ export default function Header() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
               <img
-                src="/logo.webp"
-                alt="logo"
+                {...getOptimizedImageAttributes("/logo.webp", {
+                  alt: "E-Digital India Logo - Digital Skills Training Institute in Jamshedpur",
+                  title: "E-Digital India - Professional Digital Skills Training",
+                  width: 100,
+                  height: 48,
+                  loading: "eager",
+                  decoding: "async"
+                })}
                 className="h-12 w-25 rounded-md object-cover"
               />
             </Link>
@@ -274,8 +286,12 @@ export default function Header() {
   
   {/* &nbsp; • &nbsp; */}
   <img
-    src="/new.webp"
-    alt="New"
+    {...getOptimizedImageAttributes("/new.webp", {
+      alt: "New Offer - E-Digital India Special Programs",
+      title: "E-Digital India Latest Offers and Programs",
+      width: 48,
+      height: 48
+    })}
     className="inline-block w-12 h-12 mr-5 align-middle"
   />
   "The special offer from our institute is no longer valid as of today."&nbsp; • &nbsp;

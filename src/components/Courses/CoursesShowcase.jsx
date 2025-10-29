@@ -8,6 +8,7 @@ import {
   HiCheck,
   HiX,
 } from "react-icons/hi";
+import SkeletonLoader from "../SkeletonLoader";
 
 /**
  * CoursesShowcase (with modal detail view)
@@ -140,8 +141,17 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
   if (loading) {
     return (
       <section className="py-16 lg:py-24 bg-[linear-gradient(180deg,#f1f9ff_0%,#f8fbff_100%)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>Loading courses...</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="h-10 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
+            <div className="h-6 bg-gray-200 rounded w-32 mx-auto"></div>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-8 bg-gray-200 rounded-full w-24"></div>
+            ))}
+          </div>
+          <SkeletonLoader type="courseCard" />
         </div>
       </section>
     );
@@ -196,6 +206,9 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
               src={active.image || fallbackImage}
               alt={active.title}
               className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-2xl border-4 sm:border-8 border-white shadow-lg transform transition-transform duration-300 hover:scale-105"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
 
@@ -266,7 +279,7 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
               {/* CTA buttons - Mobile responsive */}
               <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
                 <button
-                  onClick={() => openModal(activeIndex)}
+                  onClick={() => handleViewCurriculum(active.path)}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-sky-500 text-white text-sm sm:text-base font-semibold shadow hover:opacity-95 transition"
                 >
                   Read More
@@ -310,6 +323,8 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
                     src={courses[modalIndex].image || fallbackImage}
                     alt={courses[modalIndex].title}
                     className="w-full h-48 sm:h-64 md:h-full object-contain"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

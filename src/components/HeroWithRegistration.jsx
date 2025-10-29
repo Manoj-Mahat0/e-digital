@@ -1,5 +1,5 @@
 // src/components/HeroWithRegistration.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiCheck, HiPaperAirplane, HiAcademicCap, HiLightningBolt, HiX } from "react-icons/hi";
 import api from "../services/api"; // adjust path if needed
 import { toast } from "react-toastify";
@@ -187,6 +187,31 @@ export default function HeroWithRegistration() {
       setStatusLoading(false);
     }
   };
+
+  // Lazy load non-critical images
+  useEffect(() => {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+            }
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      const images = document.querySelectorAll('img[data-src]');
+      images.forEach(img => imageObserver.observe(img));
+
+      return () => {
+        imageObserver.disconnect();
+      };
+    }
+  }, []);
 
   return (
     // Switched to a light background with a subtle gradient/texture
@@ -432,7 +457,7 @@ export default function HeroWithRegistration() {
               </div>
               <p className="text-gray-600 mb-4">Scan QR to pay 499</p>
               <div className="flex justify-center mb-4">
-                <img src="/sacn.jpg" alt="QR Code" className="w-48 h-48" />
+                <img src="/sacn.jpg" alt="QR Code" className="w-48 h-48" loading="lazy" />
               </div>
               <form onSubmit={handlePaymentSubmit}>
                 <div className="space-y-4">

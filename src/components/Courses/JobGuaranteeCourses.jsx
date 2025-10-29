@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { HiCode, HiChartBar, HiCog, HiArrowRight, HiBookOpen } from "react-icons/hi";
+import { getOptimizedImageAttributes } from '../../utils/imageOptimizer';
 
 // Card Animation Variants for staggered entry
 const cardVariants = {
@@ -44,6 +45,31 @@ export default function JobAssuranceCourses() {
     },
   ];
 
+  // Lazy load non-critical images
+  useEffect(() => {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+            }
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      const images = document.querySelectorAll('img[data-src]');
+      images.forEach(img => imageObserver.observe(img));
+
+      return () => {
+        imageObserver.disconnect();
+      };
+    }
+  }, []);
+
   return (
     <section className="bg-gray-50 py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,7 +107,15 @@ export default function JobAssuranceCourses() {
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-white/15 ring-2 ring-white/50">
-                  <img src="/NewJALogo.webp" alt="Job Assurance Logo" className="w-14 h-14" />
+                  <img 
+                    {...getOptimizedImageAttributes("/NewJALogo.webp", {
+                      alt: "Job Assurance Logo - E-Digital India",
+                      title: "100% Job Assurance Program",
+                      loading: "lazy",
+                      decoding: "async"
+                    })}
+                    className="w-14 h-14" 
+                  />
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold">100% Job Assurance</h3>

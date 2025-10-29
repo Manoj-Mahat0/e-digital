@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,9 +16,19 @@ import SimplePage from "./pages/SimplePage"; // keep if used elsewhere
 import Courses from "./pages/Courses";
 import Terms from "./pages/Terms";
 import Career from "./pages/Career";
-import ContentPage from "./pages/ContentPage";
 import NotFound from "./pages/NotFound";
 import { getRedirectPath } from "./utils/redirects";
+
+// Lazy load less critical components
+const ContentPage = lazy(() => import("./pages/ContentPage"));
+
+// Loading component for lazy-loaded routes
+const LoadingFallback = () => (
+  <div className="p-8 text-center">
+    <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-sky-500"></div>
+    <p className="mt-2 text-slate-600">Loading content...</p>
+  </div>
+);
 
 // Redirect component to handle 301 redirects
 function RedirectHandler() {
@@ -103,11 +113,17 @@ export default function App() {
           <Route path="/about-us" element={<About />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
+          <Route path="/register" element={<Apply />} />
+          <Route path="/login" element={<Apply />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/term-and-condition" element={<Terms />} />
           <Route path="/career" element={<Career />} />
-          <Route path="/:slug" element={<ContentPage />} />
+          <Route path="/:slug" element={
+            <Suspense fallback={<LoadingFallback />}>
+              <ContentPage />
+            </Suspense>
+          } />
           <Route path="/404-errors-google-analytics" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

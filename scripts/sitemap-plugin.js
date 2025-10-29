@@ -26,18 +26,17 @@ export function createSitemapPlugin() {
 }
 
 export async function generateSitemap() {
-  const siteUrl = process.env.VITE_SITE_URL || 'https://edigital.globalinfosofts.com';
+  const siteUrl = process.env.VITE_SITE_URL || 'https://edigitalindian.com';
   const outputPath = path.resolve(__dirname, '../dist/sitemap.xml');
   
   try {
     // Get static routes with priorities
     const staticRoutes = [
       { url: '/', priority: '1.0', changefreq: 'daily' },
-      { url: '/about', priority: '0.9', changefreq: 'monthly' },
+      { url: '/about-us', priority: '0.9', changefreq: 'monthly' },
       { url: '/contact-us', priority: '0.9', changefreq: 'monthly' },
       { url: '/apply', priority: '0.9', changefreq: 'monthly' },
       { url: '/blog', priority: '0.9', changefreq: 'daily' },
-      { url: '/courses', priority: '0.9', changefreq: 'weekly' },
       { url: '/career', priority: '0.8', changefreq: 'weekly' },
       { url: '/term-and-condition', priority: '0.5', changefreq: 'yearly' },
     ];

@@ -209,22 +209,22 @@ export default function About() {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>About E-Digital India - Best IT Training Institute in Jamshedpur</title>
-        <meta name="description" content="E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support. Learn about our mission, vision, and values." />
+        <title>About E-Digital India | Build Your Digital Career Today</title>
+        <meta name="description" content="Know about E-Digital India, a leading platform offering digital marketing, web development & tech courses to boost your career with guaranteed job support." />
         <meta name="keywords" content="Digital Marketing Course in Jamshedpur, Web Development Training Jamshedpur, Data Science and AI Course Jamshedpur, Android App Development Course in Jamshedpur, Business and Soft Skills Training Jamshedpur, SAP Course in Jamshedpur, ISO Certified Digital Marketing Institute Jamshedpur, Best Web Development Institute Jamshedpur, AI and Machine Learning Course Jamshedpur, Full Stack Developer Course in Jamshedpur, MERN Stack Course Jamshedpur, Digital Marketing Diploma Jamshedpur, Job Oriented Courses in Jamshedpur, 100% Placement Course Jamshedpur, Software Training Institute Jamshedpur, IT Courses with Job Guarantee Jamshedpur, Learn Coding in Jamshedpur, Advanced SEO and SEM Course Jamshedpur, Freelancing Skills Training Jamshedpur, Career Oriented Courses Jamshedpur, Top Institute for AI in Jamshedpur, UI UX Design Course Jamshedpur, Professional Diploma Courses Jamshedpur, Python Programming Course Jamshedpur, Machine Learning Training in Jamshedpur, Best IT Training Center Jamshedpur" />
         <link rel="canonical" href="https://edigitalindian.com/about-us" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="About E-Digital India - Best IT Training Institute in Jamshedpur" />
-        <meta property="og:description" content="E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support." />
+        <meta property="og:title" content="About E-Digital India | Build Your Digital Career Today" />
+        <meta property="og:description" content="Know about E-Digital India, a leading platform offering digital marketing, web development & tech courses to boost your career with guaranteed job support." />
         <meta property="og:url" content="https://edigitalindian.com/about-us" />
         <meta property="og:image" content="https://edigitalindian.com/logo.webp" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About E-Digital India - Best IT Training Institute in Jamshedpur" />
-        <meta name="twitter:description" content="E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support." />
+        <meta name="twitter:title" content="About E-Digital India | Build Your Digital Career Today" />
+        <meta name="twitter:description" content="Know about E-Digital India, a leading platform offering digital marketing, web development & tech courses to boost your career with guaranteed job support." />
         <meta name="twitter:image" content="https://edigitalindian.com/logo.webp" />
         
         {/* JSON-LD structured data */}
@@ -232,8 +232,8 @@ export default function About() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "AboutPage",
-            "name": "About E-Digital India - Best IT Training Institute in Jamshedpur",
-            "description": "E-Digital India is Jamshedpur's premier IT training institute offering ISO certified courses in Digital Marketing, Web Development, Data Science, AI, and more. 100% job guarantee with placement support.",
+            "name": "About E-Digital India | Build Your Digital Career Today",
+            "description": "Know about E-Digital India, a leading platform offering digital marketing, web development & tech courses to boost your career with guaranteed job support.",
             "url": "https://edigitalindian.com/about-us",
             "mainEntity": {
               "@type": "EducationalOrganization",

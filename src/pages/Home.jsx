@@ -25,6 +25,7 @@ import Partners from '../components/Partners'
 import CoursesShowcase from '../components/Courses/CoursesShowcase'
 import TeamList from '../components/Courses/TeamList'
 import FestivalGreetingsCard from '../components/FestivalGreetingsCard'
+import { getOptimizedImageAttributes } from '../utils/imageOptimizer'
 
 function Typewriter({ lines = [], typingSpeed = 60, pauseBetween = 1500, loop = true, className = '' }) {
   const [lineIndex, setLineIndex] = useState(0)
@@ -189,11 +190,13 @@ function Hero() {
                   }`}
                 >
                   <img
-                    src={image.src}
-                    alt={image.alt}
-                    title={image.title}
+                    {...getOptimizedImageAttributes(image.src, {
+                      alt: image.alt,
+                      title: image.title,
+                      loading: index === 0 ? "eager" : "lazy",
+                      decoding: "async"
+                    })}
                     className="w-full h-full object-contain rounded-2xl"
-                    loading="lazy"
                   />
                   {/* Glassmorphism overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
@@ -302,7 +305,6 @@ const teamData = [
 
 
 
-
 function CTA() {
   return (
     <section className="py-20 bg-gradient-to-r from-brand to-brand-dark">
@@ -334,27 +336,27 @@ function CTA() {
 
 export default function Home() {
   // Define site URL for canonical links and Open Graph
-  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://edigital.globalinfosofts.com';
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://edigitalindian.com';
   
   return (
     <main>
       <Helmet>
-        <title>E-Digital Training - Professional Digital Skills & IT Courses</title>
-        <meta name="description" content="E-Digital offers professional training in Digital Marketing, Web Development, Data Science, AI, and more. Get certified with practical, job-oriented courses." />
+        <title>Job-oriented course to boost your career| E-Digital India</title>
+        <meta name="description" content="Enroll in a Job-oriented course by E-Digital India. Master Digital Marketing, Web Development & more. This skill development course will boost your career." />
         <link rel="canonical" href={siteUrl} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl} />
-        <meta property="og:title" content="E-Digital Training - Professional Digital Skills & IT Courses" />
-        <meta property="og:description" content="E-Digital offers professional training in Digital Marketing, Web Development, Data Science, AI, and more. Get certified with practical, job-oriented courses." />
+        <meta property="og:title" content="Job-oriented course to boost your career| E-Digital India" />
+        <meta property="og:description" content="Enroll in a Job-oriented course by E-Digital India. Master Digital Marketing, Web Development & more. This skill development course will boost your career." />
         <meta property="og:image" content={`${siteUrl}/logo.webp`} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content={siteUrl} />
-        <meta name="twitter:title" content="E-Digital Training - Professional Digital Skills & IT Courses" />
-        <meta name="twitter:description" content="E-Digital offers professional training in Digital Marketing, Web Development, Data Science, AI, and more. Get certified with practical, job-oriented courses." />
+        <meta name="twitter:title" content="Job-oriented course to boost your career| E-Digital India" />
+        <meta name="twitter:description" content="Enroll in a Job-oriented course by E-Digital India. Master Digital Marketing, Web Development & more. This skill development course will boost your career." />
         <meta name="twitter:image" content={`${siteUrl}/logo.webp`} />
         
         {/* JSON-LD structured data */}
@@ -412,5 +414,3 @@ export default function Home() {
     </main>
   )
 }
-
-

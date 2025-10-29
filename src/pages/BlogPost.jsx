@@ -18,7 +18,7 @@ export default function BlogPost() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [recentPosts, setRecentPosts] = useState([]);
-  const siteUrl = import.meta.env.VITE_SITE_URL || "https://edigital.globalinfosofts.com";
+  const siteUrl = import.meta.env.VITE_SITE_URL || "https://edigitalindian.com";
 
   useEffect(() => {
     let mounted = true;

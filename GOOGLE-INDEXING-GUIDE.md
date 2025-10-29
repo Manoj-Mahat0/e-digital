@@ -45,7 +45,7 @@ type dist\sitemap.xml
 You should see entries like:
 ```xml
 <url>
-  <loc>https://edigital.globalinfosofts.com/blog/chatgpt-5-vs-gpt-4-whats-new-and-why-it-matters</loc>
+  <loc>https://edigitalindian.com/blog/chatgpt-5-vs-gpt-4-whats-new-and-why-it-matters</loc>
   <lastmod>2025-10-22</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.7</priority>
@@ -64,7 +64,7 @@ public_html/
 ```
 
 ### Step 4: Verify Sitemap is Accessible
-Visit: `https://edigital.globalinfosofts.com/sitemap.xml`
+Visit: `https://edigitalindian.com/sitemap.xml`
 
 Should show XML with all your URLs.
 
@@ -97,7 +97,7 @@ For immediate indexing of important blog posts:
    - Left sidebar → Click "URL Inspection"
 
 2. **Inspect Each Blog URL**
-   - Enter full URL: `https://edigital.globalinfosofts.com/blog/chatgpt-5-vs-gpt-4-whats-new-and-why-it-matters`
+   - Enter full URL: `https://edigitalindian.com/blog/chatgpt-5-vs-gpt-4-whats-new-and-why-it-matters`
    - Click "Request Indexing"
 
 3. **Repeat for Top Posts**
@@ -156,7 +156,7 @@ chatgpt-5-vs-gpt-4-whats-new-and-why-it-matters
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://edigital.globalinfosofts.com/blog/chatgpt-5-vs-gpt-4...</loc>
+    <loc>https://edigitalindian.com/blog/chatgpt-5-vs-gpt-4...</loc>
     <lastmod>2025-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -336,7 +336,7 @@ Already configured in your `robots.txt`:
 ```
 User-agent: *
 Allow: /
-Sitemap: https://edigital.globalinfosofts.com/sitemap.xml
+Sitemap: https://edigitalindian.com/sitemap.xml
 ```
 
 #### 3. Add Structured Data

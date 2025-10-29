@@ -11,7 +11,9 @@
     "verify": "node verify-build.js",
     "deploy:check": "npm run build && npm run verify",
     "sitemap": "node scripts/sitemap-plugin.js",
-    "sitemap:build": "npm run build && npm run sitemap"
+    "sitemap:build": "npm run build && npm run sitemap",
+    "optimize": "node scripts/optimize-build.js",
+    "build:optimized": "npm run build && npm run optimize"
   },
   "dependencies": {
     "axios": "^1.12.2",

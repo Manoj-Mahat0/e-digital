@@ -1,7 +1,7 @@
 # Deployment Examples for Different Scenarios
 
 ## Scenario 1: Deploy to Root Domain
-**Example**: `https://edigital.globalinfosofts.com/`
+**Example**: `https://edigitalindian.com/`
 
 ### Configuration
 **vite.config.js:**
@@ -33,11 +33,11 @@ public_html/
 
 ### URLs Will Work
 ```
-✅ https://edigital.globalinfosofts.com/
-✅ https://edigital.globalinfosofts.com/blog
-✅ https://edigital.globalinfosofts.com/blog/chatgpt-5-vs-gpt-4
-✅ https://edigital.globalinfosofts.com/courses/web-development
-✅ https://edigital.globalinfosofts.com/about
+✅ https://edigitalindian.com/
+✅ https://edigitalindian.com/blog
+✅ https://edigitalindian.com/blog/chatgpt-5-vs-gpt-4
+✅ https://edigitalindian.com/courses/web-development
+✅ https://edigitalindian.com/about
 ```
 
 ### Asset Paths in HTML

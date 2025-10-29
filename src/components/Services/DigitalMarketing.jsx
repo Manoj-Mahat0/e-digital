@@ -12,6 +12,7 @@ import np2Image from '../../assets/np2.jpeg'
 import np3Image from '../../assets/np3.jpeg'
 
 import np4Image from '../../assets/np4.jpg'
+import { getOptimizedImageAttributes } from '../../utils/imageOptimizer'
 
 
 export default function DigitalMarketing() {
@@ -226,10 +227,13 @@ export default function DigitalMarketing() {
                     {/* image with lazy load + placeholder */}
                     <div className="w-full h-48 bg-gray-100 relative">
                       <img
-                        src={f.image}
-                        alt={f.title}
-                        loading="lazy"
-                        className="w-full h-full object-contain rounded-2xl transition-transform duration-500 pointer-events-none transform-gpu"
+                        {...getOptimizedImageAttributes(f.image, {
+                          alt: `${f.title} - E-Digital India Training`,
+                          title: `${f.title} Course Module`,
+                          loading: "lazy",
+                          decoding: "async"
+                        })}
+                        className="w-full h-full object-cover rounded-2xl transition-transform duration-500 pointer-events-none transform-gpu"
                         style={{
                           transform: isActive ? 'scale(1.06)' : 'scale(1)'
                         }}
@@ -264,10 +268,13 @@ export default function DigitalMarketing() {
               >
                 {hoveredIndex !== null && (
                   <img
-                    src={features[hoveredIndex].image}
-                    alt={features[hoveredIndex].title}
+                    {...getOptimizedImageAttributes(features[hoveredIndex].image, {
+                      alt: `${features[hoveredIndex].title} - E-Digital India Training`,
+                      title: `${features[hoveredIndex].title} Course Module`,
+                      loading: "lazy",
+                      decoding: "async"
+                    })}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 )}
               </div>
