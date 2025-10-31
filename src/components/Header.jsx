@@ -89,10 +89,10 @@ export default function Header() {
       <div className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 text-white text-base sm:text-lg">
   <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
     <div className="flex items-center justify-between h-14">
-      <span className="font-medium">info@edigitalindian.com</span>
+      <a href="mailto:info@edigitalindian.com" className="font-medium">info@edigitalindian.com</a>
       <div className="flex items-center gap-6">
         {/* <span>+91-9661577233</span> */}
-        <span className="font-medium">+91-9934141233</span>
+        <a href="tel:+91-9934141233" className="font-medium">+91-9934141233</a>
       </div>
     </div>
   </div>

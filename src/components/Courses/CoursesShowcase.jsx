@@ -227,21 +227,10 @@ export default function CoursesShowcase({ initialIndex = 0 }) {
                         : active.overview}
                     </p>
                   </div>
-                  {active.badge && (
-                    <span className="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-sky-100 text-sky-700">
-                      {active.badge}
-                    </span>
-                  )}
+                  
                 </div>
 
-                {/* Tag */}
-                {active.tag && (
-                  <div className="mt-3 sm:mt-4">
-                    <span className="inline-block text-xs bg-sky-50 text-sky-700 px-2 py-1 rounded-full">
-                      {active.tag}
-                    </span>
-                  </div>
-                )}
+               
 
                 {/* Rating */}
                 <div className="flex items-center gap-2 sm:gap-3 mt-3 sm:mt-4">

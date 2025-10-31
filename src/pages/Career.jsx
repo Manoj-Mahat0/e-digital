@@ -71,7 +71,6 @@ export default function Career() {
         <link rel="canonical" href={canonicalUrl} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-<link name="keywords" content="default, keywords, here"/>
       </Helmet>
       
       <div className="max-w-6xl mx-auto">
@@ -98,8 +97,8 @@ export default function Career() {
 
         {/* Our Current Job Openings */}
         <section>
-          <h2 className="text-3xl font-semibold text-gray-900 text-center mb-12">Our Current Job Openings</h2>
-          <div className="space-y-6">
+          <h2 className="text-3xl font-semibold text-gray-900 text-center mb-12">Coming Soon Job Openings</h2>
+          {/* <div className="space-y-6">
             {jobOpenings.map((job, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -131,7 +130,7 @@ export default function Career() {
                 </Link>
               </div>
             ))}
-          </div>
+          </div> */}
         </section>
 
         {/* Call to Action */}
