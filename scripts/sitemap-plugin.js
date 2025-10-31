@@ -4,15 +4,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import axios from 'axios';
 
-// Helper function to generate URL-friendly slugs from titles
-function generateSlug(title) {
-  if (!title) return '';
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export function createSitemapPlugin() {
@@ -85,15 +76,15 @@ async function getDynamicRoutes() {
     
     // Fetch blog posts from API
     try {
-      const blogResponse = await axios.get('https://be.edigital.globalinfosofts.com/blog/', {
+      const blogResponse = await axios.get('https://be.edigital.globalinfosofts.com/blog-html/', {
         timeout: 10000
       });
       if (blogResponse.data && Array.isArray(blogResponse.data)) {
         console.log(`📝 Found ${blogResponse.data.length} blog posts from API`);
         blogResponse.data.forEach(post => {
-          // Generate slug from h1 title or use existing slug
-          const slug = post.slug || generateSlug(post.h1 || `post-${post.id}`);
-          if (slug) {
+          // Use existing slug only (no fallback to generated slug)
+          const slug = post.slug;
+          if (slug && slug.trim() !== '') {
             routes.push({
               url: `/${slug}`,
               priority: '0.7',

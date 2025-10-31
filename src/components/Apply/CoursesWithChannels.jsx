@@ -18,7 +18,7 @@ function getIconUrl(title) {
     'Mailchimp': 'mailchimp',
     'Canva': 'canva',
 
-    // Web / PHP Development
+    // Web Development
     'WordPress': 'wordpress',
     'WooCommerce': 'woocommerce',
     'Git & GitHub': 'github',
@@ -82,7 +82,7 @@ function getIconUrl(title) {
 
 const coursesList = [
   'Diploma in Digital Marketing',
-  'Diploma in PHP Web Development',
+  'Diploma in Web Development',
   'Diploma in Data Science & AI',
   'Diploma in Business & Soft Skills',
   'Diploma in Android App Development',
@@ -102,7 +102,7 @@ const channelsByCourse = {
     { title: 'Canva', img: getIconUrl('Canva') },
   ],
 
-  'Diploma in PHP Web Development': [
+  'Diploma in Web Development': [
     { title: 'WordPress', img: getIconUrl('WordPress') },
     { title: 'WooCommerce', img: getIconUrl('WooCommerce') },
     { title: 'Git & GitHub', img: getIconUrl('Git & GitHub') },

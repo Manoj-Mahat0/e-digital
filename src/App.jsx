@@ -95,7 +95,7 @@ export default function App() {
     <>
       {/* ToastContainer placed at app root so any component can show toasts */}
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop
@@ -119,12 +119,12 @@ export default function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/term-and-condition" element={<Terms />} />
           <Route path="/career" element={<Career />} />
+          <Route path="/404-errors-google-analytics" element={<NotFound />} />
           <Route path="/:slug" element={
             <Suspense fallback={<LoadingFallback />}>
               <ContentPage />
             </Suspense>
           } />
-          <Route path="/404-errors-google-analytics" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Shell>

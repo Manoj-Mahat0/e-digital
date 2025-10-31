@@ -3,19 +3,11 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import api from "../services/api";
 
-// Helper function to generate URL-friendly slugs from titles
-function generateSlug(title) {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-export default function BlogPost() {
+export default function BlogPost({ initialPost }) {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState(initialPost || null);
+  const [loading, setLoading] = useState(!initialPost);
   const [error, setError] = useState(null);
   const [recentPosts, setRecentPosts] = useState([]);
   const siteUrl = import.meta.env.VITE_SITE_URL || "https://edigitalindian.com";
@@ -25,28 +17,57 @@ export default function BlogPost() {
     const controller = new AbortController();
 
     async function load() {
+      // If we already have the post data, skip loading
+      if (initialPost) {
+        setPost(initialPost);
+        setLoading(false);
+        
+        // Fetch recent posts for sidebar
+        try {
+          const listRes = await api.get(`/blog-html/`, { signal: controller.signal });
+          if (!mounted) return;
+
+          const allPosts = Array.isArray(listRes.data) ? listRes.data : [];
+          
+          // Sort posts by date for recent posts sidebar
+          const sorted = allPosts
+            .map((p) => ({ ...p }))
+            .sort((a, b) => {
+              const da = new Date(a.created_at || a.published_at || 0).getTime();
+              const db = new Date(b.created_at || b.published_at || 0).getTime();
+              return db - da;
+            });
+
+          // Exclude current post from recent list
+          const filtered = sorted.filter((p) => p.id !== initialPost.id);
+
+          setRecentPosts(filtered.slice(0, 3));
+        } catch (err) {
+          if (err.name === "CanceledError" || err.name === "AbortError") return;
+          console.error("Failed to load recent blog posts", err);
+        }
+        return;
+      }
+
       setLoading(true);
       setError(null);
 
       try {
-        // Fetch all blog posts to find the one matching the slug
-        const listRes = await api.get(`/blog/`, { signal: controller.signal });
+        // First try to fetch the specific post by slug from the new API endpoint
+        const postRes = await api.get(`/blog-html/slug/${slug}`, { signal: controller.signal });
+
+        if (!mounted) return;
+
+        const postData = postRes.data;
+        setPost(postData);
+
+        // Also fetch all posts for the recent posts sidebar
+        const listRes = await api.get(`/blog-html/`, { signal: controller.signal });
 
         if (!mounted) return;
 
         const allPosts = Array.isArray(listRes.data) ? listRes.data : [];
         
-        // Find the post that matches the slug
-        const matchedPost = allPosts.find(p => generateSlug(p.h1 || `post-${p.id}`) === slug);
-
-        if (!matchedPost) {
-          setError("Blog post not found.");
-          setLoading(false);
-          return;
-        }
-
-        setPost(matchedPost);
-
         // Sort posts by date for recent posts sidebar
         const sorted = allPosts
           .map((p) => ({ ...p }))
@@ -57,7 +78,7 @@ export default function BlogPost() {
           });
 
         // Exclude current post from recent list
-        const filtered = sorted.filter((p) => p.id !== matchedPost.id);
+        const filtered = sorted.filter((p) => p.id !== postData.id);
 
         setRecentPosts(filtered.slice(0, 3));
       } catch (err) {
@@ -81,81 +102,11 @@ export default function BlogPost() {
       mounted = false;
       controller.abort();
     };
-  }, [slug]);
-
-  // Updated renderBlock to use better Tailwind classes for readability
-  function renderBlock(block, idx) {
-    const key = `${idx}-${block.type}`;
-    switch (block.type) {
-      case "h2":
-        return <h2 key={key} className="text-3xl font-bold mt-8 mb-4 text-gray-900 border-b pb-2">{block.data}</h2>;
-      case "h3":
-        return <h3 key={key} className="text-2xl font-semibold mt-6 mb-3 text-gray-800">{block.data}</h3>;
-      case "text":
-        // Increased font size and leading for better readability
-        // Handle both string data and array of text objects with links
-        if (Array.isArray(block.data)) {
-          return (
-            <p key={key} className="text-lg leading-loose text-slate-700 mb-5">
-              {block.data.map((item, i) => {
-                if (item.link) {
-                  // Render as hyperlink if link property exists
-                  return (
-                    <a
-                      key={i}
-                      href={item.link.startsWith('http') ? item.link : `https://${item.link}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sky-600 hover:text-sky-700 underline font-medium transition duration-150"
-                    >
-                      {item.text}
-                    </a>
-                  );
-                } else {
-                  // Render as plain text if no link
-                  return <span key={i}>{item.text}</span>;
-                }
-              })}
-            </p>
-          );
-        }
-        return <p key={key} className="text-lg leading-loose text-slate-700 mb-5">{block.data}</p>;
-      case "list":
-        return (
-          // Used list-outside for better alignment and space-y for list spacing
-          <ul key={key} className="list-disc list-outside pl-6 mt-4 mb-4 text-lg text-slate-700 space-y-2">
-            {Array.isArray(block.data) ? block.data.map((it, i) => <li key={i} className="pl-2">{it}</li>) : null}
-          </ul>
-        );
-      case "image":
-        return (
-          // Adjusted styling for images
-          <div key={key} className="my-8 rounded-xl overflow-hidden shadow-lg border border-slate-100">
-            <img
-              src={typeof block.data === 'string' ? block.data.replace('http://', 'https://') : ''}
-              alt="educational content"
-              className="w-full max-h-[500px] object-cover"
-              loading="lazy"
-              onError={(e) => {
-                console.log("Image failed to load:", e.target.src);
-                e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/800x400?text=Image+Not+Available";
-              }}
-            />
-          </div>
-        );
-      default:
-        return null;
-    }
-  }
+  }, [slug, initialPost]);
 
   const getDescription = () => {
     if (!post) return "";
-    if (Array.isArray(post.content)) {
-      const textBlock = post.content.find(block => block.type === "text");
-      return textBlock ? String(textBlock.data).substring(0, 160) : "";
-    }
-    return typeof post.content === 'string' ? post.content.substring(0, 160) : "";
+    return post.meta_description || post.h1 || "";
   };
 
   const generateJsonLd = () => {
@@ -201,7 +152,6 @@ export default function BlogPost() {
     }
   }
 
-
   if (loading) return <div className="p-8 text-center text-xl font-medium text-sky-600">Loading post... 🚀</div>;
   if (error) return (
     <div className="p-8 text-center bg-red-50 rounded-lg max-w-lg mx-auto mt-12 shadow-lg">
@@ -226,6 +176,7 @@ export default function BlogPost() {
         <Helmet>
           <title>{post.h1} | E-Digital India Blog</title>
           <meta name="description" content={description} />
+          <meta name="keywords" content={post.meta_keywords || ""} />
           <link rel="canonical" href={canonicalUrl} />
 
           <meta property="og:type" content="article" />
@@ -286,12 +237,12 @@ export default function BlogPost() {
               </div>
             )}
 
-            {/* Content Section - Uses custom renderBlock (updated) for styling */}
+            {/* Content Section - Render HTML content directly with styled links */}
             <section className="article-content">
-              {Array.isArray(post.content) 
-                ? post.content.map(renderBlock) 
-                : <p className="text-lg leading-loose text-slate-700">{post.content}</p>
-              }
+              <div 
+                className="prose max-w-none [&_a]:text-sky-600 [&_a:hover]:text-sky-700 [&_a]:underline [&_a]:font-medium"
+                dangerouslySetInnerHTML={{ __html: post.html_content || '' }}
+              />
             </section>
           </article>
 
@@ -305,9 +256,10 @@ export default function BlogPost() {
               ) : (
                 <ul className="space-y-6">
                   {recentPosts.map((p) => {
-                    const postSlug = generateSlug(p.h1 || `post-${p.id}`);
+                    // Use the slug from the API response directly
+                    const postSlug = p.slug;
                     return (
-                    <li key={`recent-${p.id ?? p.slug}`} className="border-b last:border-b-0 pb-4 last:pb-0">
+                    <li key={`recent-${p.id}`} className="border-b last:border-b-0 pb-4 last:pb-0">
                       <Link 
                         to={`/${postSlug}`}
                         className="flex items-start space-x-3 hover:text-sky-600 transition duration-150 group"

@@ -14,7 +14,14 @@ export default function HeroWithRegistration() {
     course: "",
   });
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+
+  // UPDATED: Renamed original showModal to showPaymentModal
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  // NEW: State for the pre-payment confirmation modal
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  // NEW: State for the post-submission success modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const [paymentForm, setPaymentForm] = useState({
     transactionId: "",
     screenshot: null,
@@ -30,22 +37,76 @@ export default function HeroWithRegistration() {
 
   const courses = [
     "Diploma in Digital Marketing",
-    "Diploma in PHP Web Development",
+    "Diploma in Web Development",
     "Diploma in Data Science & AI",
     "Diploma in Business & Soft Skills",
     "Diploma in Android App Development",
     "SAP Global Certification Course",
   ];
 
+  // Helper function to reset forms after submission
+  const resetForms = () => {
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      mode: "",
+      course: "",
+    });
+    setPaymentForm({
+      transactionId: "",
+      screenshot: null,
+    });
+  };
+
+  // 1. UPDATED: Opens the new confirmation modal
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.phone || !form.course) {
       toast.error("Please fill all required fields.");
       return;
     }
-    setShowModal(true);
+    setShowConfirmationModal(true);
   };
 
+  // 2. NEW: Moves from Confirmation Modal to simple registration submission
+  const handleConfirmRegistration = async () => {
+    setShowConfirmationModal(false);
+
+    try {
+      setLoading(true);
+      // Submit registration without payment
+      const payload = {
+        name: form.name,
+        email: form.email,
+        phone_number: form.phone,
+        course_mode: form.mode,
+        course: form.course,
+      };
+
+      const res = await api.post("https://be.edigital.globalinfosofts.com/registrations/", payload);
+
+      if (res.status === 201 || res.status === 200) {
+        toast.success("Registration submitted successfully! We'll contact you soon.");
+        resetForms(); // Clear the forms
+        setShowSuccessModal(true); // Open success modal
+      } else {
+        toast.info("Received unexpected response from server.");
+      }
+    } catch (err) {
+      console.error("Registration error:", err);
+      const message =
+        err?.response?.data?.detail ||
+        err?.response?.data ||
+        err?.message ||
+        "Failed to submit registration.";
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 3. UPDATED: Closes Payment Modal and Opens Success Modal on success
   const handlePaymentSubmit = async (e) => {
     e.preventDefault();
 
@@ -77,19 +138,10 @@ export default function HeroWithRegistration() {
         },
       });
       if (payRes.status === 201 || payRes.status === 200) {
-        toast.success("Registration and payment submitted — we'll contact you soon!");
-        setForm({
-          name: "",
-          email: "",
-          phone: "",
-          mode: "Online",
-          course: "",
-        });
-        setPaymentForm({
-          transactionId: "",
-          screenshot: null,
-        });
-        setShowModal(false);
+        toast.success("Payment submitted — we'll contact you soon!");
+        resetForms(); // Clear the forms
+        setShowPaymentModal(false); // Close payment modal
+        setShowSuccessModal(true); // Open success modal
       } else {
         toast.info("Received unexpected response from server.");
       }
@@ -106,6 +158,7 @@ export default function HeroWithRegistration() {
     }
   };
 
+  // 4. UPDATED: Closes Payment Modal and Opens Success Modal on success
   const handleSkip = async () => {
     const payload = {
       name: form.name,
@@ -120,14 +173,9 @@ export default function HeroWithRegistration() {
       const res = await api.post("/registrations/", payload);
       if (res.status === 201 || res.status === 200) {
         toast.success("Registration submitted — we'll contact you soon!");
-        setForm({
-          name: "",
-          email: "",
-          phone: "",
-          mode: "Online",
-          course: "",
-        });
-        setShowModal(false);
+        resetForms(); // Clear the forms
+        setShowPaymentModal(false); // Close payment modal
+        setShowSuccessModal(true); // Open success modal
       } else {
         toast.info("Received unexpected response from server.");
       }
@@ -222,7 +270,7 @@ export default function HeroWithRegistration() {
           <div className="lg:col-span-7 order-1 lg:order-1">
             <h1 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold tracking-tight text-gray-900 leading-tight mb-4">
               Launch Your Career in <span className="text-sky-600">6 Months</span>{" "}
-              with Our Professional Diploma 
+              with Our Professional Diploma
             </h1>
 
             <p className="text-base text-gray-600 max-w-3xl mb-6">
@@ -231,8 +279,8 @@ export default function HeroWithRegistration() {
 
             <div className="mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                 <HiAcademicCap className="h-6 w-6 text-sky-600" />
-                 Why E-Digital India?
+                <HiAcademicCap className="h-6 w-6 text-sky-600" />
+                Why E-Digital India?
               </h3>
               <ul className="space-y-3 text-base text-gray-700">
                 <li className="flex items-start gap-4">
@@ -283,22 +331,20 @@ export default function HeroWithRegistration() {
                 <button
                   type="button"
                   onClick={() => setActiveTab("new")}
-                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${
-                    activeTab === "new"
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${activeTab === "new"
                       ? "bg-white text-sky-600 shadow-sm"
                       : "text-gray-600 hover:text-gray-900"
-                  }`}
+                    }`}
                 >
                   New Registration
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab("status")}
-                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${
-                    activeTab === "status"
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition ${activeTab === "status"
                       ? "bg-white text-sky-600 shadow-sm"
                       : "text-gray-600 hover:text-gray-900"
-                  }`}
+                    }`}
                 >
                   Get Registration Status
                 </button>
@@ -310,93 +356,92 @@ export default function HeroWithRegistration() {
                   className="bg-white p-6 sm:p-8 shadow-2xl border border-sky-100 rounded-xl"
                   aria-label="Course Registration Form"
                 >
-                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center gap-3 mb-6">
                     <HiLightningBolt className="h-7 w-7 text-sky-600" />
                     <h4 className="text-xl text-gray-900 font-bold">
-                        Request Course Consultation
+                      Request Course Consultation
                     </h4>
-                </div>
-
-                <div className="space-y-4">
-                  <input
-                    name="name"
-                    value={form.name}
-                    onChange={update}
-                    required
-                    placeholder="Full Name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={update}
-                    required
-                    placeholder="Email Address"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                  />
-                  <input
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={update}
-                    required
-                    placeholder="Phone Number"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                  />
-
-                  <div className="grid grid-cols-2 gap-4">
-                      <select
-                          name="mode"
-                          value={form.mode}
-                          onChange={update}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                      >
-                          {/* <option value="Online">Online Mode</option> */}
-                          <option value="Offline">Offline/In-Person</option>
-                          <option value="Hybrid">Hybrid Mode</option>
-                      </select>
-
-                      <select
-                          name="course"
-                          value={form.course}
-                          onChange={update}
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                      >
-                          <option value="" disabled>Select a Course</option>
-                          {courses.map((c) => (
-                              <option key={c} value={c}>
-                                  {c}
-                              </option>
-                          ))}
-                      </select>
                   </div>
-                </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={`mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] ${
-                    loading
-                    ? "bg-sky-400 text-white cursor-not-allowed"
-                    : "bg-sky-600 hover:bg-sky-700 text-white"
-                  }`}
-                >
-                  <HiPaperAirplane className="h-5 w-5 -rotate-45" />
-                  {loading ? "Submitting..." : "Secure Your Spot"}
-                </button>
+                  <div className="space-y-4">
+                    <input
+                      name="name"
+                      value={form.name}
+                      onChange={update}
+                      required
+                      placeholder="Full Name"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+                    />
+                    <input
+                      name="email"
+                      type="email"
+                      value={form.email}
+                      onChange={update}
+                      required
+                      placeholder="Email Address"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+                    />
+                    <input
+                      name="phone"
+                      type="tel"
+                      value={form.phone}
+                      onChange={update}
+                      required
+                      placeholder="Phone Number"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+                    />
 
-                <p className="mt-4 text-center text-xs text-gray-500">
+                    <div className="grid grid-cols-2 gap-4">
+                      <select
+                        name="mode"
+                        value={form.mode}
+                        onChange={update}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+                      >
+                        {/* <option value="Online">Online Mode</option> */}
+                        <option value="Offline">Offline/In-Person</option>
+                        <option value="Hybrid">Hybrid Mode</option>
+                      </select>
+
+                      <select
+                        name="course"
+                        value={form.course}
+                        onChange={update}
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
+                      >
+                        <option value="" disabled>Select a Course</option>
+                        {courses.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] ${loading
+                        ? "bg-sky-400 text-white cursor-not-allowed"
+                        : "bg-sky-600 hover:bg-sky-700 text-white"
+                      }`}
+                  >
+                    <HiPaperAirplane className="h-5 w-5 -rotate-45" />
+                    {loading ? "Submitting..." : "Secure Your Spot"}
+                  </button>
+
+                  <p className="mt-4 text-center text-xs text-gray-500">
                     Your details are safe. We'll contact you within 24 hours.
-                </p>
-              </form>
+                  </p>
+                </form>
               ) : (
                 <div className="bg-white p-6 sm:p-8 shadow-2xl border border-sky-100 rounded-xl">
                   <div className="flex items-center gap-3 mb-6">
                     <HiAcademicCap className="h-7 w-7 text-sky-600" />
                     <h4 className="text-xl text-gray-900 font-bold">
-                        Check Registration Status
+                      Check Registration Status
                     </h4>
                   </div>
 
@@ -413,11 +458,10 @@ export default function HeroWithRegistration() {
                     <button
                       type="submit"
                       disabled={statusLoading}
-                      className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] ${
-                        statusLoading
-                        ? "bg-sky-400 text-white cursor-not-allowed"
-                        : "bg-sky-600 hover:bg-sky-700 text-white"
-                      }`}
+                      className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] ${statusLoading
+                          ? "bg-sky-400 text-white cursor-not-allowed"
+                          : "bg-sky-600 hover:bg-sky-700 text-white"
+                        }`}
                     >
                       {statusLoading ? "Checking..." : "Check Status"}
                     </button>
@@ -443,82 +487,78 @@ export default function HeroWithRegistration() {
         </div>
 
         {/* small spacer so next section doesn't butt up flush against hero */}
-        <div className="mt-12" />
+       
 
-        {/* Payment Modal */}
-        {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full mx-4">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-gray-900">Complete Your Payment for Registration</h3>
-                <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-700">
-                  <HiX className="h-6 w-6" />
-                </button>
-              </div>
-              <p className="text-gray-600 mb-4">Scan QR to pay 499</p>
-              <div className="flex justify-center mb-4">
-                <img src="/sacn.jpg" alt="QR Code" className="w-48 h-48" loading="lazy" />
-              </div>
-              <form onSubmit={handlePaymentSubmit}>
-                <div className="space-y-4">
-                  <label
-      htmlFor="transactionId"
-      className="block text-gray-700 font-medium mb-2"
-    >
-      Transaction ID
-    </label>
-    <input
-      id="transactionId"
-      name="transactionId"
-      value={paymentForm.transactionId}
-      onChange={updatePaymentForm}
-      required
-      placeholder="Enter Transaction ID"
-      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-    />
-                  
-                     <label
-      htmlFor="screenshot"
-      className="block text-gray-700 font-medium mb-2"
-    >
-      Upload Payment Screenshot
-    </label>
-    <input
-      id="screenshot"
-      name="screenshot"
-      type="file"
-      onChange={updatePaymentForm}
-      required
-      accept="image/*"
-      className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-    />
-                </div>
-                <div className="flex gap-4 mt-6">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] ${
-                      loading
-                        ? "bg-sky-400 text-white cursor-not-allowed"
-                        : "bg-sky-600 hover:bg-sky-700 text-white"
-                    }`}
-                  >
-                    {loading ? "Submitting..." : "Submit"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleSkip}
-                    disabled={loading}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] bg-gray-600 hover:bg-gray-700 text-white"
-                  >
-                    Skip
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
+        
+
+{/* NEW CONFIRMATION MODAL (Pre-Payment) */ }
+{
+  showConfirmationModal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-gray-900">Confirm Registration Details</h3>
+          <button
+            onClick={() => setShowConfirmationModal(false)}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            <HiX className="h-6 w-6" />
+          </button>
+        </div>
+        <p className="text-gray-600 mb-4">Please confirm your details before proceeding to payment.</p>
+
+        <div className="space-y-2 p-3 bg-gray-50 rounded-lg text-sm mb-6">
+          <p><strong>Name:</strong> {form.name}</p>
+          <p><strong>Email:</strong> {form.email}</p>
+          <p><strong>Phone:</strong> {form.phone}</p>
+          <p><strong>Course:</strong> {form.course}</p>
+        </div>
+
+        <div className="flex gap-4 mt-4">
+          <button
+            type="button"
+            onClick={() => setShowConfirmationModal(false)}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition bg-gray-200 hover:bg-gray-300 text-gray-700"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            onClick={handleConfirmRegistration}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] bg-sky-600 hover:bg-sky-700 text-white"
+          >
+            Confirm Registration
+          </button>
+        </div>
       </div>
-    </section>
-  );
+    </div>
+  )
+}
+
+{/* NEW SUCCESS MODAL (Post-Submission) */ }
+{
+  showSuccessModal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 text-center">
+        <div className="flex justify-center mb-4">
+          <HiCheck className="h-10 w-10 text-emerald-500 bg-emerald-100 p-2 rounded-full" />
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">Submission Successful!</h3>
+        <p className="text-gray-600 mb-6">
+          Thank you for your submission. Your details and payment information (if provided) have been received. We will contact you soon for confirmation and next steps.
+        </p>
+        <button
+          type="button"
+          onClick={() => setShowSuccessModal(false)} // ✅ FIXED: Use setShowSuccessModal
+          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition bg-sky-600 hover:bg-sky-700 text-white"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  )
+}
+      </div >
+    </section >
+  );
 }

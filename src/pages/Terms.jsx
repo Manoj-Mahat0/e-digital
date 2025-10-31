@@ -4,7 +4,7 @@ export default function Terms() {
   const termsData = [
     {
       title: "1. Introduction",
-      content: "Welcome to E Digital India Skill Development Institute. By enrolling in our courses, you agree to abide by the following terms and conditions. These terms govern your participation in our digital marketing training programs, including SMM, SEO, PHP web development, data science, and Android development."
+      content: "Welcome to E Digital India Skill Development Institute. By enrolling in our courses, you agree to abide by the following terms and conditions. These terms govern your participation in our digital marketing training programs, including SMM, SEO, web development, data science, and Android development."
     },
     {
       title: "2. Enrollment & Fees",

@@ -4,14 +4,6 @@ import { Link } from "react-router-dom";
 import api from "../services/api";
 import { Helmet } from "react-helmet-async";
 
-// Helper function to generate URL-friendly slugs from titles
-function generateSlug(title) {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
 export default function BlogList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,11 +15,17 @@ export default function BlogList() {
       setLoading(true);
       setError(null);
       try {
-        const res = await api.get("/blog/");
+        // Updated to use the new blog-html endpoint
+        const res = await api.get("/blog-html/");
         if (!mounted) return;
         
-        // Assuming the API returns posts in a desirable order (e.g., by date)
-        setPosts(res.data || []);
+        // Filter out posts without slugs
+        const validPosts = (res.data || []).filter(post => {
+          const isValid = post.slug && post.slug.trim() !== '';
+          return isValid;
+        });
+        
+        setPosts(validPosts);
       } catch (err) {
         console.error("Failed to load blog list", err);
         setError("Could not load blog posts. Try again later.");
@@ -83,7 +81,8 @@ export default function BlogList() {
         <section className="lg:col-span-2">
           <div className="grid gap-10 sm:grid-cols-2">
             {posts.map((p) => {
-              const slug = generateSlug(p.h1 || `post-${p.id}`);
+              // Use the slug from the API response directly
+              const slug = p.slug;
               return (
                 <article
                   key={p.id}
@@ -139,7 +138,8 @@ export default function BlogList() {
             ) : (
                 <ul className="space-y-6">
                     {recentPosts.map((p) => {
-                        const slug = generateSlug(p.h1 || `post-${p.id}`);
+                        // Use the slug from the API response directly
+                        const slug = p.slug;
                         return (
                         <li key={`recent-${p.id}`} className="border-b last:border-b-0 pb-4 last:pb-0">
                             <Link 

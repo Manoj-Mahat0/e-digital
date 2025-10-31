@@ -34,7 +34,7 @@ export default function Career() {
       title: "Web Development Trainer",
       location: "Delhi, India",
       type: "Full-time",
-      description: "Lead PHP web development courses and mentor students in building real-world projects.",
+      description: "Lead web development courses and mentor students in building real-world projects.",
       applyLink: "/apply"
     },
     {
@@ -71,6 +71,7 @@ export default function Career() {
         <link rel="canonical" href={canonicalUrl} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+<link name="keywords" content="default, keywords, here"/>
       </Helmet>
       
       <div className="max-w-6xl mx-auto">

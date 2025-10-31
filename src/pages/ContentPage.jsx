@@ -3,14 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import BlogPost from "./BlogPost";
 import CourseDetail from "./CourseDetail";
 import { Helmet } from "react-helmet-async";
-
-// Helper function to generate URL-friendly slugs from titles
-function generateSlug(title) {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+import api from "../services/api";
 
 export default function ContentPage() {
   const { slug } = useParams();
@@ -39,17 +32,21 @@ export default function ContentPage() {
           }
         }
         
-        // Then check if it's a blog post
-        const blogRes = await fetch(`https://be.edigital.globalinfosofts.com/blog/`);
-        if (blogRes.ok) {
-          const blogData = await blogRes.json();
-          const allPosts = Array.isArray(blogData) ? blogData : [];
-          const postMatch = allPosts.find(post => generateSlug(post.h1 || `post-${post.id}`) === slug);
-          if (postMatch && isMounted) {
-            setContentType('blog');
-            setContentData(postMatch);
-            setLoading(false);
-            return;
+        // Then check if it's a blog post using the new API endpoint
+        // Only proceed if slug is provided
+        if (slug) {
+          try {
+            const blogRes = await api.get(`/blog-html/slug/${slug}`);
+            if (blogRes.data && isMounted) {
+              setContentType('blog');
+              setContentData(blogRes.data);
+              setLoading(false);
+              return;
+            }
+          } catch (blogError) {
+            // If blog post not found, continue to 404
+            console.log("Blog post not found for slug:", slug);
+            console.log("Note: Make sure you're using the correct slug from the API, not the post title");
           }
         }
         
@@ -95,9 +92,9 @@ export default function ContentPage() {
     return <CourseDetail />;
   }
 
-  // For blog posts, render the BlogPost component
+  // For blog posts, render the BlogPost component with initial data
   if (contentType === 'blog') {
-    return <BlogPost />;
+    return <BlogPost initialPost={contentData} />;
   }
 
   // This shouldn't be reached due to the redirect above, but just in case

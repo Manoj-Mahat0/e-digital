@@ -388,7 +388,7 @@ export default function Home() {
                 {
                   "@type": "Course",
                   "name": "Web Development",
-                  "description": "PHP and modern web development training"
+                  "description": "Modern web development training"
                 },
                 {
                   "@type": "Course",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { HiPaperAirplane, HiLightningBolt, HiAcademicCap, HiDocumentText, HiChevronDown } from "react-icons/hi";
+import { HiPaperAirplane, HiLightningBolt, HiAcademicCap, HiDocumentText, HiChevronDown, HiCheck, HiX } from "react-icons/hi";
 import { FiCheckCircle } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "../services/api";
@@ -67,6 +67,17 @@ export default function CourseDetail() {
   const [statusLoading, setStatusLoading] = useState(false);
   const [openIdx, setOpenIdx] = useState(null);
 
+  // NEW MODAL STATES
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  // NEW PAYMENT FORM STATE (Copied from HeroWithRegistration.jsx)
+  const [paymentForm, setPaymentForm] = useState({
+    transactionId: "",
+    screenshot: null,
+  });
+
   // NEW: enquiry overlay states
   const [enquiryForm, setEnquiryForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [enquiryLoading, setEnquiryLoading] = useState(false);
@@ -114,6 +125,21 @@ export default function CourseDetail() {
     setForm((f) => ({ ...f, [name]: value }));
   }, []);
 
+  // NEW: Helper to update the payment form state (for transaction ID and screenshot)
+  const updatePaymentForm = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "screenshot") {
+      setPaymentForm((f) => ({ ...f, [name]: files[0] }));
+    } else {
+      setPaymentForm((f) => ({ ...f, [name]: value }));
+    }
+  };
+
+  const resetForms = () => {
+    setForm({ name: "", email: "", phone: "", mode: "Online", course: course?.title || "" });
+    setPaymentForm({ transactionId: "", screenshot: null });
+  };
+
   const validate = () => {
     if (!form.name.trim()) return "Please enter your name.";
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) return "Please enter a valid email.";
@@ -124,13 +150,109 @@ export default function CourseDetail() {
     return null;
   };
 
-  const handleSubmit = async (e) => {
+  // 1. UPDATED: Initial form submission opens the Confirmation Modal
+  const handleSubmit = (e) => {
     e.preventDefault();
     const err = validate();
     if (err) {
       toast.error(err);
       return;
     }
+    setShowConfirmationModal(true);
+  };
+  
+  // 2. NEW: Moves from Confirmation Modal to simple registration submission
+  const handleConfirmRegistration = async () => {
+    setShowConfirmationModal(false);
+    
+    try {
+      setFormLoading(true);
+      // Submit registration without payment
+      const payload = {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone_number: form.phone.trim().replace(/[^\d+]/g, ""),
+        course_mode: form.mode,
+        course: form.course,
+      };
+      
+      const res = await api.post("https://be.edigital.globalinfosofts.com/registrations/", payload);
+      
+      if (res.status === 201 || res.status === 200) {
+        toast.success("Registration submitted successfully! We'll contact you soon.");
+        resetForms(); // Clear the forms
+        setShowSuccessModal(true); // Open success modal
+      } else {
+        toast.info("Received unexpected response from server.");
+      }
+    } catch (err) {
+      console.error("Registration error:", err);
+      const message =
+        err?.response?.data?.detail ||
+        err?.response?.data ||
+        err?.message ||
+        "Failed to submit registration.";
+      toast.error(message);
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  // 3. NEW: Handles Registration AND Payment Submission
+  const handlePaymentSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!paymentForm.transactionId || !paymentForm.screenshot) {
+      toast.error("Please provide Transaction ID and Screenshot.");
+      return;
+    }
+
+    const regPayload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone_number: form.phone.trim().replace(/[^\d+]/g, ""),
+      course_mode: form.mode,
+      course: form.course,
+    };
+
+    try {
+      setFormLoading(true);
+      
+      // First, submit registration
+      const regRes = await api.post("https://be.edigital.globalinfosofts.com/registrations/", regPayload);
+      const registrationId = regRes.data.id;
+
+      // Then, submit payment
+      const formData = new FormData();
+      formData.append("transaction_id", paymentForm.transactionId);
+      formData.append("registration_id", registrationId);
+      formData.append("screenshot", paymentForm.screenshot);
+
+      const payRes = await api.post("https://be.edigital.globalinfosofts.com/payments/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (payRes.status === 201 || payRes.status === 200) {
+        toast.success("Payment submitted — we'll contact you soon!");
+        resetForms();
+        setShowPaymentModal(false);
+        setShowSuccessModal(true); // Open success modal
+      } else {
+        throw new Error("Payment submission failed.");
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      const message =
+        err?.response?.data?.detail || err?.response?.data || err?.message || "Failed to submit.";
+      toast.error(message);
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+
+  // 4. NEW: Handles Registration ONLY (Skip Payment)
+  const handleSkipPayment = async () => {
     const payload = {
       name: form.name.trim(),
       email: form.email.trim(),
@@ -138,12 +260,15 @@ export default function CourseDetail() {
       course_mode: form.mode,
       course: form.course,
     };
+
     try {
       setFormLoading(true);
       const res = await api.post("/registrations/", payload);
       if (res.status === 201 || res.status === 200) {
         toast.success("Registration submitted — we'll contact you soon!");
-        setForm({ name: "", email: "", phone: "", mode: "Online", course: course?.title || "" });
+        resetForms();
+        setShowPaymentModal(false);
+        setShowSuccessModal(true); // Open success modal
       } else {
         toast.info("Received unexpected response from server.");
       }
@@ -156,6 +281,7 @@ export default function CourseDetail() {
       setFormLoading(false);
     }
   };
+
 
   const handleStatusSubmit = async (e) => {
     e.preventDefault();
@@ -478,9 +604,10 @@ export default function CourseDetail() {
                     </label>
                   </div>
 
+                  {/* UPDATED BUTTON TEXT */}
                   <button type="submit" disabled={formLoading} className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 mt-2 rounded-2xl text-white font-bold text-lg transition duration-200 shadow-lg ${formLoading ? "bg-slate-500 cursor-not-allowed" : "bg-sky-600 hover:bg-sky-700 hover:shadow-xl"}`}>
                     <HiPaperAirplane className={`h-5 w-5 ${formLoading ? "animate-pulse" : ""}`} />
-                    {formLoading ? "Sending Request..." : "Apply Now"}
+                    {formLoading ? "Sending Request..." : "Secure Your Spot"}
                   </button>
 
                   <div className="text-sm text-slate-500 text-center pt-2">
@@ -533,6 +660,86 @@ export default function CourseDetail() {
           </div>
         </aside>
       </section>
+
+      {/* -------------------------
+          MODALS (placed inside <main>)
+         ------------------------- */}
+      
+      {/* 1. NEW CONFIRMATION MODAL (Pre-Payment) */}
+      {showConfirmationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            exit={{ scale: 0.9, opacity: 0 }} 
+            className="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-gray-900">Confirm Registration Details</h3>
+              <button 
+                onClick={() => setShowConfirmationModal(false)} 
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <HiX className="h-6 w-6" />
+              </button>
+            </div>
+            <p className="text-gray-600 mb-4">Please confirm your details before proceeding to payment.</p>
+            
+            <div className="space-y-2 p-3 bg-gray-50 rounded-lg text-sm mb-6">
+              <p><strong>Name:</strong> {form.name}</p>
+              <p><strong>Email:</strong> {form.email}</p>
+              <p><strong>Phone:</strong> {form.phone}</p>
+              <p><strong>Course:</strong> {form.course}</p>
+            </div>
+
+            <div className="flex gap-4 mt-4">
+              <button
+                type="button"
+                onClick={() => setShowConfirmationModal(false)}
+                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition bg-gray-200 hover:bg-gray-300 text-gray-700"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmRegistration}
+                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition transform hover:scale-[1.01] bg-sky-600 hover:bg-sky-700 text-white"
+              >
+                Confirm Registration
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      
+
+      {/* 3. NEW SUCCESS MODAL (Post-Submission) */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            exit={{ scale: 0.9, opacity: 0 }} 
+            className="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4 text-center"
+          >
+            <div className="flex justify-center mb-4">
+              <HiCheck className="h-10 w-10 text-emerald-500 bg-emerald-100 p-2 rounded-full" />
+            </div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Submission Successful!</h3>
+            <p className="text-gray-600 mb-6">
+              Thank you for your submission. Your details and payment information (if provided) have been received. We will contact you soon for confirmation and next steps.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowSuccessModal(false)}
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-base font-semibold shadow-md transition bg-sky-600 hover:bg-sky-700 text-white"
+            >
+              Close
+            </button>
+          </motion.div>
+        </div>
+      )}
     </main>
   );
 }
