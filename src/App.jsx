@@ -17,6 +17,7 @@ import Courses from "./pages/Courses";
 import Terms from "./pages/Terms";
 import Career from "./pages/Career";
 import NotFound from "./pages/NotFound";
+import Workshop from "./pages/Workshop"; // Add this import
 import { getRedirectPath } from "./utils/redirects";
 
 // Lazy load less critical components
@@ -119,6 +120,7 @@ export default function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/term-and-condition" element={<Terms />} />
           <Route path="/career" element={<Career />} />
+          <Route path="/workshop" element={<Workshop />} /> {/* Add this route */}
           <Route path="/404-errors-google-analytics" element={<NotFound />} />
           <Route path="/:slug" element={
             <Suspense fallback={<LoadingFallback />}>
