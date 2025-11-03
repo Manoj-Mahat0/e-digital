@@ -9,6 +9,7 @@ import {
   HiMenu,
   HiChevronDown,
   HiChevronUp,
+  HiAcademicCap
 } from "react-icons/hi";
 import { getOptimizedImageAttributes } from "../utils/imageOptimizer";
 
@@ -184,6 +185,10 @@ export default function Header() {
               <NavLink to="/contact-us" icon={HiPhone}>
                 Contact Us
               </NavLink>
+
+              <NavLink to="/workshop" icon={HiAcademicCap}>
+                Workshop
+              </NavLink>
             </nav>
 
             {/* Right side */}
@@ -266,6 +271,10 @@ export default function Header() {
 
               <NavLink to="/contact-us" icon={HiPhone}>
                 Contact Us
+              </NavLink>
+
+              <NavLink to="/workshop" icon={HiAcademicCap}>
+                Workshop
               </NavLink>
 
               <Link

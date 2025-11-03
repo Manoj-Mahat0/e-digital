@@ -45,59 +45,53 @@ export default function Workshop() {
           <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full border border-blue-200/50 mb-6"
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-4 lg:py-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
             >
-              <HiSparkles className="w-5 h-5 text-blue-600" />
-              <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Limited Seats Available
-              </span>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", duration: 0.8 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-full border border-blue-200/50 mb-4"
+              >
+                <HiSparkles className="w-4 h-4 text-blue-600" />
+                <span className="text-xs font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Limited Seats Available
+                </span>
+              </motion.div>
+
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  Transform Your Career
+                </span>
+                <br />
+                <span className="text-slate-800">With Expert Workshops</span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-slate-600 max-w-3xl mb-6">
+                Join industry experts in intensive, hands-on workshops designed to accelerate your professional growth
+              </p>
+
+              
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Transform Your Career
-              </span>
-              <br />
-              <span className="text-slate-800">With Expert Workshops</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-              Join industry experts in intensive, hands-on workshops designed to accelerate your professional growth
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <InfoBadge icon={HiCalendarDays} text="Dec 15-16, 2024" />
-              <InfoBadge icon={HiClock} text="10 AM - 5 PM" />
-              <InfoBadge icon={HiMapPin} text="Online & Offline" />
-              <InfoBadge icon={HiUserGroup} text="50 Seats Only" />
+            {/* Registration Form moved to hero section */}
+            <div className="lg:col-span-1">
+              <WorkshopRegistrationCard />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Main Content */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          <div className="lg:col-span-2 space-y-8">
-            <WorkshopDetails />
-            <WorkshopModules />
-            <BenefitsSection />
-          </div>
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <WorkshopRegistrationCard />
-            </div>
-          </div>
+        <div className="space-y-8">
+          <WorkshopDetails />
+          <WorkshopModules />
+          <BenefitsSection />
         </div>
 
         <TestimonialsSection />
@@ -133,7 +127,7 @@ function WorkshopDetails() {
           </div>
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white">Digital Marketing Mastery</h2>
-            <p className="text-blue-100 mt-1">2-Day Intensive Workshop</p>
+            <p className="text-blue-100 mt-1">3-Day Intensive Workshop</p>
           </div>
         </div>
       </div>
@@ -346,12 +340,12 @@ function WorkshopRegistrationCard() {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white rounded-3xl shadow-2xl overflow-hidden"
     >
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">Register Now</h2>
-        <p className="text-blue-100">Limited seats available!</p>
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 text-center">
+        <h2 className="text-2xl font-bold text-white mb-2">Campus Workshop Registration (LBSM College)</h2>
+        {/* <p className="text-blue-100">Limited seats available!</p> */}
       </div>
 
-      <form onSubmit={handleSubmit} className="p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="p-4 space-y-4">
         <InputField
           label="Full Name"
           name="name"
@@ -396,8 +390,8 @@ function WorkshopRegistrationCard() {
               className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none cursor-pointer"
             >
               <option value="Student">Student</option>
-              <option value="Teaching">Teaching Professional</option>
-              <option value="Non-Teaching">Working Professional</option>
+              <option value="Teaching">Teaching</option>
+              <option value="Non-Teaching">Non-Teaching</option>
             </select>
           </div>
         </div>
@@ -423,9 +417,7 @@ function WorkshopRegistrationCard() {
           </span>
         </motion.button>
 
-        <p className="text-xs text-center text-slate-500 mt-4">
-          By registering, you agree to our terms and conditions
-        </p>
+        
       </form>
     </motion.div>
   )
